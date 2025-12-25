@@ -3,30 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'escapade Versaillaise - Votre Refuge de Luxe</title>
+    <title>L'escapade Versaillaise - Location de Prestige</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Raleway:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         :root {
-            --primary: #2c3e50;
-            --accent: #e74c3c;
-            --gold: #f39c12;
-            --light-gold: #f8d7a1;
-            --dark-navy: #1a252f;
-            --cream: #faf7f2;
-            --soft-white: #ffffff;
-            --text-primary: #2c3e50;
-            --text-secondary: #7f8c8d;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-4: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-            --gradient-gold: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+            --primary: #8b7355;
+            --dark: #4f453a;
+            --cream: #f8f3ec;
+            --gold: #d4af37;
             --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.08);
             --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
             --shadow-lg: 0 15px 50px rgba(0, 0, 0, 0.15);
-            --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
 
         * {
@@ -37,24 +28,10 @@
 
         body {
             font-family: 'Raleway', sans-serif;
-            color: var(--text-primary);
+            color: var(--dark);
             background: var(--cream);
             overflow-x: hidden;
             line-height: 1.7;
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--cream);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient-gold);
-            border-radius: 10px;
         }
 
         /* Header Navigation */
@@ -64,21 +41,16 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(20px) saturate(180%);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        header.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
         }
 
         nav {
-            max-width: 1400px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 1.5rem 3rem;
+            padding: 1.2rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -86,89 +58,49 @@
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 1px;
-            position: relative;
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.2); }
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
             letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.15s;
             position: relative;
-            transition: all 0.3s ease;
         }
 
-        .nav-menu a::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 100%;
-            height: 3px;
-            background: var(--gradient-gold);
-            border-radius: 2px;
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        .nav-links a:hover {
+            color: var(--primary);
         }
 
-        .nav-menu a:hover::before {
-            transform: translateX(-50%) scaleX(1);
-        }
-
-        .nav-menu a:hover {
-            color: var(--accent);
-        }
-
-        .btn-reserve {
-            background: var(--gradient-gold);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .btn-reserve:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.5);
-        }
-
-        /* Hero Section */
+        /* Hero Section with Background Image */
         .hero {
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            background: linear-gradient(135deg, rgba(44, 62, 80, 0.85), rgba(231, 76, 60, 0.75)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%232c3e50;stop-opacity:1" /><stop offset="100%" style="stop-color:%23e74c3c;stop-opacity:1" /></linearGradient></defs><rect fill="url(%23grad1)" width="1920" height="1080"/><circle cx="200" cy="200" r="300" fill="%23f39c12" opacity="0.1"/><circle cx="1600" cy="800" r="400" fill="%23ffffff" opacity="0.05"/><path d="M0,540 Q480,400 960,540 T1920,540 V1080 H0 Z" fill="%23000000" opacity="0.1"/></svg>');
+            background-image: linear-gradient(rgba(139, 115, 85, 0.4), rgba(79, 69, 58, 0.6)),
+                              url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             overflow: hidden;
         }
+
+        /* INSTRUCTION: Remplacez l'URL ci-dessus par une vraie photo de l'appartement
+           Téléchargez une photo depuis Booking.com et mettez-la dans un dossier "images"
+           Puis changez l'URL par: url('images/hero-appartement.jpg') */
 
         .hero::before {
             content: '';
@@ -177,41 +109,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 30% 40%, rgba(243, 156, 18, 0.2), transparent 60%),
-                        radial-gradient(circle at 70% 60%, rgba(231, 76, 60, 0.15), transparent 50%);
-            animation: pulseGradient 8s ease-in-out infinite;
-        }
-
-        @keyframes pulseGradient {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        .hero-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: float-particle 20s infinite;
-        }
-
-        .particle:nth-child(1) { width: 80px; height: 80px; left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { width: 60px; height: 60px; left: 30%; animation-delay: 2s; }
-        .particle:nth-child(3) { width: 100px; height: 100px; left: 50%; animation-delay: 4s; }
-        .particle:nth-child(4) { width: 70px; height: 70px; left: 70%; animation-delay: 6s; }
-        .particle:nth-child(5) { width: 90px; height: 90px; left: 85%; animation-delay: 8s; }
-
-        @keyframes float-particle {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.5; }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+            background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.15), transparent);
         }
 
         .hero-content {
@@ -220,243 +118,28 @@
             z-index: 10;
             max-width: 900px;
             padding: 0 2rem;
-        }
-
-        .hero-kicker {
-            font-size: 1rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.3s forwards;
-            color: var(--light-gold);
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 5.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.6s forwards, textGlow 3s ease-in-out 2s infinite;
-            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        @keyframes textGlow {
-            0%, 100% { text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); }
-            50% { text-shadow: 0 4px 40px rgba(243, 156, 18, 0.6), 0 0 60px rgba(243, 156, 18, 0.3); }
-        }
-
-        .hero p {
-            font-size: 1.4rem;
-            font-weight: 300;
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.9s forwards;
-            line-height: 1.8;
-            font-family: 'Cormorant Garamond', serif;
+            animation: fadeInUp 0.95s ease-out;
         }
 
         @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 1.2s forwards;
-        }
-
-        .btn {
-            padding: 1.2rem 3rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.05rem;
-            letter-spacing: 1px;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: var(--gradient-gold);
-            color: white;
-            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 45px rgba(243, 156, 18, 0.6);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-5px);
-        }
-
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            cursor: pointer;
-        }
-
-        .scroll-indicator svg {
-            width: 30px;
-            height: 50px;
-            stroke: white;
-            fill: none;
-            stroke-width: 2;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        /* Section Styling */
-        section {
-            padding: 8rem 3rem;
-            position: relative;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .section-kicker {
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .section-title {
+        .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--primary);
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--gradient-gold);
-            border-radius: 2px;
-        }
-
-        .section-description {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin: 2rem auto 0;
-            line-height: 1.9;
-        }
-
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 25px;
-            padding: 3rem;
-            box-shadow: var(--shadow-md);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient-gold);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            position: relative;
-            background: var(--gradient-1);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .feature-card:nth-child(2) .feature-icon {
-            background: var(--gradient-2);
-            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
-            animation-delay: 0.5s;
-        }
-
-        .feature-card:nth-child(3) .feature-icon {
-            background: var(--gradient-3);
-            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
-            animation-delay: 1s;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: float 6s ease-in-out infinite;
         }
 
         @keyframes float {
@@ -464,365 +147,239 @@
             50% { transform: translateY(-10px); }
         }
 
-        .feature-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+        .hero p {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--gold);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
             font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-kicker {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
         }
 
-        .feature-text {
-            color: var(--text-secondary);
+        .section-description {
+            font-size: 1.1rem;
+            color: #6b6b6b;
             line-height: 1.8;
-            font-size: 1.05rem;
+            max-width: 800px;
         }
 
-        /* Apartment Section */
-        #appartement {
-            background: linear-gradient(180deg, var(--cream) 0%, rgba(243, 156, 18, 0.05) 100%);
-        }
-
-        .apartment-showcase {
+        /* Photo Gallery */
+        .photo-gallery {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
-            align-items: center;
-            margin-top: 5rem;
-        }
-
-        .apartment-gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            position: relative;
+            margin-top: 3rem;
         }
 
-        .gallery-item {
-            border-radius: 25px;
+        .photo-item {
+            border-radius: 22px;
             overflow: hidden;
             box-shadow: var(--shadow-md);
-            position: relative;
-            aspect-ratio: 1;
+            aspect-ratio: 4/3;
+            background-size: cover;
+            background-position: center;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.5s ease;
+            position: relative;
         }
 
-        .gallery-item:first-child {
-            grid-row: span 2;
-            aspect-ratio: auto;
-        }
-
-        .gallery-item::before {
+        .photo-item::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
             opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: 1;
+            transition: opacity 0.3s ease;
         }
 
-        .gallery-item:hover::before {
+        .photo-item:hover::before {
             opacity: 1;
         }
 
-        .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-xl);
+        .photo-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .gallery-item-content {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: white;
-            font-weight: 600;
-            position: relative;
-            z-index: 2;
+        .photo-item:first-child {
+            grid-column: span 2;
+            grid-row: span 2;
         }
 
-        .gallery-item:nth-child(1) .gallery-item-content {
-            background: var(--gradient-1);
+        /* Placeholder images - REPLACE with real photos */
+        .photo-item:nth-child(1) {
+            background-image: url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80');
+        }
+        .photo-item:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80');
+        }
+        .photo-item:nth-child(3) {
+            background-image: url('https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=80');
+        }
+        .photo-item:nth-child(4) {
+            background-image: url('https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?w=800&q=80');
+        }
+        .photo-item:nth-child(5) {
+            background-image: url('https://images.unsplash.com/photo-1556909212-d5b604d0c90d?w=800&q=80');
         }
 
-        .gallery-item:nth-child(2) .gallery-item-content {
-            background: var(--gradient-2);
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
 
-        .gallery-item:nth-child(3) .gallery-item-content {
-            background: var(--gradient-3);
+        .feature-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 22px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
         }
 
-        .gallery-item:nth-child(4) .gallery-item-content {
-            background: var(--gradient-4);
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .apartment-details h3 {
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 1.5rem;
+            font-weight: 600;
             color: var(--primary);
-            margin-bottom: 2rem;
-            font-weight: 800;
+            margin-bottom: 1rem;
         }
 
-        .apartment-details p {
-            color: var(--text-secondary);
-            line-height: 1.9;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
+        .card-text {
+            color: #6b6b6b;
+            line-height: 1.7;
         }
 
+        /* Amenities */
         .amenities-list {
-            list-style: none;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+            gap: 1rem;
+            margin-top: 2rem;
+            list-style: none;
         }
 
         .amenities-list li {
             display: flex;
             align-items: center;
             gap: 1rem;
-            font-weight: 500;
-            color: var(--text-primary);
             padding: 1rem;
             background: white;
-            border-radius: 15px;
+            border-radius: 12px;
             box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-        }
-
-        .amenities-list li:hover {
-            transform: translateX(10px);
-            box-shadow: var(--shadow-md);
         }
 
         .amenities-list li::before {
             content: '✓';
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--gradient-gold);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        /* Pricing Section */
-        #tarifs {
-            background: var(--primary);
-            color: white;
-        }
-
-        #tarifs .section-title {
-            color: white;
-        }
-
-        #tarifs .section-title::after {
-            background: white;
-        }
-
-        #tarifs .section-description {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .pricing-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-top: 5rem;
-        }
-
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 3.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pricing-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .pricing-card.featured {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--gold);
-            transform: scale(1.05);
-            box-shadow: 0 20px 60px rgba(243, 156, 18, 0.4);
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--gold);
-        }
-
-        .pricing-badge {
-            background: var(--gradient-gold);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-amount {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .pricing-period {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-bottom: 2.5rem;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 2.5rem;
-        }
-
-        .pricing-features li {
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .pricing-features li::before {
-            content: '✓';
             color: var(--gold);
             font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
-        /* Contact Section */
-        #contact {
-            background: linear-gradient(135deg, rgba(243, 156, 18, 0.05) 0%, var(--cream) 100%);
-        }
-
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: start;
-            margin-top: 5rem;
-        }
-
-        .contact-info {
-            background: white;
-            padding: 3rem;
-            border-radius: 25px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .contact-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            background: var(--cream);
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: translateX(10px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
-            background: var(--gradient-gold);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
+        /* Contact Form */
+        .contact-section {
+            background: rgba(139, 115, 85, 0.05);
         }
 
         .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0;
             background: white;
             padding: 3rem;
-            border-radius: 25px;
+            border-radius: 22px;
             box-shadow: var(--shadow-md);
         }
 
         .form-group {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--primary);
-            font-size: 1.05rem;
+            color: var(--dark);
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 1.2rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
+            padding: 1rem;
+            border: 2px solid rgba(139, 115, 85, 0.2);
+            border-radius: 12px;
             font-family: 'Raleway', sans-serif;
             font-size: 1rem;
-            transition: all 0.3s ease;
-            background: var(--cream);
+            transition: all 0.3s;
+            background: rgba(248, 243, 236, 0.5);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 4px rgba(243, 156, 18, 0.1);
+            border-color: var(--primary);
             background: white;
         }
 
@@ -831,151 +388,77 @@
             min-height: 150px;
         }
 
-        .submit-btn {
+        .submit-button {
             width: 100%;
-            padding: 1.5rem;
-            background: var(--gradient-gold);
+            padding: 1.2rem;
+            background: var(--gold);
             color: white;
             border: none;
-            border-radius: 15px;
+            border-radius: 12px;
             font-size: 1.1rem;
             font-weight: 700;
-            letter-spacing: 1px;
             cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.4);
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 45px rgba(243, 156, 18, 0.6);
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .form-message.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .form-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
         }
 
         /* Footer */
         footer {
-            background: var(--dark-navy);
+            background: var(--primary);
             color: white;
-            padding: 4rem 3rem 2rem;
+            padding: 3rem 0;
+            text-align: center;
         }
 
         .footer-content {
-            max-width: 1400px;
+            max-width: 1100px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-brand h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .footer-brand p {
-            opacity: 0.8;
-            line-height: 1.8;
-        }
-
-        .footer-section h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--gradient-gold);
-            transform: translateY(-5px);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            text-align: center;
-            opacity: 0.6;
-        }
-
-        /* Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+            padding: 0 2rem;
         }
 
         /* Responsive */
-        @media (max-width: 1200px) {
-            .hero h1 { font-size: 4rem; }
-            .section-title { font-size: 2.8rem; }
-            .footer-content { grid-template-columns: 1fr 1fr; }
-        }
-
         @media (max-width: 968px) {
-            nav { padding: 1.2rem 2rem; }
-            .nav-menu { gap: 1.5rem; }
             .hero h1 { font-size: 3rem; }
-            .apartment-showcase,
-            .contact-container {
+            .section-title { font-size: 2.2rem; }
+            .features-grid,
+            .photo-gallery {
                 grid-template-columns: 1fr;
             }
-            .apartment-gallery {
-                grid-template-columns: 1fr;
-            }
-            .gallery-item:first-child {
+            .photo-item:first-child {
+                grid-column: span 1;
                 grid-row: span 1;
             }
-            .pricing-container {
+            .amenities-list {
                 grid-template-columns: 1fr;
-            }
-            .pricing-card.featured {
-                transform: scale(1);
             }
         }
 
@@ -984,23 +467,24 @@
                 flex-direction: column;
                 gap: 1rem;
             }
-            .nav-menu {
+            .nav-links {
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 1rem;
             }
             .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.1rem; }
-            .hero-buttons {
-                flex-direction: column;
-            }
-            .section-title { font-size: 2rem; }
-            .amenities-list {
-                grid-template-columns: 1fr;
-            }
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
+        }
+
+        /* Animation on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -1008,302 +492,200 @@
     <header>
         <nav>
             <div class="logo">L'escapade Versaillaise</div>
-            <ul class="nav-menu">
+            <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#appartement">L'Appartement</a></li>
-                <li><a href="#tarifs">Tarifs</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#contact" class="btn-reserve">Réserver</a></li>
+                <li><a href="#contact">Réserver</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero" id="accueil">
-        <div class="hero-particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
         <div class="hero-content">
-            <p class="hero-kicker">Bienvenue à</p>
             <h1>L'escapade Versaillaise</h1>
-            <p>Votre refuge de luxe au cœur de Versailles, à deux pas du Château</p>
-            <div class="hero-buttons">
-                <a href="#appartement" class="btn btn-primary">Découvrir</a>
-                <a href="#contact" class="btn btn-secondary">Nous contacter</a>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <svg viewBox="0 0 24 40">
-                <rect x="8" y="4" width="8" height="28" rx="4" />
-                <circle cx="12" cy="10" r="2" fill="white">
-                    <animate attributeName="cy" from="10" to="24" dur="1.5s" repeatCount="indefinite" />
-                </circle>
-            </svg>
+            <p>Votre refuge de charme au cœur de Versailles</p>
+            <a href="#contact" class="cta-button">Réserver maintenant</a>
         </div>
     </section>
 
     <section id="appartement">
         <div class="container">
-            <div class="section-header reveal">
+            <div class="reveal">
                 <p class="section-kicker">Découvrez</p>
                 <h2 class="section-title">Un lieu d'exception</h2>
                 <p class="section-description">
-                    Niché au cœur du quartier historique de Versailles, notre appartement de prestige
-                    vous offre une expérience unique mêlant luxe, confort et authenticité.
+                    À quelques pas du Château de Versailles, notre appartement vous offre une expérience unique alliant
+                    le charme de l'histoire au confort moderne. Un havre de paix pour vos séjours en Île-de-France.
                 </p>
             </div>
 
-            <div class="features-grid">
-                <div class="feature-card reveal">
-                    <div class="feature-icon">🏛️</div>
-                    <h3 class="feature-title">Emplacement Privilégié</h3>
-                    <p class="feature-text">
-                        À seulement 5 minutes à pied du Château de Versailles et de ses jardins majestueux.
-                        Immergez-vous dans l'histoire française.
+            <div class="photo-gallery reveal">
+                <div class="photo-item"></div>
+                <div class="photo-item"></div>
+                <div class="photo-item"></div>
+                <div class="photo-item"></div>
+                <div class="photo-item"></div>
+            </div>
+            <!-- INSTRUCTIONS:
+                 1. Téléchargez les photos de votre appartement depuis Booking.com
+                 2. Créez un dossier "images" dans SitesInternet/
+                 3. Mettez vos photos dedans (ex: salon.jpg, chambre.jpg, cuisine.jpg, etc.)
+                 4. Dans le CSS ci-dessus, remplacez les URLs unsplash par vos vraies photos:
+                    .photo-item:nth-child(1) { background-image: url('images/salon.jpg'); }
+                    .photo-item:nth-child(2) { background-image: url('images/chambre.jpg'); }
+                    etc.
+            -->
+
+            <div class="features-grid reveal">
+                <div class="feature-card">
+                    <span class="card-icon">🏛️</span>
+                    <h3 class="card-title">Emplacement Privilégié</h3>
+                    <p class="card-text">
+                        À 5 minutes à pied du Château de Versailles et du quartier historique.
+                        Restaurants, boutiques et transports à proximité.
                     </p>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon">✨</div>
-                    <h3 class="feature-title">Confort Premium</h3>
-                    <p class="feature-text">
-                        75m² entièrement rénovés avec des équipements haut de gamme et une décoration
-                        raffinée pour votre bien-être absolu.
+                <div class="feature-card">
+                    <span class="card-icon">✨</span>
+                    <h3 class="card-title">Confort Premium</h3>
+                    <p class="card-text">
+                        Appartement entièrement rénové avec équipements haut de gamme.
+                        Literie d'exception et décoration soignée.
                     </p>
                 </div>
-                <div class="feature-card reveal">
-                    <div class="feature-icon">🌟</div>
-                    <h3 class="feature-title">Service Excellence</h3>
-                    <p class="feature-text">
-                        Accueil personnalisé, conciergerie disponible 24/7 et recommandations exclusives
-                        pour sublimer votre séjour.
+                <div class="feature-card">
+                    <span class="card-icon">🌟</span>
+                    <h3 class="card-title">Service Attentionné</h3>
+                    <p class="card-text">
+                        Accueil personnalisé, conciergerie disponible et recommandations locales
+                        pour un séjour inoubliable.
                     </p>
                 </div>
             </div>
 
-            <div class="apartment-showcase reveal">
-                <div class="apartment-gallery">
-                    <div class="gallery-item">
-                        <div class="gallery-item-content">Salon Principal</div>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-item-content">Chambre Luxe</div>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-item-content">Cuisine Équipée</div>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-item-content">Salle de Bain</div>
-                    </div>
-                </div>
-                <div class="apartment-details">
-                    <h3>Votre Havre de Paix</h3>
-                    <p>
-                        Chaque détail de notre appartement a été soigneusement pensé pour créer
-                        une atmosphère élégante et chaleureuse. Profitez d'un espace généreux
-                        baigné de lumière naturelle.
-                    </p>
-                    <ul class="amenities-list">
-                        <li>2 Chambres Premium</li>
-                        <li>WiFi Haut Débit</li>
-                        <li>Cuisine Équipée</li>
-                        <li>Smart TV 4K</li>
-                        <li>Literie 5 Étoiles</li>
-                        <li>Machine à Laver</li>
-                        <li>Climatisation</li>
-                        <li>Parking Privé</li>
-                    </ul>
-                </div>
+            <div class="reveal" style="margin-top: 4rem;">
+                <h3 class="section-title">Équipements & Services</h3>
+                <ul class="amenities-list">
+                    <li>2 chambres spacieuses</li>
+                    <li>Cuisine équipée</li>
+                    <li>WiFi haut débit</li>
+                    <li>TV écran plat</li>
+                    <li>Machine à laver</li>
+                    <li>Salle de bain moderne</li>
+                    <li>Chauffage</li>
+                    <li>Draps et serviettes</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <section id="tarifs">
+    <section id="contact" class="contact-section">
         <div class="container">
-            <div class="section-header reveal">
-                <p class="section-kicker">Nos Offres</p>
-                <h2 class="section-title">Tarifs & Forfaits</h2>
-                <p class="section-description">
-                    Choisissez la formule qui correspond à vos besoins. Tous nos tarifs incluent
-                    le WiFi, le ménage et notre service de conciergerie premium.
-                </p>
-            </div>
-
-            <div class="pricing-container">
-                <div class="pricing-card reveal">
-                    <div class="pricing-badge">COURT SÉJOUR</div>
-                    <div class="pricing-amount">150€</div>
-                    <div class="pricing-period">par nuit</div>
-                    <ul class="pricing-features">
-                        <li>Jusqu'à 4 voyageurs</li>
-                        <li>Séjour minimum 2 nuits</li>
-                        <li>WiFi haut débit</li>
-                        <li>Ménage inclus</li>
-                        <li>Check-in flexible</li>
-                        <li>Support 24/7</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary" style="width: 100%; text-align: center;">Réserver</a>
-                </div>
-
-                <div class="pricing-card featured reveal">
-                    <div class="pricing-badge">POPULAIRE</div>
-                    <div class="pricing-amount">130€</div>
-                    <div class="pricing-period">par nuit (7 nuits+)</div>
-                    <ul class="pricing-features">
-                        <li>Jusqu'à 4 voyageurs</li>
-                        <li>Séjour minimum 7 nuits</li>
-                        <li>Tarif dégressif -15%</li>
-                        <li>Parking privé inclus</li>
-                        <li>Panier de bienvenue</li>
-                        <li>Conciergerie premium</li>
-                        <li>Ménage hebdomadaire</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary" style="width: 100%; text-align: center;">Réserver</a>
-                </div>
-
-                <div class="pricing-card reveal">
-                    <div class="pricing-badge">LONG SÉJOUR</div>
-                    <div class="pricing-amount">110€</div>
-                    <div class="pricing-period">par nuit (30 nuits+)</div>
-                    <ul class="pricing-features">
-                        <li>Jusqu'à 4 voyageurs</li>
-                        <li>Séjour minimum 1 mois</li>
-                        <li>Tarif dégressif -25%</li>
-                        <li>Tous services inclus</li>
-                        <li>Ménage bi-hebdomadaire</li>
-                        <li>Assistance dédiée</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary" style="width: 100%; text-align: center;">Réserver</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <div class="section-header reveal">
-                <p class="section-kicker">Contactez-nous</p>
+            <div class="reveal" style="text-align: center;">
+                <p class="section-kicker">Contact</p>
                 <h2 class="section-title">Réservez votre séjour</h2>
-                <p class="section-description">
-                    Notre équipe est à votre disposition pour répondre à toutes vos questions
-                    et organiser votre séjour d'exception à Versailles.
+                <p class="section-description" style="margin: 0 auto;">
+                    Remplissez le formulaire ci-dessous et nous vous contacterons rapidement pour confirmer votre réservation.
                 </p>
             </div>
 
-            <div class="contact-container">
-                <div class="contact-info reveal">
-                    <h3>Informations</h3>
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div>
-                            <strong>Adresse</strong><br>
-                            Centre historique, Versailles<br>
-                            78000 France
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📞</div>
-                        <div>
-                            <strong>Téléphone</strong><br>
-                            +33 1 23 45 67 89<br>
-                            Disponible 7j/7
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">✉️</div>
-                        <div>
-                            <strong>Email</strong><br>
-                            contact@escapade-versaillaise.fr<br>
-                            Réponse sous 24h
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="#">📘</a>
-                        <a href="#">📷</a>
-                        <a href="#">🐦</a>
-                    </div>
+            <form class="contact-form reveal" id="reservationForm">
+                <div class="form-group">
+                    <label for="name">Nom complet *</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
-
-                <div class="contact-form reveal">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Nom complet *</label>
-                            <input type="text" id="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Téléphone</label>
-                            <input type="tel" id="phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="dates">Dates souhaitées</label>
-                            <input type="text" id="dates" placeholder="Ex: 15-20 mars 2025">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message *</label>
-                            <textarea id="message" required placeholder="Parlez-nous de votre projet de séjour..."></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Envoyer la demande</button>
-                    </form>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="phone">Téléphone *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkin">Date d'arrivée *</label>
+                    <input type="date" id="checkin" name="checkin" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkout">Date de départ *</label>
+                    <input type="date" id="checkout" name="checkout" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Nombre de voyageurs *</label>
+                    <input type="number" id="guests" name="guests" min="1" max="4" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Des questions ou demandes spéciales ?"></textarea>
+                </div>
+                <button type="submit" class="submit-button" id="submitBtn">Envoyer la demande de réservation</button>
+                <div id="formMessage" class="form-message"></div>
+            </form>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
-            <div class="footer-brand">
-                <h3>L'escapade Versaillaise</h3>
-                <p>
-                    Votre location de prestige au cœur de Versailles.
-                    Une expérience unique alliant luxe, histoire et confort moderne.
-                </p>
-                <div class="social-links">
-                    <a href="#">📘</a>
-                    <a href="#">📷</a>
-                    <a href="#">🐦</a>
-                    <a href="#">🔗</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h4>Navigation</h4>
-                <ul class="footer-links">
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#appartement">L'Appartement</a></li>
-                    <li><a href="#tarifs">Tarifs</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Informations</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Conditions générales</a></li>
-                    <li><a href="#">Politique d'annulation</a></li>
-                    <li><a href="#">Mentions légales</a></li>
-                    <li><a href="#">Confidentialité</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Découvrir</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Château de Versailles</a></li>
-                    <li><a href="#">Restaurants</a></li>
-                    <li><a href="#">Activités</a></li>
-                    <li><a href="#">Transports</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 L'escapade Versaillaise. Tous droits réservés.</p>
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 1rem;">L'escapade Versaillaise</h3>
+            <p style="margin-bottom: 1rem; opacity: 0.9;">
+                Votre location de prestige au cœur de Versailles<br>
+                5 minutes du Château · Confort premium · Service d'exception
+            </p>
+            <p style="opacity: 0.7; font-size: 0.9rem;">
+                © 2025 L'escapade Versaillaise. Tous droits réservés.
+            </p>
         </div>
     </footer>
 
     <script>
+        // Initialize EmailJS with your public key
+        (function(){
+            emailjs.init("YOUR_PUBLIC_KEY"); // REMPLACEZ par votre clé publique EmailJS
+        })();
+
+        // Form submission
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const formMessage = document.getElementById('formMessage');
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Envoi en cours...';
+            formMessage.className = 'form-message';
+            formMessage.style.display = 'none';
+
+            // Get form data
+            const formData = {
+                to_email: 'tom.piecoup@free.fr',
+                from_name: document.getElementById('name').value,
+                from_email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                checkin: document.getElementById('checkin').value,
+                checkout: document.getElementById('checkout').value,
+                guests: document.getElementById('guests').value,
+                message: document.getElementById('message').value || 'Aucun message spécial'
+            };
+
+            // Send email using EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    formMessage.className = 'form-message success';
+                    formMessage.textContent = '✓ Votre demande de réservation a été envoyée avec succès ! Nous vous contacterons très prochainement.';
+                    document.getElementById('reservationForm').reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    formMessage.className = 'form-message error';
+                    formMessage.textContent = '✗ Une erreur est survenue. Veuillez réessayer ou nous contacter directement.';
+                })
+                .finally(function() {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Envoyer la demande de réservation';
+                });
+        });
+
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1318,52 +700,75 @@
             });
         });
 
-        // Header scroll effect
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-
-            lastScroll = currentScroll;
-        });
-
         // Reveal on scroll
         const reveals = document.querySelectorAll('.reveal');
-
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
             reveals.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
-                const revealPoint = 100;
-
-                if (elementTop < windowHeight - revealPoint) {
+                if (elementTop < windowHeight - 100) {
                     element.classList.add('active');
                 }
             });
         };
-
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
 
-        // Form submission
-        document.querySelector('.contact-form form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Merci pour votre demande de réservation!\n\nNous vous contacterons dans les plus brefs délais pour confirmer votre séjour.\n\nÀ très bientôt à L\'escapade Versaillaise! ✨');
-            this.reset();
-        });
+        // Set minimum date for check-in to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkin').setAttribute('min', today);
 
-        // Scroll indicator click
-        document.querySelector('.scroll-indicator').addEventListener('click', () => {
-            document.querySelector('#appartement').scrollIntoView({
-                behavior: 'smooth'
-            });
+        // Update checkout minimum when checkin changes
+        document.getElementById('checkin').addEventListener('change', function() {
+            const checkinDate = new Date(this.value);
+            checkinDate.setDate(checkinDate.getDate() + 1);
+            const minCheckout = checkinDate.toISOString().split('T')[0];
+            document.getElementById('checkout').setAttribute('min', minCheckout);
         });
     </script>
+
+    <!--
+    ========================================
+    INSTRUCTIONS POUR CONFIGURER L'ENVOI D'EMAIL:
+    ========================================
+
+    1. Allez sur https://www.emailjs.com/
+    2. Créez un compte gratuit
+    3. Créez un service email (Gmail, Outlook, etc.)
+    4. Créez un template d'email avec ces variables:
+       - {{to_email}}
+       - {{from_name}}
+       - {{from_email}}
+       - {{phone}}
+       - {{checkin}}
+       - {{checkout}}
+       - {{guests}}
+       - {{message}}
+
+    5. Exemple de template:
+       Sujet: Nouvelle réservation - L'escapade Versaillaise
+
+       Vous avez reçu une nouvelle demande de réservation:
+
+       Nom: {{from_name}}
+       Email: {{from_email}}
+       Téléphone: {{phone}}
+
+       Dates:
+       Arrivée: {{checkin}}
+       Départ: {{checkout}}
+       Nombre de voyageurs: {{guests}}
+
+       Message:
+       {{message}}
+
+    6. Copiez votre PUBLIC KEY depuis EmailJS
+    7. Remplacez "YOUR_PUBLIC_KEY" dans le code ci-dessus
+    8. Remplacez "YOUR_SERVICE_ID" par votre Service ID
+    9. Remplacez "YOUR_TEMPLATE_ID" par votre Template ID
+
+    L'email sera automatiquement envoyé à tom.piecoup@free.fr
+    ========================================
+    -->
 </body>
 </html>
