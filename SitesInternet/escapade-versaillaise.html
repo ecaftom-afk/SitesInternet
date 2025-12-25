@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'escapade Versaillaise - Location de vacances</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            color: #262626;
+        }
+
+        header {
+            background-color: #003580;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .breadcrumb {
+            color: #0071c2;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .property-header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .property-title {
+            font-size: 2em;
+            color: #262626;
+            margin-bottom: 10px;
+        }
+
+        .property-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .rating-badge {
+            background-color: #003580;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px 8px 8px 0;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .rating-text {
+            color: #262626;
+            font-weight: 500;
+        }
+
+        .location {
+            color: #0071c2;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 8px;
+            height: 500px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .gallery-item {
+            background-color: #e0e0e0;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item.main {
+            grid-row: 1 / 3;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .show-all-photos {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border: 1px solid #262626;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .show-all-photos:hover {
+            background-color: #f5f5f5;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .main-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight-icon {
+            font-size: 1.3em;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .description {
+            line-height: 1.6;
+            color: #474747;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .amenities {
+            margin-bottom: 25px;
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .amenity-icon {
+            color: #008009;
+        }
+
+        .booking-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 20px;
+        }
+
+        .price {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .price-details {
+            font-size: 0.9em;
+            color: #6b6b6b;
+            margin-bottom: 20px;
+        }
+
+        .dates-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #bdbdbd;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        .guests-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #bdbdbd;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        .reserve-btn {
+            width: 100%;
+            background-color: #0071c2;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .reserve-btn:hover {
+            background-color: #00509e;
+        }
+
+        .booking-info {
+            text-align: center;
+            font-size: 0.85em;
+            color: #6b6b6b;
+            margin-top: 15px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .host-info {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #008009;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(5, 200px);
+                height: auto;
+            }
+
+            .gallery-item.main {
+                grid-row: 1;
+            }
+
+            .highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .amenities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-card {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>🏰 L'escapade Versaillaise</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            France › Île-de-France › Versailles › Locations de vacances
+        </div>
+
+        <div class="property-header">
+            <h2 class="property-title">L'escapade Versaillaise - Appartement de charme</h2>
+            <div class="property-rating">
+                <span class="rating-badge">9.2</span>
+                <span class="rating-text">Fabuleux</span>
+                <span style="color: #6b6b6b;">· 127 commentaires</span>
+            </div>
+            <div class="location">
+                📍 À 5 minutes à pied du Château de Versailles, Versailles, France
+            </div>
+        </div>
+
+        <div class="image-gallery">
+            <div class="gallery-item main">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em;">
+                    Photo principale
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); height: 100%; display: flex; align-items: center; justify-content: center; color: white;">
+                    Chambre
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); height: 100%; display: flex; align-items: center; justify-content: center; color: white;">
+                    Salon
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); height: 100%; display: flex; align-items: center; justify-content: center; color: white;">
+                    Cuisine
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); height: 100%; display: flex; align-items: center; justify-content: center; color: white;">
+                    Salle de bain
+                </div>
+            </div>
+            <button class="show-all-photos">Afficher les 24 photos</button>
+        </div>
+
+        <div class="content-grid">
+            <div class="main-content">
+                <div class="highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">👥</span>
+                        <div>
+                            <strong>4 voyageurs</strong>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🛏️</span>
+                        <div>
+                            <strong>2 chambres</strong>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🏠</span>
+                        <div>
+                            <strong>75 m²</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Description</h3>
+                <div class="description">
+                    <p>Découvrez L'escapade Versaillaise, un appartement de standing idéalement situé au cœur de Versailles, à seulement 5 minutes à pied du célèbre Château de Versailles.</p>
+                    <br>
+                    <p>Cet appartement élégamment décoré offre tout le confort moderne dans un cadre historique. Profitez d'un séjour inoubliable dans ce logement spacieux et lumineux, parfait pour les familles ou les couples en quête de charme et d'authenticité.</p>
+                    <br>
+                    <p>L'appartement dispose d'une cuisine entièrement équipée, d'un salon confortable avec canapé-lit, de deux chambres avec literie haut de gamme, et d'une salle de bain moderne. Vous apprécierez également la proximité des restaurants, boutiques et du marché Notre-Dame.</p>
+                </div>
+
+                <div class="amenities">
+                    <h3 class="section-title">Équipements populaires</h3>
+                    <div class="amenities-grid">
+                        <div class="amenity-item">
+                            <span class="amenity-icon">✓</span>
+                            <span>WiFi gratuit</span>
+                        </div>
+                        <div class="amenity-item">
+                            <span class="amenity-icon">✓</span>
+                            <span>Cuisine équipée</span>
+                        </div>
+                        <div class="amenity-item">
+                            <span class="amenity-icon">✓</span>
+                            <span>Machine à laver</span>
+                        </div>
+                        <div class="amenity-item">
+                            <span class="amenity-icon">✓</span>
+                            <span>Télévision écran plat</span>
+                        </div>
+                        <div class="amenity-item">
+                            <span class="amenity-icon">✓</span>
+                            <span>Chauffage</span>
+                        </div>
+                        <div class="amenity-item">
+                            <span class="amenity-icon">✓</span>
+                            <span>Lave-vaisselle</span>
+                        </div>
+                        <div class="amenity-item">
+                            <span class="amenity-icon">✓</span>
+                            <span>Fer à repasser</span>
+                        </div>
+                        <div class="amenity-item">
+                            <span class="amenity-icon">✓</span>
+                            <span>Sèche-cheveux</span>
+                        </div>
+                        <div class="amenity-item">
+                            <span class="amenity-icon">✓</span>
+                            <span>Cafetière Nespresso</span>
+                        </div>
+                        <div class="amenity-item">
+                            <span class="amenity-icon">✓</span>
+                            <span>Draps et serviettes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="host-info">
+                    <span class="badge">Hôte Superhost</span>
+                    <h3 class="section-title">À propos de l'hôte</h3>
+                    <p style="line-height: 1.6; color: #474747;">Bienvenue! Nous sommes une famille passionnée par Versailles et son patrimoine. Nous serons ravis de vous accueillir dans notre appartement et de vous faire découvrir les meilleurs endroits de la ville. N'hésitez pas à nous contacter pour toute question!</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="booking-card">
+                    <div class="price">150 € <span style="font-size: 0.5em; font-weight: 400;">par nuit</span></div>
+                    <div class="price-details">Prix pour 4 voyageurs</div>
+
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9em;">Arrivée</label>
+                    <input type="date" class="dates-input" id="checkin">
+
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9em;">Départ</label>
+                    <input type="date" class="dates-input" id="checkout">
+
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 0.9em;">Voyageurs</label>
+                    <select class="guests-input">
+                        <option>1 voyageur</option>
+                        <option>2 voyageurs</option>
+                        <option>3 voyageurs</option>
+                        <option selected>4 voyageurs</option>
+                    </select>
+
+                    <button class="reserve-btn">Réserver</button>
+
+                    <div class="booking-info">Vous ne serez pas débité pour le moment</div>
+
+                    <ul class="features-list">
+                        <li style="display: flex; justify-content: space-between;">
+                            <span>150 € × 3 nuits</span>
+                            <span>450 €</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between;">
+                            <span>Frais de ménage</span>
+                            <span>50 €</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between;">
+                            <span>Taxe de séjour</span>
+                            <span>12 €</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; font-weight: 600; padding-top: 15px;">
+                            <span>Total</span>
+                            <span>512 €</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set minimum date to today for check-in
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkin').setAttribute('min', today);
+
+        // Update checkout minimum date when checkin changes
+        document.getElementById('checkin').addEventListener('change', function() {
+            const checkinDate = new Date(this.value);
+            checkinDate.setDate(checkinDate.getDate() + 1);
+            const minCheckout = checkinDate.toISOString().split('T')[0];
+            document.getElementById('checkout').setAttribute('min', minCheckout);
+        });
+
+        // Handle photo gallery click
+        document.querySelectorAll('.gallery-item, .show-all-photos').forEach(item => {
+            item.addEventListener('click', function() {
+                alert('Galerie de photos complète - Fonctionnalité à implémenter');
+            });
+        });
+
+        // Handle reservation button
+        document.querySelector('.reserve-btn').addEventListener('click', function() {
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+
+            if (!checkin || !checkout) {
+                alert('Veuillez sélectionner vos dates de séjour');
+                return;
+            }
+
+            alert('Réservation en cours...\nArrivée: ' + checkin + '\nDépart: ' + checkout);
+        });
+    </script>
+</body>
+</html>
