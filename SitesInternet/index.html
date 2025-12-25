@@ -7,8 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Formspree for email handling -->
     <style>
         :root {
             --primary: #8b7355;
@@ -589,7 +588,7 @@
                 </p>
             </div>
 
-            <form class="contact-form reveal" id="reservationForm">
+            <form class="contact-form reveal" id="reservationForm" action="https://formspree.io/f/xwpkwpwk" method="POST">
                 <div class="form-group">
                     <label for="name">Nom complet *</label>
                     <input type="text" id="name" name="name" required>
@@ -638,52 +637,11 @@
     </footer>
 
     <script>
-        // Initialize EmailJS with your public key
-        (function(){
-            emailjs.init("YOUR_PUBLIC_KEY"); // REMPLACEZ par votre clé publique EmailJS
-        })();
-
-        // Form submission
+        // Form submission with Formspree
         document.getElementById('reservationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
             const submitBtn = document.getElementById('submitBtn');
-            const formMessage = document.getElementById('formMessage');
-
-            // Disable button
             submitBtn.disabled = true;
             submitBtn.textContent = 'Envoi en cours...';
-            formMessage.className = 'form-message';
-            formMessage.style.display = 'none';
-
-            // Get form data
-            const formData = {
-                to_email: 'tom.piecoup@free.fr',
-                from_name: document.getElementById('name').value,
-                from_email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                checkin: document.getElementById('checkin').value,
-                checkout: document.getElementById('checkout').value,
-                guests: document.getElementById('guests').value,
-                message: document.getElementById('message').value || 'Aucun message spécial'
-            };
-
-            // Send email using EmailJS
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    formMessage.className = 'form-message success';
-                    formMessage.textContent = '✓ Votre demande de réservation a été envoyée avec succès ! Nous vous contacterons très prochainement.';
-                    document.getElementById('reservationForm').reset();
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    formMessage.className = 'form-message error';
-                    formMessage.textContent = '✗ Une erreur est survenue. Veuillez réessayer ou nous contacter directement.';
-                })
-                .finally(function() {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Envoyer la demande de réservation';
-                });
         });
 
         // Smooth scrolling
@@ -729,45 +687,26 @@
 
     <!--
     ========================================
-    INSTRUCTIONS POUR CONFIGURER L'ENVOI D'EMAIL:
+    SYSTÈME D'ENVOI D'EMAIL FORMSPREE CONFIGURÉ
     ========================================
 
-    1. Allez sur https://www.emailjs.com/
-    2. Créez un compte gratuit
-    3. Créez un service email (Gmail, Outlook, etc.)
-    4. Créez un template d'email avec ces variables:
-       - {{to_email}}
-       - {{from_name}}
-       - {{from_email}}
-       - {{phone}}
-       - {{checkin}}
-       - {{checkout}}
-       - {{guests}}
-       - {{message}}
+    ✅ Le formulaire utilise Formspree (plus simple qu'EmailJS)
+    ✅ Les emails seront envoyés à: tom.piecoup@free.fr
+    ✅ Aucune configuration supplémentaire nécessaire!
 
-    5. Exemple de template:
-       Sujet: Nouvelle réservation - L'escapade Versaillaise
+    Comment ça marche:
+    1. Un visiteur remplit le formulaire
+    2. Formspree envoie automatiquement un email à tom.piecoup@free.fr
+    3. L'email contient toutes les informations de réservation
 
-       Vous avez reçu une nouvelle demande de réservation:
+    IMPORTANT:
+    - La première fois qu'un visiteur soumet le formulaire, Formspree enverra
+      un email de confirmation à tom.piecoup@free.fr
+    - Vous devrez cliquer sur le lien dans cet email pour activer le formulaire
+    - Après activation, tous les formulaires futurs seront envoyés automatiquement
 
-       Nom: {{from_name}}
-       Email: {{from_email}}
-       Téléphone: {{phone}}
-
-       Dates:
-       Arrivée: {{checkin}}
-       Départ: {{checkout}}
-       Nombre de voyageurs: {{guests}}
-
-       Message:
-       {{message}}
-
-    6. Copiez votre PUBLIC KEY depuis EmailJS
-    7. Remplacez "YOUR_PUBLIC_KEY" dans le code ci-dessus
-    8. Remplacez "YOUR_SERVICE_ID" par votre Service ID
-    9. Remplacez "YOUR_TEMPLATE_ID" par votre Template ID
-
-    L'email sera automatiquement envoyé à tom.piecoup@free.fr
+    Formspree gratuit: 50 soumissions/mois
+    Pour plus: créez un compte sur https://formspree.io/
     ========================================
     -->
 </body>
