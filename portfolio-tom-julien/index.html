@@ -9,6 +9,133 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(-2deg); }
+            50% { transform: translateY(-10px) rotate(-2deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .animate-slideInLeft {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .animate-slideInRight {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .animate-scaleIn {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        .delay-100 { animation-delay: 0.1s; opacity: 0; }
+        .delay-200 { animation-delay: 0.2s; opacity: 0; }
+        .delay-300 { animation-delay: 0.3s; opacity: 0; }
+        .delay-400 { animation-delay: 0.4s; opacity: 0; }
+        .delay-500 { animation-delay: 0.5s; opacity: 0; }
+        .delay-600 { animation-delay: 0.6s; opacity: 0; }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4) !important;
+        }
+
+        .gradient-box {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary) !important;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -24,191 +151,171 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%); padding: 140px 0 100px;">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Création de Sites Web <span>Sur Mesure</span></h1>
-                <p>
-                    Tom Piecoup & Julien Prevot, développeurs web freelance.
-                    Nous créons vos sites internet à la main, sans templates ni outils payants.
-                    Un code propre, performant et 100% personnalisé.
+                <div class="animate-fadeInUp" style="display: inline-block; background: var(--gradient); padding: 0.5rem 1.2rem; border-radius: 50px; color: white; font-weight: 600; font-size: 0.9rem; margin-bottom: 2rem;">
+                    ✨ Étudiants Ingénieurs Passionnés
+                </div>
+                <h1 class="animate-fadeInUp delay-100" style="font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Sites Web Sur Mesure
+                    <br>
+                    <span style="background: var(--gradient-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Pour Votre Projet</span>
+                </h1>
+                <p class="animate-fadeInUp delay-200" style="font-size: 1.3rem; line-height: 1.8; color: var(--gray); margin-bottom: 3rem; max-width: 600px;">
+                    Tom Piecoup & Julien Prevot, étudiants en école d'ingénieur informatique.
+                    <strong style="color: var(--primary);">Le code est notre passion.</strong>
+                    Nous créons des sites modernes, rapides et personnalisés.
                 </p>
 
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number" data-target="50">0+</span>
-                        <span class="stat-label">Projets réalisés</span>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 3rem; max-width: 600px;">
+                    <div class="stat-card animate-scaleIn delay-300" style="text-align: center; padding: 1.5rem; background: white; border-radius: 16px; box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚡</div>
+                        <div style="font-weight: 700; color: var(--dark); font-size: 0.95rem;">1-2 semaines</div>
+                        <div style="font-size: 0.85rem; color: var(--gray);">Livraison</div>
                     </div>
-                    <div class="stat">
-                        <span class="stat-number" data-target="100">0+</span>
-                        <span class="stat-label">Clients satisfaits</span>
+                    <div class="stat-card animate-scaleIn delay-400" style="text-align: center; padding: 1.5rem; background: white; border-radius: 16px; box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💰</div>
+                        <div style="font-weight: 700; color: var(--dark); font-size: 0.95rem;">100-200€</div>
+                        <div style="font-size: 0.85rem; color: var(--gray);">Prix fixe</div>
                     </div>
-                    <div class="stat">
-                        <span class="stat-number" data-target="5">0+</span>
-                        <span class="stat-label">Années d'expérience</span>
+                    <div class="stat-card animate-scaleIn delay-500" style="text-align: center; padding: 1.5rem; background: white; border-radius: 16px; box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔄</div>
+                        <div style="font-weight: 700; color: var(--dark); font-size: 0.95rem;">À vie</div>
+                        <div style="font-size: 0.85rem; color: var(--gray);">Mises à jour</div>
                     </div>
                 </div>
 
-                <div class="cta-buttons">
-                    <a href="portfolio.html" class="btn btn-primary">
-                        Voir nos projets
+                <div class="cta-buttons animate-fadeInUp delay-600" style="display: flex; gap: 1rem;">
+                    <a href="contact.html" class="btn btn-primary btn-hover" style="padding: 1rem 2rem; background: var(--gradient); border: none; color: white; font-weight: 700; border-radius: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3); transition: all 0.3s;">
+                        Demander un devis
                         <span>→</span>
                     </a>
-                    <a href="contact.html" class="btn btn-secondary">
-                        Nous contacter
+                    <a href="portfolio.html" class="btn btn-hover" style="padding: 1rem 2rem; background: white; border: 2px solid var(--primary); color: var(--primary); font-weight: 700; border-radius: 12px; text-decoration: none; transition: all 0.3s;">
+                        Voir nos projets
                     </a>
                 </div>
             </div>
 
             <div class="hero-visual">
-                <div class="hero-card">
-                    <h3>✨ Notre Approche</h3>
-                    <ul>
-                        <li>Code fait main, aucun template</li>
-                        <li>Design moderne et responsive</li>
-                        <li>Performance optimale</li>
-                        <li>SEO intégré</li>
-                        <li>Support et maintenance</li>
-                        <li>Tarifs transparents</li>
-                    </ul>
+                <div class="animate-slideInRight" style="position: relative;">
+                    <div class="gradient-box" style="background: var(--gradient); padding: 3rem; border-radius: 24px; color: white; box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3); transform: rotate(-2deg);">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 800;">✨ Notre Approche</h3>
+                        <ul style="font-size: 1.05rem; line-height: 2.2; list-style: none;">
+                            <li>✓ Code écrit à la main</li>
+                            <li>✓ Design moderne</li>
+                            <li>✓ 100% responsive</li>
+                            <li>✓ SEO optimisé</li>
+                            <li>✓ Support inclus</li>
+                        </ul>
+                    </div>
+                    <div style="position: absolute; top: -10px; right: -10px; width: 100%; height: 100%; background: var(--gradient-2); border-radius: 24px; z-index: -1;"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="section" style="background: var(--light);">
-        <div class="container">
-            <div class="section-header reveal">
-                <p class="section-kicker">Nos Services</p>
-                <h2 class="section-title">Ce que nous faisons</h2>
-                <p class="section-description">
-                    Des solutions web complètes, développées sur mesure pour répondre à vos besoins spécifiques.
+    <section style="padding: 100px 0; background: white;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%); padding: 0.5rem 1.2rem; border-radius: 50px; color: var(--primary); font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem;">
+                    NOS SERVICES
+                </div>
+                <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 1rem; color: var(--dark);">Ce que nous faisons</h2>
+                <p style="font-size: 1.2rem; color: var(--gray); max-width: 600px; margin: 0 auto;">
+                    Des solutions web complètes et performantes pour donner vie à vos projets
                 </p>
             </div>
 
-            <div class="cards-grid">
-                <div class="card reveal">
-                    <span class="card-icon">🎨</span>
-                    <h3 class="card-title">Design Web</h3>
-                    <p class="card-text">
-                        Création de designs modernes et élégants, adaptés à votre image de marque.
-                        Interfaces intuitives et expérience utilisateur optimale.
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="service-card animate-fadeInUp delay-100" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%); padding: 2.5rem; border-radius: 20px; border: 2px solid transparent;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🎨</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Design Moderne</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        Interfaces élégantes et intuitives qui reflètent votre identité de marque.
                     </p>
                 </div>
 
-                <div class="card reveal">
-                    <span class="card-icon">💻</span>
-                    <h3 class="card-title">Développement</h3>
-                    <p class="card-text">
-                        Code HTML, CSS et JavaScript écrit à la main. Performance optimale,
-                        code propre et maintenable sans dépendances inutiles.
+                <div class="service-card animate-fadeInUp delay-200" style="background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%); padding: 2.5rem; border-radius: 20px; border: 2px solid transparent;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💻</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Code Artisanal</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        HTML, CSS, JavaScript écrits à la main. Zéro template, 100% personnalisé.
                     </p>
                 </div>
 
-                <div class="card reveal">
-                    <span class="card-icon">📱</span>
-                    <h3 class="card-title">Responsive Design</h3>
-                    <p class="card-text">
-                        Sites parfaitement adaptés à tous les écrans : smartphone, tablette,
-                        ordinateur. Une expérience fluide sur tous les appareils.
+                <div class="service-card animate-fadeInUp delay-300" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%); padding: 2.5rem; border-radius: 20px; border: 2px solid transparent;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📱</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Responsive</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        Parfaitement adapté à tous les écrans : mobile, tablette, desktop.
                     </p>
                 </div>
 
-                <div class="card reveal">
-                    <span class="card-icon">🚀</span>
-                    <h3 class="card-title">Performance</h3>
-                    <p class="card-text">
-                        Sites ultra-rapides avec temps de chargement optimisés.
-                        Code optimisé et bonnes pratiques pour une vitesse maximale.
+                <div class="service-card animate-fadeInUp delay-400" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(20, 184, 166, 0.05) 100%); padding: 2.5rem; border-radius: 20px; border: 2px solid transparent;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Performance</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        Sites ultra-rapides optimisés pour une expérience fluide.
                     </p>
                 </div>
 
-                <div class="card reveal">
-                    <span class="card-icon">🔍</span>
-                    <h3 class="card-title">SEO</h3>
-                    <p class="card-text">
-                        Optimisation pour les moteurs de recherche intégrée dès la conception.
-                        Meilleure visibilité sur Google et autres moteurs.
+                <div class="service-card animate-fadeInUp delay-500" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%); padding: 2.5rem; border-radius: 20px; border: 2px solid transparent;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">SEO Optimisé</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        Référencement naturel intégré pour une meilleure visibilité Google.
                     </p>
                 </div>
 
-                <div class="card reveal">
-                    <span class="card-icon">🛠️</span>
-                    <h3 class="card-title">Maintenance</h3>
-                    <p class="card-text">
-                        Support technique et mises à jour inclus. Nous restons disponibles
-                        pour faire évoluer votre site selon vos besoins.
+                <div class="service-card animate-fadeInUp delay-600" style="background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%); padding: 2.5rem; border-radius: 20px; border: 2px solid transparent;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔄</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Support Continu</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        Mises à jour gratuites à vie. Votre site évolue avec vous.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Us Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header reveal">
-                <p class="section-kicker">Pourquoi nous choisir</p>
-                <h2 class="section-title">Notre différence</h2>
-                <p class="section-description">
-                    Des développeurs passionnés qui travaillent directement avec vous,
-                    sans intermédiaires ni coûts cachés.
+    <!-- About Section -->
+    <section style="padding: 100px 0; background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(236, 72, 153, 0.03) 100%);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <div style="display: inline-block; background: var(--gradient); padding: 0.5rem 1.2rem; border-radius: 50px; color: white; font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem;">
+                    QUI SOMMES-NOUS
+                </div>
+                <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 1rem; color: var(--dark);">Notre Histoire</h2>
+                <p style="font-size: 1.2rem; color: var(--gray); max-width: 700px; margin: 0 auto;">
+                    Deux étudiants ingénieurs en informatique animés par une passion commune :
+                    créer des sites web de qualité professionnelle à des prix accessibles.
                 </p>
             </div>
 
-            <div class="cards-grid">
-                <div class="card reveal">
-                    <span class="card-icon">✍️</span>
-                    <h3 class="card-title">100% Fait Main</h3>
-                    <p class="card-text">
-                        Aucun template, aucun outil payant. Chaque ligne de code est écrite
-                        spécifiquement pour votre projet. Un site unique et personnalisé.
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div class="hover-lift animate-fadeInUp delay-100" style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow-md); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.5rem;">🎓</div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Formation d'Excellence</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        École d'ingénieur informatique. Technologies modernes et bonnes pratiques.
                     </p>
                 </div>
 
-                <div class="card reveal">
-                    <span class="card-icon">💰</span>
-                    <h3 class="card-title">Tarifs Transparents</h3>
-                    <p class="card-text">
-                        De 100€ à 200€ selon vos besoins. Devis gratuit et détaillé.
-                        Pas de frais cachés, pas d'abonnement surprise.
+                <div class="hover-lift animate-fadeInUp delay-300" style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow-md); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient-2); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.5rem;">❤️</div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Passion du Code</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        Le développement web est notre passion. Chaque projet est unique.
                     </p>
                 </div>
 
-                <div class="card reveal">
-                    <span class="card-icon">⚡</span>
-                    <h3 class="card-title">Livraison Rapide</h3>
-                    <p class="card-text">
-                        Délais respectés et communication transparente. Vous suivez
-                        l'avancement de votre projet en temps réel.
-                    </p>
-                </div>
-
-                <div class="card reveal">
-                    <span class="card-icon">🎯</span>
-                    <h3 class="card-title">Sur Mesure</h3>
-                    <p class="card-text">
-                        Chaque site est conçu selon vos besoins spécifiques.
-                        Nous écoutons vos idées et les transformons en réalité.
-                    </p>
-                </div>
-
-                <div class="card reveal">
-                    <span class="card-icon">🤝</span>
-                    <h3 class="card-title">Contact Direct</h3>
-                    <p class="card-text">
-                        Vous travaillez directement avec Tom et Julien.
-                        Réponses rapides, écoute attentive et collaboration étroite.
-                    </p>
-                </div>
-
-                <div class="card reveal">
-                    <span class="card-icon">🔒</span>
-                    <h3 class="card-title">Fiabilité</h3>
-                    <p class="card-text">
-                        Code de qualité, bonnes pratiques et tests rigoureux.
-                        Sites sécurisés et stables pour une tranquillité d'esprit totale.
+                <div class="hover-lift animate-fadeInUp delay-500" style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow-md); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient-3); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.5rem;">💰</div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Prix Accessibles</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        100-200€ selon vos besoins. Qualité pro, tarifs étudiants.
                     </p>
                 </div>
             </div>
@@ -216,20 +323,36 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="section" style="background: var(--light);">
-        <div class="container" style="text-align: center;">
-            <div class="reveal">
-                <h2 class="section-title">Prêt à démarrer votre projet ?</h2>
-                <p class="section-description" style="margin-bottom: 2.5rem;">
-                    Contactez-nous dès aujourd'hui pour discuter de votre projet.
-                    Devis gratuit et sans engagement.
+    <section style="padding: 100px 0; background: white;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="background: var(--gradient); padding: 5rem 3rem; border-radius: 32px; text-align: center; color: white; box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; filter: blur(40px);"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 150px; height: 150px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; filter: blur(40px);"></div>
+
+                <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 1.5rem; position: relative; z-index: 1;">Un projet en tête ?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto; position: relative; z-index: 1;">
+                    Parlons-en ensemble ! En tant qu'étudiants passionnés, nous sommes motivés à donner vie
+                    à votre projet web avec qualité et professionnalisme.
                 </p>
-                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="contact.html" class="btn btn-primary">
-                        Demander un devis gratuit
-                        <span>→</span>
+
+                <div style="display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; position: relative; z-index: 1;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚡</div>
+                        <strong style="display: block; font-size: 1.2rem; margin-bottom: 0.3rem;">Livraison rapide</strong>
+                        <span style="opacity: 0.9; font-size: 1.05rem;">1 à 2 semaines max</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔄</div>
+                        <strong style="display: block; font-size: 1.2rem; margin-bottom: 0.3rem;">Mises à jour à vie</strong>
+                        <span style="opacity: 0.9; font-size: 1.05rem;">Gratuites sur demande</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1;">
+                    <a href="contact.html" class="btn-hover" style="padding: 1.2rem 2.5rem; background: white; color: var(--primary); font-weight: 700; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); transition: all 0.3s; font-size: 1.1rem;">
+                        Demander un devis gratuit →
                     </a>
-                    <a href="portfolio.html" class="btn btn-dark">
+                    <a href="portfolio.html" class="btn-hover" style="padding: 1.2rem 2.5rem; background: rgba(255, 255, 255, 0.2); color: white; font-weight: 700; border-radius: 12px; text-decoration: none; border: 2px solid white; transition: all 0.3s; font-size: 1.1rem;">
                         Voir nos réalisations
                     </a>
                 </div>
@@ -238,19 +361,19 @@
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">Tom & Julien</div>
-            <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">
-                Développeurs Web Freelance • Sites Sur Mesure • Tarifs 100-200€
+    <footer style="background: var(--dark); color: white; padding: 4rem 2rem 2rem; text-align: center;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="font-size: 2rem; font-weight: 900; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;">Tom & Julien</div>
+            <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem; font-size: 1.05rem;">
+                Étudiants Ingénieurs Informatique • Passionnés de Code • Sites Sur Mesure • 100-200€
             </p>
-            <div class="footer-links">
-                <a href="index.html">Accueil</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="tarifs.html">Tarifs</a>
-                <a href="contact.html">Contact</a>
+            <div style="display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
+                <a href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Accueil</a>
+                <a href="portfolio.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Portfolio</a>
+                <a href="tarifs.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Tarifs</a>
+                <a href="contact.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Contact</a>
             </div>
-            <p style="margin-top: 2rem; opacity: 0.6; font-size: 0.9rem;">
+            <p style="margin-top: 2rem; opacity: 0.5; font-size: 0.9rem;">
                 © 2025 Tom Piecoup & Julien Prevot. Tous droits réservés.
             </p>
         </div>

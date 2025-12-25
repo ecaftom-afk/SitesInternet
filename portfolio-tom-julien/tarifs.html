@@ -6,6 +6,30 @@
     <title>Tarifs - Tom & Julien</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        .option-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2);
+        }
+
+        .option-card.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+            transform: scale(1.03);
+        }
+
+        .price-display {
+            position: sticky;
+            top: 100px;
+            transition: all 0.4s ease;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -20,272 +44,182 @@
         </nav>
     </header>
 
-    <div style="padding-top: 120px; min-height: 100vh;">
-        <section class="section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <p class="section-kicker">Tarifs</p>
-                    <h1 class="section-title">Des prix transparents et accessibles</h1>
-                    <p class="section-description">
-                        Nos tarifs sont simples et clairs. De 100€ à 200€ selon la complexité de votre projet.
-                        Devis gratuit et personnalisé.
+    <div style="padding-top: 120px; min-height: 100vh; background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(236, 72, 153, 0.03) 100%);">
+        <section style="padding: 60px 0;">
+            <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <div style="display: inline-block; background: var(--gradient); padding: 0.5rem 1.2rem; border-radius: 50px; color: white; font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem;">
+                        CALCULATEUR DE PRIX
+                    </div>
+                    <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; color: var(--dark);">
+                        Calculez votre tarif en <span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">temps réel</span>
+                    </h1>
+                    <p style="font-size: 1.3rem; color: var(--gray); max-width: 700px; margin: 0 auto;">
+                        Sélectionnez vos options et découvrez instantanément le prix de votre site
                     </p>
                 </div>
 
-                <div class="pricing-grid">
-                    <!-- Offre Essentiel -->
-                    <div class="pricing-card reveal">
-                        <div class="pricing-header">
-                            <span style="font-size: 3rem;">📄</span>
-                            <h3>Essentiel</h3>
-                            <div class="pricing-price">
-                                100€
-                                <span>/ site</span>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start;">
+                    <!-- Options à gauche -->
+                    <div>
+                        <!-- Délai de livraison -->
+                        <div style="background: white; padding: 2.5rem; border-radius: 24px; box-shadow: var(--shadow-md); margin-bottom: 2rem;">
+                            <div style="margin-bottom: 2rem;">
+                                <div style="display: inline-block; background: var(--gradient); color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;">ÉTAPE 1</div>
+                                <h2 style="font-size: 2rem; font-weight: 900; color: var(--dark); margin-bottom: 0.5rem;">⚡ Quel délai souhaitez-vous ?</h2>
+                                <p style="color: var(--gray); margin: 0;">Plus c'est rapide, plus le prix augmente</p>
                             </div>
-                        </div>
-                        <ul class="pricing-features">
-                            <li>Page unique (One Page)</li>
-                            <li>Design responsive</li>
-                            <li>HTML, CSS, JavaScript</li>
-                            <li>Formulaire de contact</li>
-                            <li>Optimisation mobile</li>
-                            <li>Code propre et optimisé</li>
-                            <li>1 mois de support</li>
-                            <li>Livraison sous 7 jours</li>
-                        </ul>
-                        <a href="contact.html" class="btn btn-dark" style="width: 100%; margin-top: 1.5rem;">
-                            Choisir
-                        </a>
-                    </div>
-
-                    <!-- Offre Pro (Featured) -->
-                    <div class="pricing-card featured reveal">
-                        <div class="pricing-header">
-                            <span style="font-size: 3rem;">🚀</span>
-                            <h3>Professionnel</h3>
-                            <div class="pricing-price">
-                                150€
-                                <span>/ site</span>
-                            </div>
-                        </div>
-                        <ul class="pricing-features">
-                            <li>Jusqu'à 5 pages</li>
-                            <li>Design personnalisé</li>
-                            <li>HTML, CSS, JavaScript</li>
-                            <li>Formulaire de contact avancé</li>
-                            <li>Optimisation SEO</li>
-                            <li>Animations et effets</li>
-                            <li>Galerie photos/vidéos</li>
-                            <li>3 mois de support</li>
-                            <li>Livraison sous 10 jours</li>
-                        </ul>
-                        <a href="contact.html" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">
-                            Choisir
-                        </a>
-                    </div>
-
-                    <!-- Offre Premium -->
-                    <div class="pricing-card reveal">
-                        <div class="pricing-header">
-                            <span style="font-size: 3rem;">💎</span>
-                            <h3>Premium</h3>
-                            <div class="pricing-price">
-                                200€
-                                <span>/ site</span>
-                            </div>
-                        </div>
-                        <ul class="pricing-features">
-                            <li>Site multi-pages complet</li>
-                            <li>Design sur mesure premium</li>
-                            <li>HTML, CSS, JavaScript avancé</li>
-                            <li>Fonctionnalités personnalisées</li>
-                            <li>SEO optimisé</li>
-                            <li>Blog ou actualités</li>
-                            <li>E-commerce simple</li>
-                            <li>Système de réservation</li>
-                            <li>6 mois de support</li>
-                            <li>Livraison sous 14 jours</li>
-                        </ul>
-                        <a href="contact.html" class="btn btn-dark" style="width: 100%; margin-top: 1.5rem;">
-                            Choisir
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Comparaison -->
-                <div class="reveal" style="margin-top: 5rem;">
-                    <h3 class="section-title" style="text-align: center; margin-bottom: 3rem;">Ce qui est toujours inclus</h3>
-                    <div class="cards-grid">
-                        <div class="card">
-                            <span class="card-icon">✅</span>
-                            <h4 class="card-title">Code Fait Main</h4>
-                            <p class="card-text">
-                                Aucun template, aucun outil payant. Chaque ligne de code est écrite
-                                spécifiquement pour votre projet.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <span class="card-icon">📱</span>
-                            <h4 class="card-title">Responsive Design</h4>
-                            <p class="card-text">
-                                Votre site s'adapte parfaitement à tous les écrans : mobile,
-                                tablette et ordinateur.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <span class="card-icon">🚀</span>
-                            <h4 class="card-title">Performance Optimale</h4>
-                            <p class="card-text">
-                                Sites ultra-rapides avec temps de chargement optimisés pour
-                                une expérience utilisateur fluide.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <span class="card-icon">🔒</span>
-                            <h4 class="card-title">Code Sécurisé</h4>
-                            <p class="card-text">
-                                Bonnes pratiques de sécurité et code de qualité pour protéger
-                                votre site et vos visiteurs.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <span class="card-icon">💬</span>
-                            <h4 class="card-title">Communication Claire</h4>
-                            <p class="card-text">
-                                Contact direct avec Tom et Julien. Réponses rapides et
-                                transparence totale sur l'avancement.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <span class="card-icon">🎨</span>
-                            <h4 class="card-title">Design Moderne</h4>
-                            <p class="card-text">
-                                Designs contemporains et élégants qui reflètent l'identité
-                                de votre entreprise.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Options supplémentaires -->
-                <div class="reveal" style="margin-top: 5rem; background: var(--light); padding: 3rem; border-radius: 24px;">
-                    <h3 class="section-title" style="text-align: center; margin-bottom: 2rem;">Options supplémentaires</h3>
-                    <div style="max-width: 800px; margin: 0 auto;">
-                        <div style="display: grid; gap: 1.5rem;">
-                            <div style="background: white; padding: 1.5rem; border-radius: 16px; display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <h4 style="color: var(--dark); margin-bottom: 0.5rem;">🌐 Nom de domaine</h4>
-                                    <p style="color: var(--gray); margin: 0;">Réservation et configuration de votre nom de domaine</p>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;" id="delai-options">
+                                <div class="option-card selected" data-value="0" data-label="2 semaines" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🗓️</div>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">2 semaines</strong>
+                                    <span style="color: var(--primary); font-weight: 700;">Inclus</span>
                                 </div>
-                                <strong style="color: var(--primary); font-size: 1.3rem;">15€/an</strong>
-                            </div>
-                            <div style="background: white; padding: 1.5rem; border-radius: 16px; display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <h4 style="color: var(--dark); margin-bottom: 0.5rem;">🖥️ Hébergement</h4>
-                                    <p style="color: var(--gray); margin: 0;">Hébergement web performant et sécurisé</p>
+                                <div class="option-card" data-value="30" data-label="1 semaine" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⏰</div>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">1 semaine</strong>
+                                    <span style="color: var(--accent); font-weight: 700;">+30€</span>
                                 </div>
-                                <strong style="color: var(--primary); font-size: 1.3rem;">50€/an</strong>
-                            </div>
-                            <div style="background: white; padding: 1.5rem; border-radius: 16px; display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <h4 style="color: var(--dark); margin-bottom: 0.5rem;">📧 Email professionnel</h4>
-                                    <p style="color: var(--gray); margin: 0;">Adresse email personnalisée (@votresite.com)</p>
+                                <div class="option-card" data-value="50" data-label="3-5 jours" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚀</div>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">3-5 jours</strong>
+                                    <span style="color: var(--secondary); font-weight: 700;">+50€</span>
                                 </div>
-                                <strong style="color: var(--primary); font-size: 1.3rem;">30€/an</strong>
                             </div>
-                            <div style="background: white; padding: 1.5rem; border-radius: 16px; display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <h4 style="color: var(--dark); margin-bottom: 0.5rem;">🔄 Maintenance mensuelle</h4>
-                                    <p style="color: var(--gray); margin: 0;">Mises à jour, modifications et support continu</p>
-                                </div>
-                                <strong style="color: var(--primary); font-size: 1.3rem;">20€/mois</strong>
+                        </div>
+
+                        <!-- Support -->
+                        <div style="background: white; padding: 2.5rem; border-radius: 24px; box-shadow: var(--shadow-md); margin-bottom: 2rem;">
+                            <div style="margin-bottom: 2rem;">
+                                <div style="display: inline-block; background: var(--gradient-2); color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;">ÉTAPE 2</div>
+                                <h2 style="font-size: 2rem; font-weight: 900; color: var(--dark); margin-bottom: 0.5rem;">🔄 Combien de temps de support ?</h2>
+                                <p style="color: var(--gray); margin: 0;">Mises à jour et modifications gratuites</p>
                             </div>
-                            <div style="background: white; padding: 1.5rem; border-radius: 16px; display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <h4 style="color: var(--dark); margin-bottom: 0.5rem;">📊 Google Analytics</h4>
-                                    <p style="color: var(--gray); margin: 0;">Installation et configuration des statistiques</p>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;" id="support-options">
+                                <div class="option-card selected" data-value="0" data-label="1 mois" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📅</div>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">1 mois</strong>
+                                    <span style="color: var(--primary); font-weight: 700;">Inclus</span>
                                 </div>
-                                <strong style="color: var(--primary); font-size: 1.3rem;">Gratuit</strong>
+                                <div class="option-card" data-value="30" data-label="3 mois" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🗓️</div>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">3 mois</strong>
+                                    <span style="color: var(--accent); font-weight: 700;">+30€</span>
+                                </div>
+                                <div class="option-card" data-value="75" data-label="1 an" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📆</div>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">1 an</strong>
+                                    <span style="color: var(--secondary); font-weight: 700;">+75€</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- FAQ -->
-                <div class="reveal" style="margin-top: 5rem;">
-                    <h3 class="section-title" style="text-align: center; margin-bottom: 3rem;">Questions fréquentes</h3>
-                    <div style="max-width: 900px; margin: 0 auto;">
-                        <div class="card" style="margin-bottom: 1.5rem;">
-                            <h4 style="color: var(--primary); margin-bottom: 1rem;">💳 Comment se fait le paiement ?</h4>
-                            <p style="color: var(--gray); margin: 0;">
-                                50% à la commande, 50% à la livraison du site. Paiement par virement bancaire,
-                                PayPal ou espèces. Facture fournie.
-                            </p>
-                        </div>
-                        <div class="card" style="margin-bottom: 1.5rem;">
-                            <h4 style="color: var(--primary); margin-bottom: 1rem;">⏱️ Quels sont les délais ?</h4>
-                            <p style="color: var(--gray); margin: 0;">
-                                7 à 14 jours selon la formule choisie. Nous respectons nos délais et vous
-                                tenons informé de l'avancement en temps réel.
-                            </p>
-                        </div>
-                        <div class="card" style="margin-bottom: 1.5rem;">
-                            <h4 style="color: var(--primary); margin-bottom: 1rem;">🔧 Puis-je modifier mon site après ?</h4>
-                            <p style="color: var(--gray); margin: 0;">
-                                Oui ! Nous offrons un support gratuit selon la formule choisie (1 à 6 mois).
-                                Au-delà, maintenance possible à 20€/mois.
-                            </p>
-                        </div>
-                        <div class="card" style="margin-bottom: 1.5rem;">
-                            <h4 style="color: var(--primary); margin-bottom: 1rem;">📱 Le site sera-t-il adapté au mobile ?</h4>
-                            <p style="color: var(--gray); margin: 0;">
-                                Absolument ! Tous nos sites sont 100% responsive et s'adaptent parfaitement
-                                à tous les types d'écrans.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <h4 style="color: var(--primary); margin-bottom: 1rem;">🎨 Puis-je voir le site avant de payer ?</h4>
-                            <p style="color: var(--gray); margin: 0;">
-                                Oui ! Nous vous montrons une version de travail avant le paiement final.
-                                Vous validez le résultat avant de payer les 50% restants.
-                            </p>
+                    <!-- Récapitulatif prix à droite -->
+                    <div>
+                        <div class="price-display" style="background: var(--gradient); padding: 2.5rem; border-radius: 24px; color: white; box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);">
+                            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1.5rem; opacity: 0.95;">Votre devis</h3>
+
+                            <div style="background: rgba(255, 255, 255, 0.15); padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem; backdrop-filter: blur(10px);">
+                                <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.5rem;">Prix de base</div>
+                                <div style="font-size: 2rem; font-weight: 900;">150€</div>
+                            </div>
+
+                            <div id="selected-options" style="margin-bottom: 1.5rem; min-height: 100px;">
+                                <div style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 1rem;">Options sélectionnées :</div>
+                                <div id="options-list" style="font-size: 0.9rem; line-height: 2;">
+                                    <div>✓ Livraison 2 semaines (inclus)</div>
+                                    <div>✓ Support 1 mois (inclus)</div>
+                                </div>
+                            </div>
+
+                            <div style="border-top: 2px solid rgba(255, 255, 255, 0.3); padding-top: 1.5rem; margin-top: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                                    <span style="font-size: 1.2rem; font-weight: 700;">TOTAL</span>
+                                    <span id="total-price" style="font-size: 3rem; font-weight: 900;">150€</span>
+                                </div>
+
+                                <a href="contact.html" style="display: block; width: 100%; padding: 1.2rem; background: white; color: var(--primary); text-align: center; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); transition: all 0.3s;">
+                                    Demander un devis →
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- CTA -->
-                <div class="reveal" style="text-align: center; margin-top: 5rem; background: var(--gradient); color: white; padding: 4rem 2rem; border-radius: 24px;">
-                    <h3 style="font-size: 2.5rem; margin-bottom: 1rem;">Prêt à démarrer ?</h3>
-                    <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95;">
-                        Contactez-nous pour un devis gratuit et personnalisé
-                    </p>
-                    <a href="contact.html" class="btn" style="background: white; color: var(--primary); box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-                        Demander un devis gratuit
-                        <span>→</span>
-                    </a>
                 </div>
             </div>
         </section>
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">Tom & Julien</div>
-            <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">
-                Développeurs Web Freelance • Sites Sur Mesure • Tarifs 100-200€
+    <footer style="background: var(--dark); color: white; padding: 4rem 2rem 2rem; text-align: center;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="font-size: 2rem; font-weight: 900; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;">Tom & Julien</div>
+            <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem; font-size: 1.05rem;">
+                Étudiants Ingénieurs Informatique • Passionnés de Code • Sites Sur Mesure • 100-200€
             </p>
-            <div class="footer-links">
-                <a href="index.html">Accueil</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="tarifs.html">Tarifs</a>
-                <a href="contact.html">Contact</a>
+            <div style="display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
+                <a href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Accueil</a>
+                <a href="portfolio.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Portfolio</a>
+                <a href="tarifs.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Tarifs</a>
+                <a href="contact.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Contact</a>
             </div>
-            <p style="margin-top: 2rem; opacity: 0.6; font-size: 0.9rem;">
+            <p style="margin-top: 2rem; opacity: 0.5; font-size: 0.9rem;">
                 © 2025 Tom Piecoup & Julien Prevot. Tous droits réservés.
             </p>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script>
+        // Configuration
+        const BASE_PRICE = 150;
+        let selectedDelai = { value: 0, label: "2 semaines" };
+        let selectedSupport = { value: 0, label: "1 mois" };
+
+        // Fonction pour calculer et afficher le prix
+        function updatePrice() {
+            const total = BASE_PRICE + selectedDelai.value + selectedSupport.value;
+            document.getElementById('total-price').textContent = total + '€';
+
+            // Mise à jour de la liste des options
+            let optionsList = '';
+            optionsList += `<div>✓ Livraison ${selectedDelai.label} ${selectedDelai.value === 0 ? '(inclus)' : '(+' + selectedDelai.value + '€)'}</div>`;
+            optionsList += `<div>✓ Support ${selectedSupport.label} ${selectedSupport.value === 0 ? '(inclus)' : '(+' + selectedSupport.value + '€)'}</div>`;
+
+            document.getElementById('options-list').innerHTML = optionsList;
+        }
+
+        // Gestion des options (délai, support)
+        function setupOptions(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const options = container.querySelectorAll('.option-card');
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Désélectionner toutes les options
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    // Sélectionner l'option cliquée
+                    this.classList.add('selected');
+
+                    const value = parseInt(this.getAttribute('data-value')) || 0;
+                    const label = this.getAttribute('data-label') || '';
+
+                    if (containerId === 'delai-options') {
+                        selectedDelai = { value, label };
+                    } else if (containerId === 'support-options') {
+                        selectedSupport = { value, label };
+                    }
+
+                    updatePrice();
+                });
+            });
+        }
+
+        // Initialisation
+        setupOptions('delai-options');
+        setupOptions('support-options');
+
+        // Affiche le prix initial correctement
+        updatePrice();
+    </script>
 </body>
 </html>
