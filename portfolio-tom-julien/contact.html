@@ -126,9 +126,16 @@
                         </div>
 
                         <form id="contact-form">
+                            <input type="hidden" name="access_key" value="c18ebd62-c0a8-4e58-a123-6e0afb4f03d3">
+                            <input type="hidden" name="redirect" value="false">
+                            <input type="hidden" name="subject" value="Nouvelle demande de devis - Web Locations">
+                            <input type="hidden" name="from_name" value="Web Locations - Formulaire Contact">
+
                             <h3 style="color: var(--dark); margin-bottom: 1.5rem; font-size: 1.8rem;">
                                 Demander un devis gratuit
                             </h3>
+
+                            <div id="form-message" style="display: none; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; text-align: center;"></div>
 
                             <div class="form-group">
                                 <label for="name">Nom complet *</label>
@@ -170,7 +177,7 @@
                                 <textarea id="message" name="message" required placeholder="Décrivez-nous votre projet : type de site souhaité, fonctionnalités, design préféré, etc."></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                            <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; justify-content: center;">
                                 Envoyer ma demande
                                 <span>→</span>
                             </button>
