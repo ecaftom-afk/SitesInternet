@@ -51,8 +51,9 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 // Load tarifs selection and display price reminder
 const priceReminder = document.getElementById('price-reminder');
 const deadlineSelect = document.getElementById('deadline');
+const supportSelect = document.getElementById('support');
 
-if (priceReminder && deadlineSelect) {
+if (priceReminder && deadlineSelect && supportSelect) {
     const savedSelection = localStorage.getItem('tarifsSelection');
     let currentSelection = null;
 
@@ -60,31 +61,46 @@ if (priceReminder && deadlineSelect) {
     const delaiPrices = {
         '2semaines': { value: 0, label: '2 semaines' },
         '1semaine': { value: 30, label: '1 semaine' },
-        '3-5jours': { value: 50, label: '3-5 jours' },
-        'express': { value: 80, label: 'Express 1-2 jours' }
+        '3-5jours': { value: 50, label: '3-5 jours' }
+    };
+
+    // Mapping du support vers leurs prix
+    const supportPrices = {
+        '1mois': { value: 0, label: '1 mois' },
+        '3mois': { value: 30, label: '3 mois' },
+        '1an': { value: 75, label: '1 an' }
     };
 
     // Fonction pour mettre à jour l'affichage du prix
     function updatePriceDisplay() {
-        if (!currentSelection) return;
-
         const priceDetails = document.getElementById('price-details');
         const remindedPrice = document.getElementById('reminded-price');
 
-        // Récupérer le délai sélectionné
+        // Récupérer les sélections actuelles
         const selectedDelaiKey = deadlineSelect.value || '2semaines';
+        const selectedSupportKey = supportSelect.value || '1mois';
+
         const selectedDelai = delaiPrices[selectedDelaiKey];
+        const selectedSupport = supportPrices[selectedSupportKey];
+
+        // Prix de base (150€)
+        const basePrice = 150;
 
         // Calculer le nouveau prix total
-        const newTotal = currentSelection.basePrice + selectedDelai.value + currentSelection.support.value;
+        const newTotal = basePrice + selectedDelai.value + selectedSupport.value;
 
         // Mettre à jour l'affichage
-        let detailsHTML = `<div>✓ Prix de base : ${currentSelection.basePrice}€</div>`;
+        let detailsHTML = `<div>✓ Prix de base : ${basePrice}€</div>`;
         detailsHTML += `<div>✓ Livraison ${selectedDelai.label} : ${selectedDelai.value === 0 ? 'inclus' : '+' + selectedDelai.value + '€'}</div>`;
-        detailsHTML += `<div>✓ Support ${currentSelection.support.label} : ${currentSelection.support.value === 0 ? 'inclus' : '+' + currentSelection.support.value + '€'}</div>`;
+        detailsHTML += `<div>✓ Support ${selectedSupport.label} : ${selectedSupport.value === 0 ? 'inclus' : '+' + selectedSupport.value + '€'}</div>`;
         priceDetails.innerHTML = detailsHTML;
 
         remindedPrice.textContent = newTotal + '€';
+
+        // Afficher le rappel si au moins une option est sélectionnée
+        if (deadlineSelect.value || supportSelect.value || currentSelection) {
+            priceReminder.style.display = 'block';
+        }
     }
 
     if (savedSelection) {
@@ -101,9 +117,21 @@ if (priceReminder && deadlineSelect) {
                 '3-5 jours': '3-5jours'
             };
 
-            const selectValue = delaiMapping[currentSelection.delai.label];
-            if (selectValue) {
-                deadlineSelect.value = selectValue;
+            // Auto-sélectionner le support dans le formulaire
+            const supportMapping = {
+                '1 mois': '1mois',
+                '3 mois': '3mois',
+                '1 an': '1an'
+            };
+
+            const selectDelaiValue = delaiMapping[currentSelection.delai.label];
+            if (selectDelaiValue) {
+                deadlineSelect.value = selectDelaiValue;
+            }
+
+            const selectSupportValue = supportMapping[currentSelection.support.label];
+            if (selectSupportValue) {
+                supportSelect.value = selectSupportValue;
             }
 
             // Afficher le prix initial
@@ -116,9 +144,12 @@ if (priceReminder && deadlineSelect) {
 
     // Écouter les changements de délai pour mettre à jour le prix
     deadlineSelect.addEventListener('change', function() {
-        if (currentSelection) {
-            updatePriceDisplay();
-        }
+        updatePriceDisplay();
+    });
+
+    // Écouter les changements de support pour mettre à jour le prix
+    supportSelect.addEventListener('change', function() {
+        updatePriceDisplay();
     });
 
     // Bouton pour effacer la sélection
@@ -128,6 +159,7 @@ if (priceReminder && deadlineSelect) {
             localStorage.removeItem('tarifsSelection');
             priceReminder.style.display = 'none';
             deadlineSelect.value = '';
+            supportSelect.value = '';
             currentSelection = null;
         });
     }
