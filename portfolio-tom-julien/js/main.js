@@ -54,41 +54,72 @@ const deadlineSelect = document.getElementById('deadline');
 
 if (priceReminder && deadlineSelect) {
     const savedSelection = localStorage.getItem('tarifsSelection');
+    let currentSelection = null;
+
+    // Mapping des délais vers leurs prix
+    const delaiPrices = {
+        '2semaines': { value: 0, label: '2 semaines' },
+        '1semaine': { value: 30, label: '1 semaine' },
+        '3-5jours': { value: 50, label: '3-5 jours' },
+        'express': { value: 80, label: 'Express 1-2 jours' }
+    };
+
+    // Fonction pour mettre à jour l'affichage du prix
+    function updatePriceDisplay() {
+        if (!currentSelection) return;
+
+        const priceDetails = document.getElementById('price-details');
+        const remindedPrice = document.getElementById('reminded-price');
+
+        // Récupérer le délai sélectionné
+        const selectedDelaiKey = deadlineSelect.value || '2semaines';
+        const selectedDelai = delaiPrices[selectedDelaiKey];
+
+        // Calculer le nouveau prix total
+        const newTotal = currentSelection.basePrice + selectedDelai.value + currentSelection.support.value;
+
+        // Mettre à jour l'affichage
+        let detailsHTML = `<div>✓ Prix de base : ${currentSelection.basePrice}€</div>`;
+        detailsHTML += `<div>✓ Livraison ${selectedDelai.label} : ${selectedDelai.value === 0 ? 'inclus' : '+' + selectedDelai.value + '€'}</div>`;
+        detailsHTML += `<div>✓ Support ${currentSelection.support.label} : ${currentSelection.support.value === 0 ? 'inclus' : '+' + currentSelection.support.value + '€'}</div>`;
+        priceDetails.innerHTML = detailsHTML;
+
+        remindedPrice.textContent = newTotal + '€';
+    }
 
     if (savedSelection) {
         try {
-            const selection = JSON.parse(savedSelection);
+            currentSelection = JSON.parse(savedSelection);
 
             // Afficher le rappel de prix
             priceReminder.style.display = 'block';
 
-            // Remplir les détails
-            const priceDetails = document.getElementById('price-details');
-            let detailsHTML = `<div>✓ Prix de base : ${selection.basePrice}€</div>`;
-            detailsHTML += `<div>✓ Livraison ${selection.delai.label} : ${selection.delai.value === 0 ? 'inclus' : '+' + selection.delai.value + '€'}</div>`;
-            detailsHTML += `<div>✓ Support ${selection.support.label} : ${selection.support.value === 0 ? 'inclus' : '+' + selection.support.value + '€'}</div>`;
-            priceDetails.innerHTML = detailsHTML;
-
-            // Afficher le prix total
-            document.getElementById('reminded-price').textContent = selection.totalPrice + '€';
-
             // Auto-sélectionner le délai dans le formulaire
-            // Mapper les labels de tarifs aux valeurs du select
             const delaiMapping = {
                 '2 semaines': '2semaines',
                 '1 semaine': '1semaine',
                 '3-5 jours': '3-5jours'
             };
 
-            const selectValue = delaiMapping[selection.delai.label];
+            const selectValue = delaiMapping[currentSelection.delai.label];
             if (selectValue) {
                 deadlineSelect.value = selectValue;
             }
+
+            // Afficher le prix initial
+            updatePriceDisplay();
 
         } catch (e) {
             console.error('Erreur lors du chargement de la sélection tarifs:', e);
         }
     }
+
+    // Écouter les changements de délai pour mettre à jour le prix
+    deadlineSelect.addEventListener('change', function() {
+        if (currentSelection) {
+            updatePriceDisplay();
+        }
+    });
 
     // Bouton pour effacer la sélection
     const clearBtn = document.getElementById('clear-selection');
@@ -97,6 +128,7 @@ if (priceReminder && deadlineSelect) {
             localStorage.removeItem('tarifsSelection');
             priceReminder.style.display = 'none';
             deadlineSelect.value = '';
+            currentSelection = null;
         });
     }
 }
