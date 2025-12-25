@@ -588,7 +588,12 @@
                 </p>
             </div>
 
-            <form class="contact-form reveal" id="reservationForm" action="https://formspree.io/f/tom.piecoup@free.fr" method="POST">
+            <form class="contact-form reveal" id="reservationForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="781e792d-8ad7-450e-abbe-8e62f7d93f8d">
+                <input type="hidden" name="subject" value="Nouvelle réservation - L'escapade Versaillaise">
+                <input type="hidden" name="from_name" value="Site L'escapade Versaillaise">
+                <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
                 <div class="form-group">
                     <label for="name">Nom complet *</label>
                     <input type="text" id="name" name="name" required>
@@ -637,7 +642,7 @@
     </footer>
 
     <script>
-        // Form submission with Formspree
+        // Form submission with Web3Forms
         document.getElementById('reservationForm').addEventListener('submit', function(e) {
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
@@ -687,26 +692,26 @@
 
     <!--
     ========================================
-    SYSTÈME D'ENVOI D'EMAIL FORMSPREE CONFIGURÉ ✅
+    SYSTÈME D'ENVOI D'EMAIL WEB3FORMS CONFIGURÉ ✅
     ========================================
 
-    Le formulaire utilise Formspree avec email direct (pas besoin de compte)
+    Le formulaire utilise Web3Forms (gratuit et simple)
     📧 Emails envoyés à: tom.piecoup@free.fr
+    🔑 Access Key: 781e792d-8ad7-450e-abbe-8e62f7d93f8d
 
     COMMENT ÇA MARCHE:
     1. Un visiteur remplit et soumet le formulaire de réservation
-    2. Formspree envoie automatiquement les données à tom.piecoup@free.fr
+    2. Web3Forms envoie automatiquement un email à tom.piecoup@free.fr
     3. L'email contient: nom, email, téléphone, dates, voyageurs, message
+    4. Après soumission, le visiteur est redirigé vers une page de succès
 
-    ⚠️ PREMIÈRE UTILISATION (ACTIVATION REQUISE):
-    - Lors de la toute première soumission, Formspree enverra un email
-      de CONFIRMATION à tom.piecoup@free.fr
-    - Cliquez sur le lien dans cet email pour ACTIVER le formulaire
-    - C'est une sécurité anti-spam de Formspree
-    - Une fois activé, toutes les soumissions suivantes arrivent directement
+    ✅ PRÊT À L'EMPLOI:
+    - Aucune activation nécessaire
+    - Fonctionne immédiatement
+    - Les emails arrivent directement dans votre boîte
 
-    📊 Limite gratuite: 50 soumissions/mois
-    Pour plus ou un tableau de bord: https://formspree.io/
+    📊 Limite gratuite: 250 soumissions/mois
+    Tableau de bord: https://web3forms.com (connectez-vous avec tom.piecoup@free.fr)
     ========================================
     -->
 </body>
