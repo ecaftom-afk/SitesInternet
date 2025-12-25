@@ -48,6 +48,59 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     }
 });
 
+// Load tarifs selection and display price reminder
+const priceReminder = document.getElementById('price-reminder');
+const deadlineSelect = document.getElementById('deadline');
+
+if (priceReminder && deadlineSelect) {
+    const savedSelection = localStorage.getItem('tarifsSelection');
+
+    if (savedSelection) {
+        try {
+            const selection = JSON.parse(savedSelection);
+
+            // Afficher le rappel de prix
+            priceReminder.style.display = 'block';
+
+            // Remplir les détails
+            const priceDetails = document.getElementById('price-details');
+            let detailsHTML = `<div>✓ Prix de base : ${selection.basePrice}€</div>`;
+            detailsHTML += `<div>✓ Livraison ${selection.delai.label} : ${selection.delai.value === 0 ? 'inclus' : '+' + selection.delai.value + '€'}</div>`;
+            detailsHTML += `<div>✓ Support ${selection.support.label} : ${selection.support.value === 0 ? 'inclus' : '+' + selection.support.value + '€'}</div>`;
+            priceDetails.innerHTML = detailsHTML;
+
+            // Afficher le prix total
+            document.getElementById('reminded-price').textContent = selection.totalPrice + '€';
+
+            // Auto-sélectionner le délai dans le formulaire
+            // Mapper les labels de tarifs aux valeurs du select
+            const delaiMapping = {
+                '2 semaines': '2semaines',
+                '1 semaine': '1semaine',
+                '3-5 jours': '3-5jours'
+            };
+
+            const selectValue = delaiMapping[selection.delai.label];
+            if (selectValue) {
+                deadlineSelect.value = selectValue;
+            }
+
+        } catch (e) {
+            console.error('Erreur lors du chargement de la sélection tarifs:', e);
+        }
+    }
+
+    // Bouton pour effacer la sélection
+    const clearBtn = document.getElementById('clear-selection');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            localStorage.removeItem('tarifsSelection');
+            priceReminder.style.display = 'none';
+            deadlineSelect.value = '';
+        });
+    }
+}
+
 // Form submission with Web3Forms
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {

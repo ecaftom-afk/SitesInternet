@@ -188,6 +188,14 @@
             optionsList += `<div>✓ Support ${selectedSupport.label} ${selectedSupport.value === 0 ? '(inclus)' : '(+' + selectedSupport.value + '€)'}</div>`;
 
             document.getElementById('options-list').innerHTML = optionsList;
+
+            // Sauvegarder les sélections dans localStorage
+            localStorage.setItem('tarifsSelection', JSON.stringify({
+                delai: selectedDelai,
+                support: selectedSupport,
+                totalPrice: total,
+                basePrice: BASE_PRICE
+            }));
         }
 
         // Gestion des options (délai, support)
