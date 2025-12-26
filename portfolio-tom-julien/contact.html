@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Tom & Julien</title>
+    <title>Contact - Web Locations</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
@@ -31,9 +31,56 @@
                         <p class="section-kicker animate-fade-in">Contact</p>
                         <h1 class="section-title animate-slide-up">Parlons de votre projet</h1>
                         <p class="section-description animate-fade-in-delay">
-                            Une idée de site web pour votre location ? Contactez-nous pour un devis gratuit et sans engagement.<br>
+                            Une idée de site web pour votre location ? Contactez-nous pour un devis.<br>
                             Nous vous répondons rapidement !
                         </p>
+                    </div>
+                </div>
+
+                <!-- Process -->
+                <div class="reveal" style="margin-bottom: 4rem;">
+                    <h3 class="section-title" style="text-align: center; margin-bottom: 3rem;">Comment ça marche ?</h3>
+                    <div class="cards-grid">
+                        <div class="card">
+                            <span class="card-icon">1️⃣</span>
+                            <h4 class="card-title">Prise de contact</h4>
+                            <p class="card-text">
+                                Vous nous contactez via le formulaire ou email.
+                                Nous discutons de votre projet et de vos besoins.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <span class="card-icon">2️⃣</span>
+                            <h4 class="card-title">Devis personnalisé</h4>
+                            <p class="card-text">
+                                Nous vous envoyons un devis détaillé gratuit sous 24-48h.
+                                <strong>Paiement après satisfaction</strong> - vous ne payez que si le résultat vous convient parfaitement.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <span class="card-icon">3️⃣</span>
+                            <h4 class="card-title">Développement</h4>
+                            <p class="card-text">
+                                Après accord, nous commençons le développement.
+                                Vous suivez l'avancement en temps réel.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <span class="card-icon">4️⃣</span>
+                            <h4 class="card-title">Validation & Satisfaction</h4>
+                            <p class="card-text">
+                                Nous vous présentons le site terminé.
+                                <strong>Vous ne payez que si vous êtes 100% satisfait.</strong> Votre satisfaction est garantie.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <span class="card-icon">5️⃣</span>
+                            <h4 class="card-title">Support</h4>
+                            <p class="card-text">
+                                Nous restons disponibles pour le support gratuit
+                                selon la formule choisie (de 1 mois à 1 an).
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -46,30 +93,9 @@
                             <div class="contact-icon">📧</div>
                             <div>
                                 <h4 style="margin-bottom: 0.3rem;">Email</h4>
-                                <a href="mailto:contact@tom-julien.fr" style="color: white; text-decoration: none; opacity: 0.9;">
-                                    contact@tom-julien.fr
+                                <a href="mailto:contact.website@gmail.com" style="color: white; text-decoration: none; opacity: 0.9;">
+                                    contact.website@gmail.com
                                 </a>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">📱</div>
-                            <div>
-                                <h4 style="margin-bottom: 0.3rem;">Téléphone</h4>
-                                <a href="tel:+33612345678" style="color: white; text-decoration: none; opacity: 0.9;">
-                                    +33 6 12 34 56 78
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">⏰</div>
-                            <div>
-                                <h4 style="margin-bottom: 0.3rem;">Disponibilité</h4>
-                                <p style="margin: 0; opacity: 0.9;">
-                                    Lundi - Samedi<br>
-                                    9h00 - 19h00
-                                </p>
                             </div>
                         </div>
 
@@ -79,7 +105,7 @@
                                 <h4 style="margin-bottom: 0.3rem;">Réponse rapide</h4>
                                 <p style="margin: 0; opacity: 0.9;">
                                     Réponse sous 24-48h<br>
-                                    Devis personnalisé gratuit
+                                    Devis personnalisé
                                 </p>
                             </div>
                         </div>
@@ -101,10 +127,6 @@
                                 </div>
                                 <div style="display: flex; align-items: center; gap: 0.5rem;">
                                     <span style="font-size: 1.2rem;">✅</span>
-                                    <p style="margin: 0; opacity: 0.9; font-size: 0.95rem;">Solde payé seulement si satisfait</p>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <span style="font-size: 1.2rem;">✅</span>
                                     <p style="margin: 0; opacity: 0.9; font-size: 0.95rem;">Spécialisés locations immobilières</p>
                                 </div>
                             </div>
@@ -113,10 +135,33 @@
 
                     <!-- Formulaire de contact -->
                     <div class="contact-form">
-                        <form>
+                        <!-- Prix sélectionné depuis la page tarifs -->
+                        <div id="price-reminder" style="display: none; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%); padding: 1.5rem; border-radius: 16px; margin-bottom: 2rem; border-left: 4px solid var(--primary);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span style="color: var(--dark); font-weight: 700; font-size: 1rem;">Votre sélection depuis la page Tarifs</span>
+                                <button type="button" id="clear-selection" style="background: none; border: none; color: var(--gray); cursor: pointer; font-size: 1.2rem;" title="Effacer la sélection">✕</button>
+                            </div>
+                            <div id="price-details" style="color: var(--dark); font-size: 0.95rem; line-height: 1.8;">
+                            </div>
+                            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(99, 102, 241, 0.2);">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="color: var(--dark); font-weight: 600;">Prix total estimé :</span>
+                                    <span id="reminded-price" style="color: var(--primary); font-weight: 900; font-size: 1.5rem;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form id="contact-form">
+                            <input type="hidden" name="access_key" value="c18ebd62-c0a8-4e58-a123-6e0afb4f03d3">
+                            <input type="hidden" name="redirect" value="false">
+                            <input type="hidden" name="subject" value="Nouvelle demande de devis - Web Locations">
+                            <input type="hidden" name="from_name" value="Web Locations - Formulaire Contact">
+
                             <h3 style="color: var(--dark); margin-bottom: 1.5rem; font-size: 1.8rem;">
-                                Demander un devis gratuit
+                                Demander un devis 
                             </h3>
+
+                            <div id="form-message" style="display: none; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; text-align: center;"></div>
 
                             <div class="form-group">
                                 <label for="name">Nom complet *</label>
@@ -134,34 +179,22 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="project">Type de projet *</label>
-                                <select id="project" name="project" required>
-                                    <option value="">Sélectionnez...</option>
-                                    <option value="essentiel">Site Essentiel (100€)</option>
-                                    <option value="pro">Site Professionnel (150€)</option>
-                                    <option value="premium">Site Premium (200€)</option>
-                                    <option value="custom">Projet sur mesure</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="budget">Budget estimé</label>
-                                <select id="budget" name="budget">
-                                    <option value="">Sélectionnez...</option>
-                                    <option value="100">100€</option>
-                                    <option value="150">150€</option>
-                                    <option value="200">200€</option>
-                                    <option value="plus">Plus de 200€</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="deadline">Délai souhaité</label>
+                                <label for="deadline">Délai de livraison</label>
                                 <select id="deadline" name="deadline">
                                     <option value="">Sélectionnez...</option>
-                                    <option value="urgent">Urgent (moins d'1 semaine)</option>
-                                    <option value="normal">Normal (1-2 semaines)</option>
-                                    <option value="flexible">Flexible (plus de 2 semaines)</option>
+                                    <option value="2semaines">2 semaines (Inclus)</option>
+                                    <option value="1semaine">1 semaine (+30€)</option>
+                                    <option value="3-5jours">3 à 5 jours (+50€)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="support">Durée de support</label>
+                                <select id="support" name="support">
+                                    <option value="">Sélectionnez...</option>
+                                    <option value="1mois">1 mois (Inclus)</option>
+                                    <option value="3mois">3 mois (+30€)</option>
+                                    <option value="1an">1 an (+75€)</option>
                                 </select>
                             </div>
 
@@ -170,7 +203,7 @@
                                 <textarea id="message" name="message" required placeholder="Décrivez-nous votre projet : type de site souhaité, fonctionnalités, design préféré, etc."></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                            <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; justify-content: center;">
                                 Envoyer ma demande
                                 <span>→</span>
                             </button>
@@ -182,61 +215,6 @@
                     </div>
                 </div>
 
-                <!-- Process -->
-                <div class="reveal" style="margin-top: 6rem;">
-                    <h3 class="section-title" style="text-align: center; margin-bottom: 3rem;">Comment ça marche ?</h3>
-                    <div class="cards-grid">
-                        <div class="card">
-                            <span class="card-icon">1️⃣</span>
-                            <h4 class="card-title">Prise de contact</h4>
-                            <p class="card-text">
-                                Vous nous contactez via le formulaire, email ou téléphone.
-                                Nous discutons de votre projet et de vos besoins.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <span class="card-icon">2️⃣</span>
-                            <h4 class="card-title">Devis personnalisé</h4>
-                            <p class="card-text">
-                                Nous vous envoyons un devis détaillé gratuit sous 24-48h.
-                                Paiement en 2 fois : 50% au démarrage, 50% après validation finale.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <span class="card-icon">3️⃣</span>
-                            <h4 class="card-title">Développement</h4>
-                            <p class="card-text">
-                                Après accord, nous commençons le développement.
-                                Vous suivez l'avancement en temps réel.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <span class="card-icon">4️⃣</span>
-                            <h4 class="card-title">Validation & Satisfaction</h4>
-                            <p class="card-text">
-                                Nous vous présentons le site terminé.
-                                Vous validez une fois 100% satisfait, puis paiement du solde (50%).
-                            </p>
-                        </div>
-                        <div class="card">
-                            <span class="card-icon">5️⃣</span>
-                            <h4 class="card-title">Livraison</h4>
-                            <p class="card-text">
-                                Une fois validé, nous livrons le site complet
-                                avec tous les fichiers et la documentation.
-                            </p>
-                        </div>
-                        <div class="card">
-                            <span class="card-icon">6️⃣</span>
-                            <h4 class="card-title">Support</h4>
-                            <p class="card-text">
-                                Nous restons disponibles pour le support gratuit
-                                selon la formule choisie (de 1 mois à 1 an).
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Final CTA -->
                 <div class="reveal" style="text-align: center; margin-top: 5rem;">
                     <div style="background: var(--gradient); color: white; padding: 4rem 2rem; border-radius: 24px;">
@@ -245,11 +223,8 @@
                             N'hésitez pas à nous contacter, nous sommes là pour vous aider !
                         </p>
                         <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                            <a href="mailto:contact@tom-julien.fr" class="btn" style="background: white; color: var(--primary);">
+                            <a href="mailto:contact.website@gmail.com" class="btn" style="background: white; color: var(--primary);">
                                 📧 Nous écrire
-                            </a>
-                            <a href="tel:+33612345678" class="btn btn-secondary">
-                                📱 Nous appeler
                             </a>
                         </div>
                     </div>
@@ -260,9 +235,8 @@
 
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">Web Locations</div>
             <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">
-                Sites Web pour Locations Saisonnières • Tarifs 100-200€
+                Étudiants Ingénieurs Informatique • Passionnés de Code • Sites Sur Mesure • 100-200€
             </p>
             <div class="footer-links">
                 <a href="index.html">Accueil</a>
