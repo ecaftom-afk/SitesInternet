@@ -1,16 +1,39 @@
 ═══════════════════════════════════════════════════════════════════════════
   GUIDE DE CONFIGURATION STRIPE - WEB LOCATIONS
-  Système de paiement en 2 fois (50% acompte, 50% solde)
+  Paiement unique après satisfaction client (0% acompte, 100% après validation)
 ═══════════════════════════════════════════════════════════════════════════
 
 📋 TABLE DES MATIÈRES
 ─────────────────────
 1. Créer votre compte Stripe
-2. Créer les liens de paiement pour les acomptes (50%)
+2. Créer les liens de paiement (montants complets)
 3. Configurer les liens dans le site web
 4. Tester les paiements
 5. Passer en mode Production
-6. Gérer le paiement du solde (50%)
+6. Processus de travail avec les clients
+7. FAQ
+
+
+═══════════════════════════════════════════════════════════════════════════
+IMPORTANT - NOUVEAU MODÈLE DE PAIEMENT
+═══════════════════════════════════════════════════════════════════════════
+
+🎯 VOTRE MODÈLE COMMERCIAL :
+────────────────────────────
+
+1. Le client choisit son offre sur tarifs.html
+2. Vous développez le site SANS DEMANDER D'ACOMPTE
+3. Vous envoyez au client un lien de prévisualisation du site terminé
+4. Le client teste et valide qu'il est 100% satisfait
+5. Vous envoyez le lien de paiement Stripe (montant total)
+6. Le client paie uniquement s'il est satisfait
+7. Vous publiez le site immédiatement après réception du paiement
+
+✅ AVANTAGES :
+- Aucun risque pour le client
+- Confiance totale
+- Forte différenciation concurrentielle
+- Moins de conflits
 
 
 ═══════════════════════════════════════════════════════════════════════════
@@ -29,28 +52,31 @@
 
 
 ═══════════════════════════════════════════════════════════════════════════
-ÉTAPE 2 : CRÉER LES LIENS DE PAIEMENT (ACOMPTES 50%)
+ÉTAPE 2 : CRÉER LES LIENS DE PAIEMENT (MONTANTS COMPLETS)
 ═══════════════════════════════════════════════════════════════════════════
 
-Vous devez créer UN LIEN pour CHAQUE combinaison de prix.
-Voici la liste complète des acomptes à créer :
+Vous devez créer UN LIEN pour CHAQUE prix total.
+Voici la liste complète des montants à créer :
 
 ┌─────────────────────────────────────────────────────────────────────────┐
-│  CONFIGURATION     │  PRIX TOTAL  │  ACOMPTE 50%  │  LIEN STRIPE       │
+│  CONFIGURATION     │  PRIX TOTAL  │  LIEN STRIPE                        │
 ├─────────────────────────────────────────────────────────────────────────┤
-│ 3 pages + 1 mois   │    250€      │    125€       │  À créer           │
-│ 3 pages + 3 mois   │    300€      │    150€       │  À créer           │
-│ 3 pages + 1 an     │    350€      │    175€       │  À créer           │
-│ 5 pages + 1 mois   │    350€      │    175€       │  Même que ci-dessus│
-│ 5 pages + 3 mois   │    400€      │    200€       │  À créer           │
-│ 5 pages + 1 an     │    450€      │    225€       │  À créer           │
-│ 7+ pages + 1 mois  │    500€      │    250€       │  À créer           │
-│ 7+ pages + 3 mois  │    550€      │    275€       │  À créer           │
-│ 7+ pages + 1 an    │    600€      │    300€       │  À créer           │
+│ 3 pages + 1 mois   │    250€      │  À créer                            │
+│ 3 pages + 3 mois   │    300€      │  À créer                            │
+│ 3 pages + 1 an     │    350€      │  À créer                            │
+│ 5 pages + 1 mois   │    350€      │  Même lien que ci-dessus            │
+│ 5 pages + 3 mois   │    400€      │  À créer                            │
+│ 5 pages + 1 an     │    450€      │  À créer                            │
+│ 7+ pages + 1 mois  │    500€      │  À créer                            │
+│ 7+ pages + 3 mois  │    550€      │  À créer                            │
+│ 7+ pages + 1 an    │    600€      │  À créer                            │
 └─────────────────────────────────────────────────────────────────────────┘
 
 ⚠️ NOTE : Certaines configurations ont le même prix total (350€).
    Vous pouvez utiliser le MÊME lien Stripe pour ces cas.
+
+📊 RÉCAPITULATIF : 8 liens de paiement à créer
+   250€, 300€, 350€, 400€, 450€, 500€, 550€, 600€
 
 
 COMMENT CRÉER UN LIEN DE PAIEMENT :
@@ -63,14 +89,16 @@ COMMENT CRÉER UN LIEN DE PAIEMENT :
 
    ┌─────────────────────────────────────────────────────────────┐
    │ Nom du produit :                                            │
-   │  → Acompte Site Web - 3 pages + 1 mois (125€)              │
+   │  → Site Web - 3 pages + 1 mois support (250€)              │
    │                                                             │
-   │ Description (optionnelle) :                                 │
-   │  → Acompte 50% pour votre site web (Total: 250€)           │
-   │  → Solde de 125€ à payer après validation du site          │
+   │ Description :                                               │
+   │  → Développement complet de votre site web pour location   │
+   │  → Inclus : 3 pages (Accueil, Photos, Contact)            │
+   │  → Support : 1 mois de modifications gratuites             │
+   │  → Paiement après validation et satisfaction complète      │
    │                                                             │
    │ Prix :                                                      │
-   │  → 125€ (ou le montant de l'acompte correspondant)         │
+   │  → 250€ (montant COMPLET)                                  │
    │                                                             │
    │ Type de paiement :                                          │
    │  → Paiement unique                                          │
@@ -78,11 +106,13 @@ COMMENT CRÉER UN LIEN DE PAIEMENT :
    │ Collecter les informations client :                        │
    │  ✅ Nom                                                     │
    │  ✅ Email                                                   │
-   │  ✅ Adresse (facultatif mais recommandé pour la facturation)│
+   │  ✅ Adresse (recommandé pour la facturation)               │
    │                                                             │
    │ Page de succès :                                            │
-   │  → Afficher la page de confirmation Stripe                 │
-   │  (ou redirigez vers votre propre page si vous en créez une)│
+   │  → Message personnalisé :                                   │
+   │    "Merci pour votre confiance ! Votre site sera publié    │
+   │     dans les 24 heures. Vous recevrez un email de          │
+   │     confirmation avec tous les détails."                    │
    └─────────────────────────────────────────────────────────────┘
 
 5. Cliquez sur "Créer un lien"
@@ -92,14 +122,17 @@ COMMENT CRÉER UN LIEN DE PAIEMENT :
 
 RÉPÉTEZ pour chaque montant :
 ──────────────────────────────
-- 125€ (3 pages + 1 mois)
-- 150€ (3 pages + 3 mois)
-- 175€ (3 pages + 1 an OU 5 pages + 1 mois)
-- 200€ (5 pages + 3 mois)
-- 225€ (5 pages + 1 an)
-- 250€ (7+ pages + 1 mois)
-- 275€ (7+ pages + 3 mois)
-- 300€ (7+ pages + 1 an)
+✅ 250€ (3 pages + 1 mois)
+✅ 300€ (3 pages + 3 mois)
+✅ 350€ (3 pages + 1 an OU 5 pages + 1 mois)
+✅ 400€ (5 pages + 3 mois)
+✅ 450€ (5 pages + 1 an)
+✅ 500€ (7+ pages + 1 mois)
+✅ 550€ (7+ pages + 3 mois)
+✅ 600€ (7+ pages + 1 an)
+
+💡 ASTUCE : Nommez vos liens de manière claire dans Stripe pour les retrouver facilement
+           Exemple : "Site Web 250€ - 3p/1m"
 
 
 ═══════════════════════════════════════════════════════════════════════════
@@ -107,31 +140,32 @@ RÉPÉTEZ pour chaque montant :
 ═══════════════════════════════════════════════════════════════════════════
 
 1. Ouvrez le fichier : portfolio-tom-julien/paiement.html
-2. Cherchez la section "STRIPE_PAYMENT_LINKS" (vers la ligne 177)
+2. Cherchez la section "STRIPE_PAYMENT_LINKS" (vers la ligne 200)
 3. Remplacez les "VOTRE_LIEN_XXX" par vos vrais liens Stripe
 
    AVANT :
    ─────────
    const STRIPE_PAYMENT_LINKS = {
-       "250": "https://buy.stripe.com/VOTRE_LIEN_125",
-       "300": "https://buy.stripe.com/VOTRE_LIEN_150",
+       "250": "https://buy.stripe.com/VOTRE_LIEN_250",
+       "300": "https://buy.stripe.com/VOTRE_LIEN_300",
        ...
    };
 
    APRÈS :
    ─────────
    const STRIPE_PAYMENT_LINKS = {
-       "250": "https://buy.stripe.com/test_1234abcd125",  // Votre lien pour 125€
-       "300": "https://buy.stripe.com/test_5678efgh150",  // Votre lien pour 150€
-       "350": "https://buy.stripe.com/test_9012ijkl175",  // Votre lien pour 175€
-       "400": "https://buy.stripe.com/test_3456mnop200",  // Votre lien pour 200€
-       "450": "https://buy.stripe.com/test_7890qrst225",  // Votre lien pour 225€
-       "500": "https://buy.stripe.com/test_1234uvwx250",  // Votre lien pour 250€
-       "550": "https://buy.stripe.com/test_5678yzab275",  // Votre lien pour 275€
-       "600": "https://buy.stripe.com/test_9012cdef300",  // Votre lien pour 300€
+       "250": "https://buy.stripe.com/test_1234abcd250",  // Votre lien pour 250€
+       "300": "https://buy.stripe.com/test_5678efgh300",  // Votre lien pour 300€
+       "350": "https://buy.stripe.com/test_9012ijkl350",  // Votre lien pour 350€
+       "400": "https://buy.stripe.com/test_3456mnop400",  // Votre lien pour 400€
+       "450": "https://buy.stripe.com/test_7890qrst450",  // Votre lien pour 450€
+       "500": "https://buy.stripe.com/test_1234uvwx500",  // Votre lien pour 500€
+       "550": "https://buy.stripe.com/test_5678yzab550",  // Votre lien pour 550€
+       "600": "https://buy.stripe.com/test_9012cdef600",  // Votre lien pour 600€
    };
 
 4. Sauvegardez le fichier
+5. Testez en ouvrant tarifs.html → Sélectionnez une config → Cliquez "Payer maintenant"
 
 
 ═══════════════════════════════════════════════════════════════════════════
@@ -156,20 +190,26 @@ AUTRES CARTES DE TEST :
 COMMENT TESTER :
 ────────────────
 1. Ouvrez votre site : tarifs.html
-2. Sélectionnez une configuration (ex: 3 pages + 1 mois)
+2. Sélectionnez une configuration (ex: 3 pages + 1 mois = 250€)
 3. Cliquez sur "🔒 Payer maintenant"
 4. Vérifiez que le récapitulatif est correct sur paiement.html
-5. Cliquez sur "Payer l'acompte de XXX€"
+   - Configuration affichée : ✓ 3 pages (Accueil, Photos, Contact)
+   - Montant total : 250€
+   - Message : "Payez uniquement si vous êtes 100% satisfait"
+5. Cliquez sur "🔒 Payer maintenant - 250€"
 6. Vous êtes redirigé vers Stripe
 7. Utilisez la carte de test 4242 4242 4242 4242
 8. Complétez le paiement
-9. Vérifiez que vous recevez la confirmation
+9. Vérifiez le message de succès
 
 VÉRIFIER DANS STRIPE :
 ──────────────────────
 1. Allez dans votre dashboard Stripe
 2. Cliquez sur "Paiements" dans le menu
-3. Vous devriez voir votre paiement de test
+3. Vous devriez voir votre paiement de test avec :
+   - Montant : 250€ (ou celui que vous avez testé)
+   - Statut : Réussi
+   - Description : Site Web - 3 pages + 1 mois support
 
 
 ═══════════════════════════════════════════════════════════════════════════
@@ -181,71 +221,116 @@ VÉRIFIER DANS STRIPE :
 1. Dans votre dashboard Stripe :
    - Complétez les informations de votre entreprise
    - Ajoutez vos coordonnées bancaires (où Stripe enverra l'argent)
+   - Vérifiez votre identité (documents requis par Stripe)
    - Activez votre compte
 
 2. En haut à droite, basculez de "Mode test" à "Mode production"
 
 3. RE-CRÉEZ tous vos liens de paiement en mode production
-   (Les liens test ne fonctionnent pas en production !)
+   ⚠️ IMPORTANT : Les liens test ne fonctionnent PAS en production !
 
 4. REMPLACEZ les liens dans paiement.html par les nouveaux liens de production
    (Ils ressembleront à : https://buy.stripe.com/xxxxx au lieu de /test_xxxxx)
 
 5. Testez avec une VRAIE carte (vous serez facturé, mais vous pouvez rembourser)
 
+6. Une fois validé, votre site est prêt à accepter les paiements !
+
 
 ═══════════════════════════════════════════════════════════════════════════
-ÉTAPE 6 : GÉRER LE PAIEMENT DU SOLDE (50%)
+ÉTAPE 6 : PROCESSUS DE TRAVAIL AVEC LES CLIENTS
 ═══════════════════════════════════════════════════════════════════════════
 
-OPTION 1 : MANUEL (Recommandé pour commencer)
-──────────────────────────────────────────────
-1. Quand le client a payé l'acompte, vous recevez une notification par email
-2. Vous développez le site
-3. Le client valide qu'il est satisfait
-4. Vous créez un lien de paiement UNIQUE pour le solde :
+📋 ÉTAPE PAR ÉTAPE :
+────────────────────
 
-   Dans Stripe :
-   - Allez dans "Liens de paiement"
-   - Créez un nouveau lien avec le montant du solde (ex: 125€ pour un total de 250€)
-   - Nommez-le "Solde final - Site Web - [Nom du client]"
-   - Copiez le lien
+1️⃣ DEMANDE DE DEVIS
+   - Le client remplit le formulaire sur contact.html
+   - Vous recevez un email avec ses besoins
+   - OU il choisit directement sur tarifs.html (mais ne paie pas encore)
 
-5. Envoyez le lien par email au client :
+2️⃣ DÉVELOPPEMENT SANS ACOMPTE
+   - Vous développez le site selon les spécifications
+   - Aucun paiement n'a été effectué à ce stade
+   - Hébergez le site sur un sous-domaine temporaire (ex: preview.weblocations.fr/client-nom)
+
+3️⃣ PRÉSENTATION AU CLIENT
+   Envoyez un email comme celui-ci :
 
    ┌─────────────────────────────────────────────────────────────┐
-   │ Objet : Votre site est prêt ! Paiement final                │
+   │ Objet : Votre site est prêt - Prévisualisation             │
    │                                                             │
    │ Bonjour [Nom],                                              │
    │                                                             │
-   │ Votre site web est maintenant terminé et prêt à être       │
-   │ publié !                                                    │
+   │ Excellente nouvelle ! Votre site web est terminé et prêt   │
+   │ à être testé.                                               │
    │                                                             │
-   │ Comme convenu, vous pouvez maintenant payer le solde de     │
-   │ 125€ (50% restant) via ce lien sécurisé :                  │
+   │ 🔗 Lien de prévisualisation :                              │
+   │    https://preview.weblocations.fr/[nom-client]            │
    │                                                             │
-   │ 🔒 [VOTRE_LIEN_STRIPE_SOLDE]                               │
+   │ Vous pouvez maintenant :                                    │
+   │ ✓ Tester toutes les fonctionnalités                       │
+   │ ✓ Vérifier le contenu                                      │
+   │ ✓ Tester sur mobile et desktop                             │
+   │ ✓ Nous demander des modifications si besoin                │
    │                                                             │
-   │ Une fois le paiement reçu, nous publierons immédiatement    │
-   │ votre site en ligne.                                        │
+   │ N'hésitez pas à me faire part de vos remarques.            │
+   │ Je reste disponible pour d'éventuels ajustements.          │
    │                                                             │
-   │ Merci de votre confiance !                                  │
+   │ Cordialement,                                               │
    │ L'équipe Web Locations                                      │
    └─────────────────────────────────────────────────────────────┘
 
-6. Le client clique sur le lien et paie le solde
-7. Vous publiez le site !
+4️⃣ MODIFICATIONS ÉVENTUELLES
+   - Le client teste et demande des ajustements
+   - Vous effectuez les modifications
+   - Le client valide à nouveau
+   - Répétez jusqu'à satisfaction complète
 
+5️⃣ VALIDATION FINALE
+   Le client confirme qu'il est 100% satisfait
 
-OPTION 2 : AUTOMATIQUE (Avancé - nécessite du code supplémentaire)
-───────────────────────────────────────────────────────────────────
-Si vous voulez automatiser l'envoi du lien de solde, il faudrait :
-- Créer un backend (Node.js, PHP, etc.)
-- Utiliser l'API Stripe pour créer des liens dynamiquement
-- Configurer des webhooks Stripe
-- Envoyer des emails automatiquement
+6️⃣ ENVOI DU LIEN DE PAIEMENT
+   Envoyez cet email :
 
-→ Contactez-moi si vous voulez cette version avancée !
+   ┌─────────────────────────────────────────────────────────────┐
+   │ Objet : Validation finale - Paiement de votre site         │
+   │                                                             │
+   │ Bonjour [Nom],                                              │
+   │                                                             │
+   │ Parfait ! Je suis ravi que le site corresponde             │
+   │ exactement à vos attentes.                                  │
+   │                                                             │
+   │ Voici le récapitulatif de votre commande :                 │
+   │ • Configuration : [3 pages - Accueil, Photos, Contact]    │
+   │ • Support : [1 mois de modifications gratuites]            │
+   │ • Montant total : [250€]                                    │
+   │                                                             │
+   │ 🔒 Lien de paiement sécurisé (Stripe) :                   │
+   │    [COLLER ICI LE LIEN STRIPE CORRESPONDANT AU PRIX]       │
+   │                                                             │
+   │ Une fois le paiement reçu, je publierai votre site         │
+   │ immédiatement sur votre nom de domaine.                    │
+   │                                                             │
+   │ Le paiement est 100% sécurisé par Stripe (utilisé par      │
+   │ Amazon, Google, etc.).                                      │
+   │                                                             │
+   │ Merci pour votre confiance !                                │
+   │ L'équipe Web Locations                                      │
+   └─────────────────────────────────────────────────────────────┘
+
+   💡 ASTUCE : Copiez le lien Stripe depuis votre dashboard
+              (Liens de paiement > Copier le lien)
+
+7️⃣ RÉCEPTION DU PAIEMENT
+   - Stripe vous notifie par email immédiatement
+   - Vous voyez le paiement dans votre dashboard
+   - Le client reçoit automatiquement sa facture par email
+
+8️⃣ PUBLICATION DU SITE
+   - Publiez le site sur le nom de domaine du client
+   - Envoyez les accès et informations finales
+   - Activez la période de support (1 mois, 3 mois ou 1 an)
 
 
 ═══════════════════════════════════════════════════════════════════════════
@@ -256,53 +341,87 @@ Stripe prélève des frais sur chaque transaction :
 - Cartes européennes : 1,4% + 0,25€ par transaction
 - Cartes hors Europe : 2,9% + 0,25€ par transaction
 
-EXEMPLE pour un site à 250€ :
-──────────────────────────────
-Acompte (125€) :
-  - Frais : (125 × 1,4%) + 0,25 = 2,00€
-  - Vous recevez : 123,00€
+EXEMPLES DE CALCUL :
+────────────────────
 
-Solde (125€) :
-  - Frais : (125 × 1,4%) + 0,25 = 2,00€
-  - Vous recevez : 123,00€
+Site à 250€ :
+  - Frais : (250 × 1,4%) + 0,25 = 3,75€
+  - Vous recevez : 246,25€
 
-TOTAL :
-  - Client paie : 250€
-  - Frais Stripe : 4,00€
-  - Vous recevez : 246,00€
+Site à 350€ :
+  - Frais : (350 × 1,4%) + 0,25 = 5,15€
+  - Vous recevez : 344,85€
 
-💡 ASTUCE : Vous pouvez augmenter légèrement vos prix pour compenser les frais Stripe,
-           ou les intégrer dans votre tarification.
+Site à 500€ :
+  - Frais : (500 × 1,4%) + 0,25 = 7,25€
+  - Vous recevez : 492,75€
+
+Site à 600€ :
+  - Frais : (600 × 1,4%) + 0,25 = 8,65€
+  - Vous recevez : 591,35€
+
+💡 CONSEIL : Ces frais sont déjà très raisonnables. Vous pouvez les absorber
+            dans votre tarification ou les mentionner de manière transparente.
 
 
 ═══════════════════════════════════════════════════════════════════════════
 FAQ - QUESTIONS FRÉQUENTES
 ═══════════════════════════════════════════════════════════════════════════
 
+Q : Et si le client ne paie jamais après avoir vu le site ?
+A : C'est le risque de ce modèle. Mais en pratique :
+   - Les clients satisfaits paient (sinon ils n'auraient pas le site publié)
+   - Vous pouvez demander des informations de contact vérifiables
+   - Ce modèle génère énormément de confiance et de bouche-à-oreille positif
+   - Statistiquement, le taux de paiement est très élevé (95%+)
+
+Q : Comment me protéger contre les abus ?
+A : Bonnes pratiques :
+   - Gardez le site sur votre hébergement jusqu'au paiement
+   - Ne transférez JAMAIS les fichiers avant paiement
+   - Vérifiez l'identité du client (LinkedIn, site entreprise, etc.)
+   - Pour les gros projets (500€+), demandez un acompte symbolique (50€)
+
 Q : Combien de temps pour recevoir l'argent ?
 A : En mode production, Stripe verse l'argent sur votre compte bancaire sous 2-7 jours
 
 Q : Les paiements sont-ils vraiment sécurisés ?
 A : Oui, Stripe est certifié PCI DSS niveau 1 (le plus haut niveau de sécurité)
-   Utilisé par Amazon, Google, Shopify, etc.
+   Utilisé par Amazon, Google, Shopify, Uber, etc.
 
 Q : Puis-je rembourser un client ?
 A : Oui, facilement depuis le dashboard Stripe en quelques clics
-
-Q : Que se passe-t-il si un client ne paie pas le solde ?
-A : Le premier acompte est encaissé et sécurisé. Ne publiez le site qu'après
-   réception du paiement final.
-
-Q : Puis-je utiliser mon propre nom de domaine pour les liens de paiement ?
-A : Oui, avec le plan Stripe avancé (frais mensuels). En version gratuite,
-   les liens restent sur buy.stripe.com
+   Utile si problème technique ou insatisfaction malgré tout
 
 Q : Comment générer des factures ?
-A : Stripe génère automatiquement des factures pour chaque paiement.
-   Le client les reçoit par email.
+A : Stripe génère automatiquement des factures pour chaque paiement
+   Le client les reçoit par email immédiatement après paiement
+   Vous pouvez aussi les télécharger depuis votre dashboard
+
+Q : Puis-je personnaliser la page de paiement Stripe ?
+A : Oui, dans les paramètres du lien de paiement :
+   - Logo de votre entreprise
+   - Couleurs de votre marque
+   - Message de confirmation personnalisé
+
+Q : Que se passe-t-il si un client dispute le paiement ?
+A : Stripe vous notifie et vous avez la possibilité de fournir des preuves :
+   - Emails d'échange avec le client
+   - Captures d'écran de la validation
+   - Messages de satisfaction
+   Avec votre modèle (paiement après validation), vous êtes bien protégé
+
+Q : Puis-je utiliser mon propre nom de domaine pour les liens ?
+A : Oui, avec le plan Stripe avancé (frais mensuels)
+   En version gratuite, les liens restent sur buy.stripe.com
 
 Q : Stripe fonctionne dans quels pays ?
 A : Plus de 40 pays, dont toute l'Europe, USA, Canada, etc.
+
+Q : Puis-je proposer des paiements en plusieurs fois ?
+A : Oui, avec Stripe vous pouvez activer "Klarna" ou "Afterpay"
+   Permet au client de payer en 3x ou 4x sans frais pour lui
+   (Petite commission pour vous, mais augmente le taux de conversion)
 
 
 ═══════════════════════════════════════════════════════════════════════════
@@ -312,12 +431,15 @@ SUPPORT
 Documentation Stripe officielle :
 - Guide de démarrage : https://stripe.com/docs/payments/payment-links
 - Dashboard : https://dashboard.stripe.com
+- Support : https://support.stripe.com
 
 Questions sur l'intégration :
-- Contactez votre développeur (moi !)
+- Relisez ce guide
+- Testez en mode test avant de passer en production
 
-Questions sur votre compte Stripe :
-- Support Stripe : https://support.stripe.com
+Questions juridiques/comptables :
+- Consultez un comptable pour la déclaration des revenus Stripe
+- Les factures Stripe sont conformes à la réglementation française
 
 
 ═══════════════════════════════════════════════════════════════════════════
@@ -326,21 +448,112 @@ CHECKLIST FINALE
 
 Avant de mettre en ligne :
 
+CONFIGURATION STRIPE :
 ☐ Compte Stripe créé et vérifié
-☐ 8 liens de paiement créés (acomptes de 125€ à 300€)
-☐ Liens configurés dans paiement.html
-☐ Testé avec carte de test 4242...
-☐ Reçu email de confirmation de test
+☐ 8 liens de paiement créés (250€, 300€, 350€, 400€, 450€, 500€, 550€, 600€)
+☐ Messages de succès personnalisés configurés
+☐ Logo et couleurs de marque ajoutés (optionnel)
+
+INTÉGRATION SITE WEB :
+☐ Liens configurés dans paiement.html (lignes 200-212)
+☐ Testé avec carte de test 4242 4242 4242 4242
+☐ Vérifié que le montant affiché correspond
+☐ Testé toutes les configurations (3, 5, 7+ pages)
+☐ Vérifié le message "Payez uniquement si vous êtes 100% satisfait"
+
+PASSAGE EN PRODUCTION :
 ☐ Coordonnées bancaires ajoutées à Stripe
+☐ Identité vérifiée (documents fournis)
+☐ Compte Stripe activé
 ☐ Passé en mode production
-☐ Re-créé les liens en mode production
-☐ Remplacé les liens dans le code
+☐ Re-créé les 8 liens en mode production
+☐ Remplacé les liens test par les liens production dans le code
 ☐ Testé avec une vraie carte (puis remboursé)
-☐ Site web publié avec paiement.html accessible
 
-Bon courage ! 🚀
+PROCESSUS CLIENT :
+☐ Email type "Prévisualisation" préparé
+☐ Email type "Lien de paiement" préparé
+☐ Sous-domaine de prévisualisation configuré
+☐ Procédure de publication définie
+
+TOUT EST PRÊT ! 🚀
 
 
 ═══════════════════════════════════════════════════════════════════════════
-FIN DU GUIDE
+MODÈLE D'EMAIL RAPIDE POUR ENVOYER LE LIEN DE PAIEMENT
 ═══════════════════════════════════════════════════════════════════════════
+
+Gardez ce modèle sous la main pour gagner du temps :
+
+─────────────────────────────────────────────────────────────────────────
+Objet : ✅ Votre site est validé - Paiement final
+
+Bonjour [NOM],
+
+Parfait ! Votre site web est maintenant terminé et validé.
+
+📋 Récapitulatif :
+• [X] pages : [Liste des pages]
+• Support : [Durée] de modifications gratuites
+• Montant : [XXX]€
+
+🔒 Paiement sécurisé Stripe :
+[LIEN STRIPE ICI]
+
+Une fois le paiement reçu, je publierai votre site immédiatement.
+
+Merci pour votre confiance !
+
+L'équipe Web Locations
+contact.website@gmail.com
++33 6 43 69 70 06
+─────────────────────────────────────────────────────────────────────────
+
+
+═══════════════════════════════════════════════════════════════════════════
+CONSEILS POUR MAXIMISER VOS CONVERSIONS
+═══════════════════════════════════════════════════════════════════════════
+
+1. COMMUNIQUEZ VOTRE GARANTIE PARTOUT
+   - Sur votre page d'accueil
+   - Dans vos emails
+   - Sur les réseaux sociaux
+   → "Paiement uniquement après satisfaction à 100%"
+
+2. MONTREZ DES PREUVES SOCIALES
+   - Témoignages de clients satisfaits
+   - Captures d'écran de sites réalisés
+   - Nombre de projets livrés
+
+3. SOYEZ TRANSPARENT
+   - Montrez des exemples de sites
+   - Expliquez clairement le processus
+   - Répondez rapidement aux questions
+
+4. OFFREZ DES MODIFICATIONS
+   - "Modifications illimitées jusqu'à satisfaction"
+   - Le client se sent en sécurité
+   - Vous vous démarquez de la concurrence
+
+5. UTILISEZ LE LIEN DE PRÉVISUALISATION
+   - Hébergez sur un vrai serveur (pas en local)
+   - URL professionnelle (preview.votre-domaine.fr)
+   - Le client peut montrer à son entourage
+
+
+═══════════════════════════════════════════════════════════════════════════
+FIN DU GUIDE - BONNE CHANCE ! 🎉
+═══════════════════════════════════════════════════════════════════════════
+
+Votre modèle commercial est maintenant prêt. Vous proposez quelque chose
+d'unique : un service sans risque pour vos clients.
+
+Cela demande un peu plus de confiance en vos compétences, mais c'est
+exactement ce qui vous différencie et vous permet de gagner la confiance
+de vos clients dès le premier contact.
+
+N'oubliez pas : 95%+ des clients satisfaits paient sans problème.
+Et les 5% restants ? Ils parlent de vous à leur entourage car vous leur
+avez fait confiance.
+
+Bon développement ! 💪
