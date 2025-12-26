@@ -115,10 +115,10 @@
                         PAIEMENT SÉCURISÉ
                     </div>
                     <h1 style="font-size: 3rem; font-weight: 900; margin-bottom: 1rem; color: var(--dark);">
-                        Finalisez votre <span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">commande</span>
+                        Votre site est <span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">prêt !</span>
                     </h1>
                     <p style="font-size: 1.2rem; color: var(--gray);">
-                        Paiement 100% sécurisé par Stripe
+                        Payez uniquement si vous êtes 100% satisfait
                     </p>
                 </div>
 
@@ -136,30 +136,30 @@
                         </div>
                     </div>
 
-                    <div class="price-breakdown">
-                        <div class="price-row">
-                            <span>Prix total du projet :</span>
-                            <strong id="total-price">-</strong>
-                        </div>
-                        <div class="price-row total">
-                            <span>Acompte à payer (50%) :</span>
-                            <span id="deposit-price">-</span>
-                        </div>
+                    <div class="info-box" style="background: rgba(34, 197, 94, 0.05); border-left-color: #22c55e;">
+                        <h3 style="color: #22c55e;">✅ Notre garantie satisfaction</h3>
+                        <ol style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">
+                            <li>Nous développons votre site <strong>sans acompte</strong></li>
+                            <li>Vous recevez un lien de prévisualisation de votre site terminé</li>
+                            <li>Vous testez et validez que tout correspond à vos attentes</li>
+                            <li>Vous payez <strong>uniquement si vous êtes 100% satisfait</strong></li>
+                            <li>Une fois le paiement reçu, nous publions votre site immédiatement</li>
+                        </ol>
                     </div>
 
-                    <div class="info-box">
-                        <h3>💳 Comment ça marche ?</h3>
-                        <ol style="margin: 0; padding-left: 1.5rem; line-height: 1.8;">
-                            <li>Vous payez <strong>50% maintenant</strong> pour démarrer le projet</li>
-                            <li>Nous développons votre site selon vos besoins</li>
-                            <li>Vous validez le site quand vous êtes <strong>100% satisfait</strong></li>
-                            <li>Vous payez les <strong>50% restants</strong> uniquement après validation</li>
-                        </ol>
+                    <div class="price-breakdown">
+                        <div class="price-row total">
+                            <span>Montant total à payer :</span>
+                            <span id="total-price">-</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 1rem; color: #22c55e; font-weight: 600; font-size: 1rem;">
+                            ✓ Paiement après validation complète
+                        </div>
                     </div>
 
                     <!-- Bouton de paiement Stripe -->
                     <button id="stripe-payment-button" class="stripe-button">
-                        🔒 Payer l'acompte de <span id="deposit-button-price">-</span> €
+                        🔒 Payer maintenant - <span id="total-button-price">-</span> €
                     </button>
 
                     <div class="secure-badge">
@@ -200,15 +200,15 @@
         // Mapping des prix vers les liens de paiement Stripe
         // IMPORTANT: Vous devrez créer ces liens dans votre dashboard Stripe et remplacer les URLs
         const STRIPE_PAYMENT_LINKS = {
-            // Format: "prix_total": "lien_stripe_pour_acompte_50%"
-            "250": "https://buy.stripe.com/VOTRE_LIEN_125", // 3 pages + 1 mois support
-            "300": "https://buy.stripe.com/VOTRE_LIEN_150", // 3 pages + 3 mois support
-            "350": "https://buy.stripe.com/VOTRE_LIEN_175", // 5 pages + 1 mois support OU 3 pages + 1 an support
-            "400": "https://buy.stripe.com/VOTRE_LIEN_200", // 5 pages + 3 mois support
-            "450": "https://buy.stripe.com/VOTRE_LIEN_225", // 5 pages + 1 an support
-            "500": "https://buy.stripe.com/VOTRE_LIEN_250", // 7+ pages + 1 mois support
-            "550": "https://buy.stripe.com/VOTRE_LIEN_275", // 7+ pages + 3 mois support
-            "600": "https://buy.stripe.com/VOTRE_LIEN_300", // 7+ pages + 1 an support
+            // Format: "prix_total": "lien_stripe_paiement_complet"
+            "250": "https://buy.stripe.com/VOTRE_LIEN_250", // 3 pages + 1 mois support
+            "300": "https://buy.stripe.com/VOTRE_LIEN_300", // 3 pages + 3 mois support
+            "350": "https://buy.stripe.com/VOTRE_LIEN_350", // 5 pages + 1 mois support OU 3 pages + 1 an support
+            "400": "https://buy.stripe.com/VOTRE_LIEN_400", // 5 pages + 3 mois support
+            "450": "https://buy.stripe.com/VOTRE_LIEN_450", // 5 pages + 1 an support
+            "500": "https://buy.stripe.com/VOTRE_LIEN_500", // 7+ pages + 1 mois support
+            "550": "https://buy.stripe.com/VOTRE_LIEN_550", // 7+ pages + 3 mois support
+            "600": "https://buy.stripe.com/VOTRE_LIEN_600", // 7+ pages + 1 an support
         };
 
         // Récupérer les données du devis depuis localStorage
@@ -231,8 +231,7 @@
 
             const configDetails = document.getElementById('config-details');
             const totalPrice = document.getElementById('total-price');
-            const depositPrice = document.getElementById('deposit-price');
-            const depositButtonPrice = document.getElementById('deposit-button-price');
+            const totalButtonPrice = document.getElementById('total-button-price');
 
             // Afficher la configuration
             let configHTML = '';
@@ -245,13 +244,11 @@
             }
             configDetails.innerHTML = configHTML;
 
-            // Calculer les prix
+            // Afficher le prix total
             const total = data.totalPrice || 250;
-            const deposit = Math.round(total / 2);
 
             totalPrice.textContent = `${total}€`;
-            depositPrice.textContent = `${deposit}€`;
-            depositButtonPrice.textContent = deposit;
+            totalButtonPrice.textContent = total;
 
             // Configurer le bouton de paiement
             setupPaymentButton(total);
@@ -272,8 +269,7 @@
                 button.onclick = function() {
                     alert('Les liens de paiement Stripe ne sont pas encore configurés.\n\n' +
                           'Veuillez suivre le guide GUIDE_STRIPE.txt pour créer vos liens de paiement.\n\n' +
-                          'Prix total: ' + totalPrice + '€\n' +
-                          'Acompte à configurer: ' + Math.round(totalPrice / 2) + '€');
+                          'Prix total: ' + totalPrice + '€');
                 };
                 button.style.opacity = '0.7';
                 button.innerHTML = '⚠️ Configuration requise - Voir GUIDE_STRIPE.txt';
