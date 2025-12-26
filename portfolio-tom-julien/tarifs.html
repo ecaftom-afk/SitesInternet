@@ -6,7 +6,39 @@
     <title>Tarifs - Web Locations</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
+        .pack-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+        }
+
+        .pack-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.25);
+        }
+
+        .pack-card.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+            transform: scale(1.02);
+        }
+
+        .pack-card.selected::before {
+            content: "✓ Sélectionné";
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
         .option-card {
             cursor: pointer;
             transition: all 0.3s ease;
@@ -21,7 +53,6 @@
         .option-card.selected {
             border-color: var(--primary);
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
-            transform: scale(1.03);
         }
 
         .price-display {
@@ -29,14 +60,20 @@
             top: 100px;
             transition: all 0.4s ease;
         }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
     </style>
 </head>
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
-                <span style="font-size: 1.8rem;">🏠</span>
-                <span>Web Locations</span>
+            <a href="index.html" class="logo" style="display: flex; align-items: center;">
+                <img src="images/logowebduo.png" alt="WebDuo" style="height: 100px;">
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
@@ -52,44 +89,70 @@
             <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
                 <div style="text-align: center; margin-bottom: 4rem;">
                     <div style="display: inline-block; background: var(--gradient); padding: 0.5rem 1.2rem; border-radius: 50px; color: white; font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem;">
-                        CALCULATEUR DE PRIX
+                        NOS PACKS
                     </div>
                     <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; color: var(--dark);">
-                        Calculez votre tarif en <span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">temps réel</span>
+                        Choisissez votre <span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">formule</span>
                     </h1>
                     <p style="font-size: 1.3rem; color: var(--gray); max-width: 700px; margin: 0 auto;">
-                        Sélectionnez vos options et découvrez instantanément le prix de votre site
+                        Sélectionnez un pack et personnalisez-le selon vos besoins
                     </p>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start;">
                     <!-- Options à gauche -->
                     <div>
-                        <!-- Nombre de pages -->
+                        <!-- Choix du pack -->
                         <div style="background: white; padding: 2.5rem; border-radius: 24px; box-shadow: var(--shadow-md); margin-bottom: 2rem;">
                             <div style="margin-bottom: 2rem;">
                                 <div style="display: inline-block; background: var(--gradient); color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;">ÉTAPE 1</div>
-                                <h2 style="font-size: 2rem; font-weight: 900; color: var(--dark); margin-bottom: 0.5rem;">📄 Combien de pages pour votre site ?</h2>
-                                <p style="color: var(--gray); margin: 0;">Plus de pages = plus de contenu et fonctionnalités</p>
+                                <h2 style="font-size: 2rem; font-weight: 900; color: var(--dark); margin-bottom: 0.5rem;">📦 Quel pack vous convient ?</h2>
+                                <p style="color: var(--gray); margin: 0;">Choisissez la base qui correspond à vos besoins</p>
                             </div>
-                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;" id="pages-options">
-                                <div class="option-card selected" data-value="250" data-label="3 pages" data-example="Accueil, Photos, Contact" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
-                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📄</div>
-                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">3 pages</strong>
-                                    <span style="color: var(--gray); font-size: 0.85rem; display: block; margin-bottom: 0.5rem;">Accueil, Photos, Contact</span>
-                                    <span style="color: var(--primary); font-weight: 700;">250€</span>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" id="pack-options">
+                                <!-- Pack Essentiel -->
+                                <div class="pack-card selected" data-value="250" data-label="Pack Essentiel" data-pack="essentiel" style="padding: 2rem 1.5rem; background: white; border-radius: 20px; box-shadow: var(--shadow-sm);">
+                                    <div style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">📄</div>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.5rem; font-size: 1.2rem; text-align: center;">Essentiel</strong>
+                                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                                        <span style="color: var(--primary); font-weight: 900; font-size: 2rem;">250€</span>
+                                    </div>
+                                    <div style="font-size: 0.85rem; color: var(--gray); line-height: 1.8;">
+                                        <div class="feature-item">✓ Site vitrine 2-3 pages</div>
+                                        <div class="feature-item">✓ Galerie photos</div>
+                                        <div class="feature-item">✓ Formulaire de contact</div>
+                                        <div class="feature-item">✓ Version mobile responsive</div>
+                                    </div>
                                 </div>
-                                <div class="option-card" data-value="350" data-label="5 pages" data-example="+ Réservation, Tarifs" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
-                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📄📄</div>
-                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">5 pages</strong>
-                                    <span style="color: var(--gray); font-size: 0.85rem; display: block; margin-bottom: 0.5rem;">+ Réservation, Tarifs</span>
-                                    <span style="color: var(--accent); font-weight: 700;">+100€</span>
+
+                                <!-- Pack Confort -->
+                                <div class="pack-card" data-value="400" data-label="Pack Confort" data-pack="confort" style="padding: 2rem 1.5rem; background: white; border-radius: 20px; box-shadow: var(--shadow-sm);">
+                                    <div style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">📅</div>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.5rem; font-size: 1.2rem; text-align: center;">Confort</strong>
+                                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                                        <span style="color: var(--accent); font-weight: 900; font-size: 2rem;">400€</span>
+                                    </div>
+                                    <div style="font-size: 0.85rem; color: var(--gray); line-height: 1.8;">
+                                        <div class="feature-item">✓ Tout du pack Essentiel</div>
+                                        <div class="feature-item">✓ Calendrier de disponibilité</div>
+                                        <div class="feature-item">✓ Système de réservation</div>
+                                        <div class="feature-item">✓ Page tarifs détaillée</div>
+                                    </div>
                                 </div>
-                                <div class="option-card" data-value="500" data-label="7+ pages (Sur mesure)" data-example="Selon vos besoins" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
-                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📄📄📄</div>
-                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">7+ pages</strong>
-                                    <span style="color: var(--gray); font-size: 0.85rem; display: block; margin-bottom: 0.5rem;">Sur mesure selon vos besoins</span>
-                                    <span style="color: var(--secondary); font-weight: 700;">+250€</span>
+
+                                <!-- Pack Premium -->
+                                <div class="pack-card" data-value="600" data-label="Pack Premium" data-pack="premium" style="padding: 2rem 1.5rem; background: white; border-radius: 20px; box-shadow: var(--shadow-sm);">
+                                    <div style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">🌟</div>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.5rem; font-size: 1.2rem; text-align: center;">Premium</strong>
+                                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                                        <span style="color: var(--secondary); font-weight: 900; font-size: 2rem;">600€</span>
+                                    </div>
+                                    <div style="font-size: 0.85rem; color: var(--gray); line-height: 1.8;">
+                                        <div class="feature-item">✓ Tout du pack Confort</div>
+                                        <div class="feature-item">✓ Paiement en ligne sécurisé</div>
+                                        <div class="feature-item">✓ Gestion multi-langues</div>
+                                        <div class="feature-item">✓ Synchronisation plateformes</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -112,10 +175,10 @@
                                     <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">3 mois</strong>
                                     <span style="color: var(--accent); font-weight: 700;">+50€</span>
                                 </div>
-                                <div class="option-card" data-value="100" data-label="1 an" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                <div class="option-card" data-value="200" data-label="1 an" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
                                     <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📆</div>
                                     <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">1 an</strong>
-                                    <span style="color: var(--secondary); font-weight: 700;">+100€</span>
+                                    <span style="color: var(--secondary); font-weight: 700;">+200€</span>
                                 </div>
                             </div>
                         </div>
@@ -126,10 +189,10 @@
                         <div class="price-display" style="background: var(--gradient); padding: 2.5rem; border-radius: 24px; color: white; box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);">
                             <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1.5rem; opacity: 0.95;">Votre devis</h3>
 
-                            <div id="selected-options" style="margin-bottom: 1.5rem; min-height: 100px;">
+                            <div id="selected-options" style="margin-bottom: 1.5rem; min-height: 120px;">
                                 <div style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 1rem;">Votre configuration :</div>
                                 <div id="options-list" style="font-size: 0.9rem; line-height: 2;">
-                                    <div>✓ 3 pages (Accueil, Photos, Contact)</div>
+                                    <div>✓ Pack Essentiel</div>
                                     <div>✓ Support 1 mois (inclus)</div>
                                 </div>
                             </div>
@@ -147,6 +210,11 @@
                                 <a href="contact.html" style="display: block; width: 100%; padding: 1rem; background: rgba(255,255,255,0.2); color: white; text-align: center; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 1rem; border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s;">
                                     💬 Demander un devis personnalisé
                                 </a>
+
+                                <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.15); border-radius: 12px; font-size: 0.85rem; text-align: center;">
+                                    🤝 Paiement après satisfaction<br>
+                                    Vous ne payez que si vous êtes satisfait
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -158,7 +226,7 @@
     <footer style="background: var(--dark); color: white; padding: 4rem 2rem 2rem; text-align: center;">
         <div style="max-width: 1200px; margin: 0 auto;">
             <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem; font-size: 1.05rem;">
-                Étudiants Ingénieurs Informatique • Passionnés de Code • Sites Sur Mesure • À partir de 250€
+                Étudiants Ingénieurs Informatique • Passionnés de Code • Sites Sur Mesure • 250€ - 700€
             </p>
             <div style="display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
                 <a href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Accueil</a>
@@ -174,32 +242,55 @@
 
     <script>
         // Configuration
-        let selectedPages = { value: 250, label: "3 pages", example: "Accueil, Photos, Contact" };
+        let selectedPack = { value: 250, label: "Pack Essentiel", pack: "essentiel" };
         let selectedSupport = { value: 0, label: "1 mois" };
 
         // Fonction pour calculer et afficher le prix
         function updatePrice() {
-            const total = selectedPages.value + selectedSupport.value;
+            const total = selectedPack.value + selectedSupport.value;
             document.getElementById('total-price').textContent = total + '€';
 
             // Mise à jour de la liste des options
             let optionsList = '';
-            optionsList += `<div>✓ ${selectedPages.label} (${selectedPages.example})</div>`;
+            optionsList += `<div>✓ ${selectedPack.label}</div>`;
             optionsList += `<div>✓ Support ${selectedSupport.label} ${selectedSupport.value === 0 ? '(inclus)' : '(+' + selectedSupport.value + '€)'}</div>`;
 
             document.getElementById('options-list').innerHTML = optionsList;
 
             // Sauvegarder les sélections dans localStorage
             localStorage.setItem('tarifsSelection', JSON.stringify({
-                pages: selectedPages,
+                pack: selectedPack,
                 support: selectedSupport,
                 totalPrice: total
             }));
         }
 
-        // Gestion des options (pages, support)
-        function setupOptions(containerId) {
-            const container = document.getElementById(containerId);
+        // Gestion des packs
+        function setupPacks() {
+            const container = document.getElementById('pack-options');
+            if (!container) return;
+            const packs = container.querySelectorAll('.pack-card');
+
+            packs.forEach(pack => {
+                pack.addEventListener('click', function() {
+                    // Désélectionner tous les packs
+                    packs.forEach(p => p.classList.remove('selected'));
+                    // Sélectionner le pack cliqué
+                    this.classList.add('selected');
+
+                    const value = parseInt(this.getAttribute('data-value')) || 0;
+                    const label = this.getAttribute('data-label') || '';
+                    const packName = this.getAttribute('data-pack') || '';
+
+                    selectedPack = { value, label, pack: packName };
+                    updatePrice();
+                });
+            });
+        }
+
+        // Gestion du support
+        function setupSupport() {
+            const container = document.getElementById('support-options');
             if (!container) return;
             const options = container.querySelectorAll('.option-card');
 
@@ -212,25 +303,71 @@
 
                     const value = parseInt(this.getAttribute('data-value')) || 0;
                     const label = this.getAttribute('data-label') || '';
-                    const example = this.getAttribute('data-example') || '';
 
-                    if (containerId === 'pages-options') {
-                        selectedPages = { value, label, example };
-                    } else if (containerId === 'support-options') {
-                        selectedSupport = { value, label };
-                    }
-
+                    selectedSupport = { value, label };
                     updatePrice();
                 });
             });
         }
 
         // Initialisation
-        setupOptions('pages-options');
-        setupOptions('support-options');
+        setupPacks();
+        setupSupport();
 
         // Affiche le prix initial correctement
         updatePrice();
+
+        // ==================== STRIPE INTEGRATION ====================
+        // IMPORTANT: Remplacez 'pk_test_...' par votre clé publique Stripe
+        const stripe = Stripe('pk_test_51QYxBLEYfK1FTW3rEwWu9sDm6DQGFjNOE3WkuRRvg1kUVQvRMpPGtHBhpAW0TXJwJPb4QqMFsHcOhxKrW9Qyx71B00gUQYPWir');
+
+        // Fonction pour créer une session Stripe Checkout
+        async function createCheckoutSession() {
+            const button = document.getElementById('checkout-button');
+            button.disabled = true;
+            button.textContent = '⏳ Chargement...';
+
+            try {
+                // Récupérer les informations du panier
+                const total = selectedPack.value + selectedSupport.value;
+
+                // Créer la description du produit
+                const description = `${selectedPack.label} + Support ${selectedSupport.label}`;
+
+                // OPTION 1: Mode test simple - Redirection directe vers Stripe Checkout
+                // Créer une session de paiement côté client (pour test uniquement)
+                const { error } = await stripe.redirectToCheckout({
+                    lineItems: [{
+                        price_data: {
+                            currency: 'eur',
+                            product_data: {
+                                name: selectedPack.label,
+                                description: description,
+                            },
+                            unit_amount: total * 100, // Stripe utilise les centimes
+                        },
+                        quantity: 1,
+                    }],
+                    mode: 'payment',
+                    successUrl: window.location.origin + '/portfolio-tom-julien/success.html?session_id={CHECKOUT_SESSION_ID}',
+                    cancelUrl: window.location.href,
+                });
+
+                if (error) {
+                    console.error('Erreur Stripe:', error);
+                    alert('Erreur lors de la création du paiement. Veuillez réessayer.');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors de la création du paiement. Veuillez réessayer ou nous contacter.');
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '💳 Payer maintenant →';
+            }
+        }
+
+        // Attacher l'événement au bouton de paiement
+        document.getElementById('checkout-button').addEventListener('click', createCheckoutSession);
     </script>
 </body>
 </html>
