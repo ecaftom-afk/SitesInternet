@@ -201,14 +201,15 @@
         // IMPORTANT: Vous devrez créer ces liens dans votre dashboard Stripe et remplacer les URLs
         const STRIPE_PAYMENT_LINKS = {
             // Format: "prix_total": "lien_stripe_paiement_complet"
-            "250": "https://buy.stripe.com/test_00wdR2568aZ25IzaQo0gw00", // 3 pages + 1 mois support
-            "300": "https://buy.stripe.com/test_3cI6oAfKM7MQ5Iz3nW0gw01", // 3 pages + 3 mois support
-            "350": "https://buy.stripe.com/test_00w3co4245EI1sjcYw0gw02", // 5 pages + 1 mois support OU 3 pages + 1 an support
-            "400": "https://buy.stripe.com/test_fZubIU5688QUgnd3nW0gw04", // 5 pages + 3 mois support
-            "450": "https://buy.stripe.com/test_7sY7sE5681os5Ize2A0gw05", // 5 pages + 1 an support
-            "500": "https://buy.stripe.com/test_28E28k5686IM8UL4s00gw06", // 7+ pages + 1 mois support
-            "550": "https://buy.stripe.com/test_aFa5kwfKM2sw5Iz2jS0gw07", // 7+ pages + 3 mois support
-            "600": "https://buy.stripe.com/test_bJe5kwaqs9UY2wngaI0gw08", // 7+ pages + 1 an support
+            "250": "https://buy.stripe.com/test_00wdR2568aZ25IzaQo0gw00", // Pack Essentiel + 1 mois support
+            "300": "https://buy.stripe.com/test_3cI6oAfKM7MQ5Iz3nW0gw01", // Pack Essentiel + 3 mois support
+            "450": "https://buy.stripe.com/test_7sY7sE5681os5Ize2A0gw05", // Pack Essentiel + 1 an support
+            "400": "https://buy.stripe.com/test_fZubIU5688QUgnd3nW0gw04", // Pack Confort + 1 mois support
+            "450": "https://buy.stripe.com/test_7sY7sE5681os5Ize2A0gw05", // Pack Confort + 3 mois support
+            "600": "https://buy.stripe.com/test_bJe5kwaqs9UY2wngaI0gw08", // Pack Confort + 1 an support
+            "600": "https://buy.stripe.com/test_bJe5kwaqs9UY2wngaI0gw08", // Pack Premium + 1 mois support
+            "650": "https://buy.stripe.com/test_bJe5kwaqs9UY2wngaI0gw08", // Pack Premium + 3 mois support (à créer)
+            "800": "https://buy.stripe.com/test_bJe5kwaqs9UY2wngaI0gw08", // Pack Premium + 1 an support (à créer)
         };
 
         // Récupérer les données du devis depuis localStorage
@@ -235,7 +236,12 @@
 
             // Afficher la configuration
             let configHTML = '';
-            if (data.pages) {
+            // Gestion du nouveau format avec "pack"
+            if (data.pack) {
+                configHTML += `<div>✓ ${data.pack.label}</div>`;
+            }
+            // Rétrocompatibilité avec l'ancien format "pages"
+            else if (data.pages) {
                 configHTML += `<div>✓ ${data.pages.label} - ${data.pages.example}</div>`;
             }
             if (data.support) {
