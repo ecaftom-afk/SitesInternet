@@ -55,6 +55,13 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 - **Option B** : OUI mais avec supplément si technologie non maîtrisée (+100-200€)
 - **Option C** : Au cas par cas selon faisabilité
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - Non, le client ne doit pas imposer la techno, c'est vous qui restez maitre de la technologie
+    - Avoir un frameWorks sera un plus, mais plus tard !
+    - Restez sur du CSS3 et HTML5 (avec du js pour la sécurité)
+- **Avis TOM** : 
+- **Avis JULIEN** : 
 ---
 
 ### 1.2 Base de données
@@ -71,6 +78,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 - Sauvegardes automatiques de la BDD à prévoir dans la maintenance
 - Migration de données possible si évolution d'un pack à l'autre (+50€)
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - Pour l'instant, je ne suis pas sûr qu'avoir un base de donnée ce soit nécessaire. Un point a garder en suspens, à avoir lors de la création du premier site web de test (on fera un cahier de charge client un peu étoffé pour voir ce que ça donne)
+- **Avis TOM** : 
+- **Avis JULIEN** : 
+
 ---
 
 ### 1.3 Nombre de pages
@@ -85,6 +98,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 
 **Tarif** : 30-50€ par page additionnelle selon complexité
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - il y a une petit réflexion sur le nombre de page à avoir.
+    - Claude à mis en lumière la question de l'espace client par exemple qui est pas mal ! Allez vous créer un espace client systèmatiquement pour chaque site developpé ?
+- **Avis TOM** : 
+- **Avis JULIEN** : 
 ---
 
 ### 1.4 Design responsive
@@ -99,6 +118,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 #### ⚠ Important
 
 **Le responsive design est OBLIGATOIRE et NON NÉGOCIABLE.** Plus de 60% des visiteurs utilisent leur smartphone pour chercher une location.
+
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - J'ai le même avis que claude. Le site doit être responsive desing tout support.
+- **Avis TOM** : 
+- **Avis JULIEN** :
 
 ---
 
@@ -127,6 +152,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 #### Option d'ajout
 
 **Ajouter le paiement aux packs Essentiel/Confort** : +150€
+
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - attention à la sécurité ici. Il faudra faire des tests poussé. Car c'est sur ce sujet que le client sera très vigilant !
+- **Avis TOM** : 
+- **Avis JULIEN** :
 
 ---
 
@@ -158,6 +189,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 - **Recommandation** : Option payante +100€ même pour Premium (complexité technique)
 - **Plateforme supplémentaire** : +50€ par plateforme additionnelle
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - ici j'ai pas d'avis parce que j'y connais pas grand chose. c'est un point à éclaircir !!
+- **Avis TOM** : 
+- **Avis JULIEN** :
+
 ---
 
 ### 2.3 Autres fonctionnalités importantes
@@ -187,6 +224,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 ✗ **Pack Confort** : NON inclus  
 ✓ **Pack Premium** : OUI - 2 langues (ex: Français + Anglais)  
 **Langue supplémentaire** : +80€ (traduction non incluse)
+
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - a clarifier !
+- **Avis TOM** : 
+- **Avis JULIEN** :
 
 ---
 
@@ -222,6 +265,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 - Risque de mauvaise configuration
 - Perte de revenus récurrents
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - je ne suis pas du tout d'accord avec claude, mais c'est normal. Il n'a pas le context. Vous êtes dans une démarche minimum d'emmerdement. Donc pas d'hébergement ! pour l'instant en tout cas !
+- **Avis TOM** : 
+- **Avis JULIEN** :
+
 ---
 
 ### 3.2 Recommandation de tarification (si vous gérez)
@@ -250,6 +299,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 - Coût réel hébergement : ~100€/an
 - **Marge nette : 500€/an** 💰
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - claude est parti dans un délire d'hébergement, nom de domaine... ici, vous n'êtes pas concerné. L'abonnement dans votre cas doit correspondre à quoi ? maintenance sur les bugs, et faille de sécurité mais c'est tout !? ce sujet est traité spécifiquement au point 4.
+- **Avis TOM** : 
+- **Avis JULIEN** :
+
 ---
 
 ### 3.3 Services inclus dans l'hébergement
@@ -277,6 +332,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 - ✓ Assistance technique (comment modifier une photo, etc.)
 - ✓ Mises à jour de contenu (textes, photos) - max 3 interventions
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - Correction de bug Oui, Ajustement mineur Peut-être , Assistance technique (Oui au démarrage). Mise à jour  je ne pense pas
+- **Avis TOM** : 
+- **Avis JULIEN** :
+
 ---
 
 ### 4.2 Formules de maintenance longue durée
@@ -284,6 +345,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 #### ⚠ Décision à prendre
 
 **Proposez-vous des contrats de maintenance au-delà du 1er mois ?**
+
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - pour l'instant, non il ne faut pas de maintenance longue durée !
+- **Avis TOM** : 
+- **Avis JULIEN** :
 
 #### Option 1 : Maintenance à la demande (Recommandé au démarrage)
 
@@ -338,6 +405,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 ✗ Problèmes liés à un hébergement tiers (si le client gère lui-même)  
 ✗ Rédaction de contenu (textes, traductions)
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - je valide !
+- **Avis TOM** : 
+- **Avis JULIEN** :
+
 ---
 
 ## 5. SERVICES ADDITIONNELS
@@ -349,9 +422,21 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 - **Configuration DNS** : Incluse gratuitement
 - **Transfert de domaine existant** : 30€ (manipulation technique)
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - pas concerné pour l'instant
+- **Avis TOM** : 
+- **Avis JULIEN** :
+
 ---
 
 ### 5.2 SEO (Référencement naturel)
+
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - pas concerné pour l'instant, vous ne gérez pas le référencement !
+- **Avis TOM** : 
+- **Avis JULIEN** :
 
 #### SEO de base - INCLUS dans tous les packs
 
@@ -376,6 +461,12 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 - **Traduction** : 40€ par page
 - **Relecture/correction** : 20€ par page
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - A voir ! Pas con !?
+- **Avis TOM** : 
+- **Avis JULIEN** :
+
 ---
 
 ### 5.4 Photographie professionnelle
@@ -384,12 +475,24 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 - **Option 2** : Le client fournit ses photos
 - **Retouche photos** : 5€ par photo
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - pas concerné pour l'instant
+- **Avis TOM** : 
+- **Avis JULIEN** :
+
 ---
 
 ### 5.5 Logo et identité visuelle
 
 ✗ **NON proposé initialement** (sauf si vous développez cette compétence)  
 **Alternative** : Orienter vers Fiverr, 99designs ou graphiste partenaire
+
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - A voir ! avec l'IA pour la génération de logo ou d'identité
+- **Avis TOM** : 
+- **Avis JULIEN** :
 
 ---
 
@@ -398,6 +501,11 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 ✓ **Formation de base** : INCLUSE - 1h en visio pour montrer comment modifier textes/photos  
 **Formation avancée** : 50€/heure (gestion calendrier, réservations...)
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - pas concerné pour l'instant
+- **Avis TOM** : 
+- **Avis JULIEN** :
 ---
 
 ### 5.7 Analytics et suivi
@@ -405,11 +513,22 @@ Il détaille précisément ce qui est inclus dans chaque pack, ce qui est propos
 ✓ **Google Analytics** : Installation INCLUSE dans tous les packs  
 **Rapport mensuel personnalisé** : 30€/mois (inclus dans formule Argent+)
 
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - pas concerné pour l'instant
+- **Avis TOM** : 
+- **Avis JULIEN** :
 ---
 
 ## 6. SERVICES VOLONTAIREMENT EXCLUS
 
 Ces services ne sont **PAS proposés** car trop coûteux, chronophages ou hors périmètre pour le lancement du projet.
+
+🔴 **AVIS EQUIPE PROJET :** 
+- **Avis MIKE** : 
+    - Je valide
+- **Avis TOM** : 
+- **Avis JULIEN** :
 
 ### 6.1 Marketing et publicité
 
