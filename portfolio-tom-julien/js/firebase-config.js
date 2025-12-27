@@ -3,12 +3,13 @@
 // Vous trouverez ces informations dans Firebase Console > Project Settings > Your apps
 
 const firebaseConfig = {
-    apiKey: "VOTRE_API_KEY",
-    authDomain: "VOTRE_PROJECT_ID.firebaseapp.com",
-    projectId: "VOTRE_PROJECT_ID",
-    storageBucket: "VOTRE_PROJECT_ID.appspot.com",
-    messagingSenderId: "VOTRE_MESSAGING_SENDER_ID",
-    appId: "VOTRE_APP_ID"
+    apiKey: "AIzaSyD9sLYMmMmYhHvkw3GP4NYWvd7GgSbB_xc",
+    authDomain: "espace-clients-b83eb.firebaseapp.com",
+    projectId: "espace-clients-b83eb",
+    storageBucket: "espace-clients-b83eb.firebasestorage.app",
+    messagingSenderId: "910256118004",
+    appId: "1:910256118004:web:2df218142ab709bbe726a1",
+    measurementId: "G-HV77YD94X7"
 };
 
 // Initialiser Firebase
