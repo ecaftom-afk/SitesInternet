@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Tableau de Bord - Espace Client</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .delay-100 { animation-delay: 0.1s; opacity: 0; }
+        .delay-200 { animation-delay: 0.2s; opacity: 0; }
+        .delay-300 { animation-delay: 0.3s; opacity: 0; }
+        .delay-400 { animation-delay: 0.4s; opacity: 0; }
+
+        body {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(236, 72, 153, 0.03) 100%);
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 140px 2rem 4rem;
+        }
+
+        .dashboard-header {
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1);
+            transition: all 0.3s;
+        }
+
+        .dashboard-card:hover {
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .dashboard-card h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-nouveau {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+        }
+
+        .status-en-developpement {
+            background: rgba(249, 115, 22, 0.1);
+            color: #f97316;
+        }
+
+        .status-livre {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .status-satisfait {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+
+        .status-paye {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+        }
+
+        .project-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .project-info-row:last-child {
+            border-bottom: none;
+        }
+
+        .project-info-label {
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        .project-info-value {
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: white;
+            color: #6366f1;
+            border: 2px solid #6366f1;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: #6366f1;
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .chat-container {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .messages-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            background: rgba(99, 102, 241, 0.02);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            max-width: 80%;
+        }
+
+        .message-client {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            margin-left: auto;
+        }
+
+        .message-admin {
+            background: white;
+            border: 2px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+        }
+
+        .message-input-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .btn-send {
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-send:hover {
+            transform: scale(1.05);
+        }
+
+        .file-upload-area {
+            border: 2px dashed rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-area:hover {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .file-list {
+            margin-top: 1rem;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-item-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .file-item-delete {
+            color: #ef4444;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #6366f1, #ec4899);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #6366f1;
+        }
+
+        .timeline-item.active::before {
+            background: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--gray);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 100px;
+            right: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: #ef4444;
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        @media (max-width: 968px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logout-btn {
+                position: static;
+                margin: 1rem 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo" style="display: flex; align-items: center;">
+                <img src="images/logowebduo.png" alt="WebDuo" style="height: 100px;">
+            </a>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Tableau de bord</a></li>
+                <li><a href="index.html">Accueil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <button class="logout-btn" id="logoutBtn">Déconnexion</button>
+
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="dashboard-header animate-fadeInUp">
+            <h1>Bienvenue, <span id="userName">Client</span> 👋</h1>
+            <p>Suivez l'avancement de votre projet en temps réel</p>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Projet Status Card -->
+            <div class="dashboard-card animate-fadeInUp delay-100">
+                <h2>📊 Mon Projet</h2>
+
+                <div id="projectInfo">
+                    <div class="project-info-row">
+                        <span class="project-info-label">Statut :</span>
+                        <span id="projectStatus" class="status-badge status-nouveau">Nouveau client</span>
+                    </div>
+                    <div class="project-info-row">
+                        <span class="project-info-label">Pack :</span>
+                        <span id="projectPack" class="project-info-value">-</span>
+                    </div>
+                    <div class="project-info-row">
+                        <span class="project-info-label">Prix :</span>
+                        <span id="projectPrice" class="project-info-value">-</span>
+                    </div>
+                    <div class="project-info-row">
+                        <span class="project-info-label">Date de commande :</span>
+                        <span id="projectOrderDate" class="project-info-value">-</span>
+                    </div>
+                    <div class="project-info-row">
+                        <span class="project-info-label">Livraison estimée :</span>
+                        <span id="projectDeliveryDate" class="project-info-value">-</span>
+                    </div>
+                </div>
+
+                <div id="noProjectMessage" class="empty-state" style="display: none;">
+                    <div class="empty-state-icon">📦</div>
+                    <p>Aucun projet en cours</p>
+                    <p style="font-size: 0.9rem;">Contactez-nous pour démarrer votre projet !</p>
+                    <a href="contact.html" class="btn-primary" style="margin-top: 1rem;">Demander un devis</a>
+                </div>
+            </div>
+
+            <!-- Timeline Card -->
+            <div class="dashboard-card animate-fadeInUp delay-200">
+                <h2>📅 Timeline du Projet</h2>
+
+                <div id="timeline" class="timeline">
+                    <!-- Rempli dynamiquement -->
+                </div>
+            </div>
+
+            <!-- Preview & Validation Card -->
+            <div class="dashboard-card animate-fadeInUp delay-300">
+                <h2>🎨 Prévisualisation</h2>
+
+                <div id="previewSection">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🚧</div>
+                        <p>Votre site est en cours de développement</p>
+                        <p style="font-size: 0.9rem;">Vous recevrez un lien de prévisualisation dès qu'il sera prêt !</p>
+                    </div>
+                </div>
+
+                <div id="previewAvailable" style="display: none;">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        Votre site est prêt ! Testez-le et faites-nous savoir ce que vous en pensez.
+                    </p>
+                    <a id="previewLink" href="#" class="btn-primary" target="_blank">
+                        👀 Voir la prévisualisation
+                    </a>
+
+                    <div id="validationButtons" style="display: none; margin-top: 1.5rem;">
+                        <button id="btnValidate" class="btn-primary btn-success">
+                            ✅ Je valide le site
+                        </button>
+                        <button id="btnRequestChanges" class="btn-secondary">
+                            🔧 Demander des modifications
+                        </button>
+                    </div>
+                </div>
+
+                <div id="paymentSection" style="display: none;">
+                    <div style="background: rgba(34, 197, 94, 0.1); padding: 1.5rem; border-radius: 12px; margin-top: 1rem;">
+                        <h3 style="color: #22c55e; font-size: 1.2rem; margin-bottom: 0.5rem;">✅ Site validé !</h3>
+                        <p style="color: var(--gray); margin-bottom: 1rem;">
+                            Merci ! Nous vous avons envoyé le lien de paiement par email.
+                        </p>
+                        <a id="paymentLink" href="#" class="btn-primary">
+                            💳 Payer maintenant
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messagerie Card -->
+            <div class="dashboard-card animate-fadeInUp delay-400">
+                <h2>💬 Messagerie</h2>
+
+                <div class="chat-container">
+                    <div class="messages-list" id="messagesList">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">💭</div>
+                            <p>Aucun message pour le moment</p>
+                            <p style="font-size: 0.9rem;">Envoyez-nous un message si vous avez des questions !</p>
+                        </div>
+                    </div>
+
+                    <div class="message-input-container">
+                        <input
+                            type="text"
+                            class="message-input"
+                            id="messageInput"
+                            placeholder="Écrivez votre message..."
+                        >
+                        <button class="btn-send" id="sendMessageBtn">
+                            Envoyer
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fichiers Card -->
+            <div class="dashboard-card animate-fadeInUp delay-100" style="grid-column: 1 / -1;">
+                <h2>📁 Mes Fichiers</h2>
+
+                <div class="file-upload-area" id="fileUploadArea">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📤</div>
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">Glissez vos fichiers ici ou cliquez pour sélectionner</p>
+                    <p style="font-size: 0.9rem; color: var(--gray);">Logo, images, documents (max 10MB)</p>
+                    <input type="file" id="fileInput" multiple style="display: none;">
+                </div>
+
+                <div class="file-list" id="fileList">
+                    <!-- Fichiers affichés ici -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script src="js/firebase-config.js"></script>
+
+    <script>
+        let currentUser = null;
+        let unsubscribeProject = null;
+        let unsubscribeMessages = null;
+
+        // Vérifier l'authentification
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                currentUser = user;
+                await loadUserData();
+                setupRealtimeListeners();
+            } else {
+                // Rediriger vers login si non connecté
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Charger les données de l'utilisateur
+        async function loadUserData() {
+            try {
+                const userDoc = await db.collection('clients').doc(currentUser.uid).get();
+
+                if (userDoc.exists) {
+                    const userData = userDoc.data();
+                    document.getElementById('userName').textContent = userData.nom || 'Client';
+                    displayProjectInfo(userData.projet);
+                    displayTimeline(userData.projet);
+                    displayFiles(userData.fichiers || []);
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+            }
+        }
+
+        // Configurer les listeners en temps réel
+        function setupRealtimeListeners() {
+            // Écouter les changements du projet
+            unsubscribeProject = db.collection('clients').doc(currentUser.uid)
+                .onSnapshot((doc) => {
+                    if (doc.exists) {
+                        const data = doc.data();
+                        displayProjectInfo(data.projet);
+                        displayTimeline(data.projet);
+                        displayFiles(data.fichiers || []);
+                    }
+                });
+
+            // Écouter les nouveaux messages
+            loadMessages();
+        }
+
+        // Afficher les informations du projet
+        function displayProjectInfo(projet) {
+            if (!projet || !projet.pack) {
+                document.getElementById('projectInfo').style.display = 'none';
+                document.getElementById('noProjectMessage').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('projectInfo').style.display = 'block';
+            document.getElementById('noProjectMessage').style.display = 'none';
+
+            // Statut
+            const statusElement = document.getElementById('projectStatus');
+            const statusMap = {
+                'nouveau_client': { text: 'Nouveau client', class: 'status-nouveau' },
+                'en_developpement': { text: 'En développement', class: 'status-en-developpement' },
+                'livre': { text: 'Livré', class: 'status-livre' },
+                'satisfait': { text: 'Validé', class: 'status-satisfait' },
+                'paye': { text: 'Payé', class: 'status-paye' }
+            };
+            const status = statusMap[projet.statut] || statusMap['nouveau_client'];
+            statusElement.textContent = status.text;
+            statusElement.className = 'status-badge ' + status.class;
+
+            // Autres infos
+            document.getElementById('projectPack').textContent = projet.pack || '-';
+            document.getElementById('projectPrice').textContent = projet.prix ? projet.prix + '€' : '-';
+            document.getElementById('projectOrderDate').textContent = projet.dateCommande
+                ? new Date(projet.dateCommande).toLocaleDateString('fr-FR') : '-';
+            document.getElementById('projectDeliveryDate').textContent = projet.dateLivraison
+                ? new Date(projet.dateLivraison).toLocaleDateString('fr-FR') : '-';
+
+            // Prévisualisation
+            if (projet.previewUrl && projet.statut === 'livre') {
+                document.getElementById('previewSection').style.display = 'none';
+                document.getElementById('previewAvailable').style.display = 'block';
+                document.getElementById('previewLink').href = projet.previewUrl;
+
+                if (projet.statut === 'livre') {
+                    document.getElementById('validationButtons').style.display = 'block';
+                }
+            }
+
+            if (projet.statut === 'satisfait' && projet.stripePaymentLink) {
+                document.getElementById('validationButtons').style.display = 'none';
+                document.getElementById('paymentSection').style.display = 'block';
+                document.getElementById('paymentLink').href = projet.stripePaymentLink;
+            }
+        }
+
+        // Afficher la timeline
+        function displayTimeline(projet) {
+            const timeline = document.getElementById('timeline');
+
+            const steps = [
+                { label: 'Inscription', date: projet?.dateCommande, active: true },
+                { label: 'Développement', date: null, active: projet?.statut === 'en_developpement' },
+                { label: 'Livraison', date: projet?.dateLivraison, active: projet?.statut === 'livre' || projet?.statut === 'satisfait' || projet?.statut === 'paye' },
+                { label: 'Validation', date: null, active: projet?.statut === 'satisfait' || projet?.statut === 'paye' },
+                { label: 'Publication', date: null, active: projet?.statut === 'paye' }
+            ];
+
+            timeline.innerHTML = steps.map(step => `
+                <div class="timeline-item ${step.active ? 'active' : ''}">
+                    ${step.date ? `<div class="timeline-date">${new Date(step.date).toLocaleDateString('fr-FR')}</div>` : ''}
+                    <div class="timeline-title">${step.label}</div>
+                </div>
+            `).join('');
+        }
+
+        // Charger les messages
+        function loadMessages() {
+            db.collection('messages')
+                .where('clientId', '==', currentUser.uid)
+                .orderBy('timestamp', 'asc')
+                .onSnapshot((snapshot) => {
+                    const messagesList = document.getElementById('messagesList');
+
+                    if (snapshot.empty) {
+                        messagesList.innerHTML = `
+                            <div class="empty-state">
+                                <div class="empty-state-icon">💭</div>
+                                <p>Aucun message pour le moment</p>
+                                <p style="font-size: 0.9rem;">Envoyez-nous un message si vous avez des questions !</p>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    messagesList.innerHTML = '';
+                    snapshot.forEach((doc) => {
+                        const msg = doc.data();
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = `message ${msg.from === 'client' ? 'message-client' : 'message-admin'}`;
+                        messageDiv.innerHTML = `
+                            <div>${msg.text}</div>
+                            <div class="message-time">${new Date(msg.timestamp?.toDate()).toLocaleString('fr-FR')}</div>
+                        `;
+                        messagesList.appendChild(messageDiv);
+                    });
+
+                    // Scroll vers le bas
+                    messagesList.scrollTop = messagesList.scrollHeight;
+                });
+        }
+
+        // Envoyer un message
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+
+            if (!text) return;
+
+            try {
+                await db.collection('messages').add({
+                    clientId: currentUser.uid,
+                    from: 'client',
+                    text: text,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    read: false
+                });
+
+                input.value = '';
+            } catch (error) {
+                console.error('Erreur lors de l\'envoi du message:', error);
+                alert('Erreur lors de l\'envoi du message');
+            }
+        }
+
+        document.getElementById('sendMessageBtn').addEventListener('click', sendMessage);
+        document.getElementById('messageInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Gérer l'upload de fichiers
+        const fileInput = document.getElementById('fileInput');
+        const fileUploadArea = document.getElementById('fileUploadArea');
+
+        fileUploadArea.addEventListener('click', () => fileInput.click());
+
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = '#6366f1';
+            fileUploadArea.style.background = 'rgba(99, 102, 241, 0.05)';
+        });
+
+        fileUploadArea.addEventListener('dragleave', () => {
+            fileUploadArea.style.borderColor = 'rgba(99, 102, 241, 0.3)';
+            fileUploadArea.style.background = '';
+        });
+
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = 'rgba(99, 102, 241, 0.3)';
+            fileUploadArea.style.background = '';
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        async function handleFiles(files) {
+            for (let file of files) {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert(`Le fichier ${file.name} est trop volumineux (max 10MB)`);
+                    continue;
+                }
+
+                try {
+                    // Upload vers Firebase Storage
+                    const storageRef = storage.ref(`clients/${currentUser.uid}/${file.name}`);
+                    await storageRef.put(file);
+                    const downloadURL = await storageRef.getDownloadURL();
+
+                    // Ajouter à Firestore
+                    await db.collection('clients').doc(currentUser.uid).update({
+                        fichiers: firebase.firestore.FieldValue.arrayUnion({
+                            name: file.name,
+                            url: downloadURL,
+                            uploadedAt: new Date().toISOString()
+                        })
+                    });
+
+                } catch (error) {
+                    console.error('Erreur lors de l\'upload:', error);
+                    alert(`Erreur lors de l'upload de ${file.name}`);
+                }
+            }
+        }
+
+        // Afficher les fichiers
+        function displayFiles(files) {
+            const fileList = document.getElementById('fileList');
+
+            if (!files || files.length === 0) {
+                fileList.innerHTML = '';
+                return;
+            }
+
+            fileList.innerHTML = files.map((file, index) => `
+                <div class="file-item">
+                    <span class="file-item-name">📄 ${file.name}</span>
+                    <a href="${file.url}" target="_blank" style="color: #6366f1; font-weight: 600; text-decoration: none;">Télécharger</a>
+                </div>
+            `).join('');
+        }
+
+        // Bouton de validation
+        document.getElementById('btnValidate').addEventListener('click', async () => {
+            if (confirm('Êtes-vous sûr de valider le site ? Vous recevrez le lien de paiement par email.')) {
+                try {
+                    await db.collection('clients').doc(currentUser.uid).update({
+                        'projet.statut': 'satisfait'
+                    });
+
+                    alert('Merci ! Vous allez recevoir le lien de paiement par email.');
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    alert('Une erreur est survenue');
+                }
+            }
+        });
+
+        // Bouton de modifications
+        document.getElementById('btnRequestChanges').addEventListener('click', () => {
+            const message = prompt('Quelles modifications souhaitez-vous ?');
+            if (message) {
+                db.collection('messages').add({
+                    clientId: currentUser.uid,
+                    from: 'client',
+                    text: `🔧 Demande de modifications : ${message}`,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    read: false
+                });
+            }
+        });
+
+        // Déconnexion
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
+                await auth.signOut();
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Nettoyage à la fermeture
+        window.addEventListener('beforeunload', () => {
+            if (unsubscribeProject) unsubscribeProject();
+            if (unsubscribeMessages) unsubscribeMessages();
+        });
+
+        console.log('📊 Dashboard initialized successfully!');
+    </script>
+</body>
+</html>

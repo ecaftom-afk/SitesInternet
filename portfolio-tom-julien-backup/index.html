@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Locations - Sites Web pour Locations Saisonnières</title>
+    <meta name="description" content="Création de sites web sur mesure pour locations saisonnières. Développeurs freelance spécialisés. Tarifs de 250€ à 600€. 0% de commission, économisez sur Booking et Airbnb.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(-2deg); }
+            50% { transform: translateY(-10px) rotate(-2deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* 3D Mountain Animation Keyframes */
+        @keyframes mountainGrow {
+            0% {
+                clip-path: polygon(50% 100%, 50% 100%, 50% 100%);
+                opacity: 0;
+            }
+            100% {
+                clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+                opacity: 1;
+            }
+        }
+
+        @keyframes mountainLayer2 {
+            0% {
+                clip-path: polygon(50% 100%, 50% 100%, 50% 100%);
+                opacity: 0;
+            }
+            100% {
+                clip-path: polygon(50% 20%, 15% 100%, 85% 100%);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes mountainLayer3 {
+            0% {
+                clip-path: polygon(50% 100%, 50% 100%, 50% 100%);
+                opacity: 0;
+            }
+            100% {
+                clip-path: polygon(50% 35%, 25% 100%, 75% 100%);
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes manAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes textSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomEffect {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .animate-slideInLeft {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .animate-slideInRight {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .animate-scaleIn {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        .delay-100 { animation-delay: 0.1s; opacity: 0; }
+        .delay-200 { animation-delay: 0.2s; opacity: 0; }
+        .delay-300 { animation-delay: 0.3s; opacity: 0; }
+        .delay-400 { animation-delay: 0.4s; opacity: 0; }
+        .delay-500 { animation-delay: 0.5s; opacity: 0; }
+        .delay-600 { animation-delay: 0.6s; opacity: 0; }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4) !important;
+        }
+
+        .gradient-box {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary) !important;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        /* 3D Mountain Scene Styles */
+        .mountain-scene {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #1e3a8a 0%, #3b82f6 50%, #93c5fd 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mountain-container {
+            position: relative;
+            width: 500px;
+            height: 400px;
+            animation: zoomEffect 3s ease-in-out 3.5s forwards;
+        }
+
+        .mountain-layer-1 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4b5563 0%, #6b7280 50%, #9ca3af 100%);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation: mountainGrow 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        }
+
+        .mountain-layer-2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+            clip-path: polygon(50% 20%, 15% 100%, 85% 100%);
+            animation: mountainLayer2 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+            opacity: 0;
+        }
+
+        .mountain-layer-3 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            clip-path: polygon(50% 35%, 25% 100%, 75% 100%);
+            animation: mountainLayer3 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.6s forwards;
+            opacity: 0;
+        }
+
+        .mountain-snow {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 80px solid #ffffff;
+            filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.5));
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 1.8s forwards;
+        }
+
+        .mountain-man {
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: manAppear 1s cubic-bezier(0.34, 1.56, 0.64, 1) 2.2s forwards;
+            z-index: 10;
+        }
+
+        .man-head {
+            width: 30px;
+            height: 30px;
+            background: #f59e0b;
+            border-radius: 50%;
+            margin: 0 auto 5px;
+        }
+
+        .man-body {
+            width: 40px;
+            height: 50px;
+            background: #ef4444;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .man-arm-left {
+            position: absolute;
+            width: 30px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 4px;
+            top: 10px;
+            left: -25px;
+            transform: rotate(-45deg);
+        }
+
+        .man-arm-right {
+            position: absolute;
+            width: 30px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 4px;
+            top: 10px;
+            right: -25px;
+            transform: rotate(45deg);
+        }
+
+        .man-leg-left {
+            position: absolute;
+            width: 12px;
+            height: 30px;
+            background: #1f2937;
+            border-radius: 6px;
+            bottom: -30px;
+            left: 8px;
+        }
+
+        .man-leg-right {
+            position: absolute;
+            width: 12px;
+            height: 30px;
+            background: #1f2937;
+            border-radius: 6px;
+            bottom: -30px;
+            right: 8px;
+        }
+
+        .scene-text {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            opacity: 0;
+            animation: textSlideIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) 3s forwards;
+        }
+
+        .scene-text h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: white;
+            margin: 0;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .scene-text p {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-top: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .clouds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 100px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .cloud-1 {
+            width: 120px;
+            height: 40px;
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .cloud-2 {
+            width: 150px;
+            height: 50px;
+            top: 25%;
+            right: 15%;
+            animation-delay: 5s;
+        }
+
+        .cloud-3 {
+            width: 100px;
+            height: 35px;
+            top: 35%;
+            left: 20%;
+            animation-delay: 10s;
+        }
+
+        .skip-animation {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .skip-animation:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .mountain-scene {
+                height: 400px;
+            }
+
+            .mountain-container {
+                width: 300px;
+                height: 250px;
+            }
+
+            .scene-text h2 {
+                font-size: 2rem;
+            }
+
+            .scene-text p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo" style="display: flex; align-items: center;">
+                <img src="images/logowebduo.png" alt="WebDuo" style="height: 100px;">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="tarifs.html">Tarifs</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%); padding: 140px 0 100px;">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="animate-fadeInUp" style="display: inline-block; background: var(--gradient); padding: 0.5rem 1.2rem; border-radius: 50px; color: white; font-weight: 600; font-size: 0.9rem; margin-bottom: 2rem;">
+                    ✨ Étudiants Ingénieurs Passionnés
+                </div>
+                <h1 class="animate-fadeInUp delay-100" style="font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Sites Web Sur Mesure
+                    <br>
+                    <span style="background: var(--gradient-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Pour Votre Projet</span>
+                </h1>
+                <p class="animate-fadeInUp delay-200" style="font-size: 1.3rem; line-height: 1.8; color: var(--gray); margin-bottom: 3rem; max-width: 600px;">
+                    Étudiants en école d'ingénieur informatique, spécialisés dans les sites pour locations.
+                    <strong style="color: var(--primary);">Le code est notre passion.</strong>
+                    Nous créons des sites modernes, rapides et personnalisés.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 3rem; max-width: 700px;">
+                    <div class="stat-card animate-scaleIn delay-300" style="text-align: center; padding: 1.5rem; background: white; border-radius: 16px; box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🤝</div>
+                        <div style="font-weight: 700; color: var(--dark); font-size: 0.95rem;">Paiement après livraison</div>
+                        <div style="font-size: 0.85rem; color: var(--gray);">Si satisfait</div>
+                    </div>
+                    <div class="stat-card animate-scaleIn delay-400" style="text-align: center; padding: 1.5rem; background: white; border-radius: 16px; box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚡</div>
+                        <div style="font-weight: 700; color: var(--dark); font-size: 0.95rem;">1-2 semaines</div>
+                        <div style="font-size: 0.85rem; color: var(--gray);">Livraison</div>
+                    </div>
+                    <div class="stat-card animate-scaleIn delay-500" style="text-align: center; padding: 1.5rem; background: white; border-radius: 16px; box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💰</div>
+                        <div style="font-weight: 700; color: var(--dark); font-size: 0.95rem;">250-800€</div>
+                        <div style="font-size: 0.85rem; color: var(--gray);">Prix variable</div>
+                    </div>
+                    <div class="stat-card animate-scaleIn delay-600" style="text-align: center; padding: 1.5rem; background: white; border-radius: 16px; box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💸</div>
+                        <div style="font-weight: 700; color: var(--dark); font-size: 0.95rem;">0% commission</div>
+                        <div style="font-size: 0.85rem; color: var(--gray);">Sans Booking, Airbnb...</div>
+                    </div>
+                </div>
+
+                <div class="cta-buttons animate-fadeInUp delay-600" style="display: flex; gap: 1rem;">
+                    <a href="contact.html" class="btn btn-primary btn-hover" style="padding: 1rem 2rem; background: var(--gradient); border: none; color: white; font-weight: 700; border-radius: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3); transition: all 0.3s;">
+                        Demander un devis
+                        <span>→</span>
+                    </a>
+                    <a href="portfolio.html" class="btn btn-hover" style="padding: 1rem 2rem; background: white; border: 2px solid var(--primary); color: var(--primary); font-weight: 700; border-radius: 12px; text-decoration: none; transition: all 0.3s;">
+                        Voir nos projets
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="animate-slideInRight" style="position: relative;">
+                    <div class="gradient-box" style="background: var(--gradient); padding: 3rem; border-radius: 24px; color: white; box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3); transform: rotate(-2deg);">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 800;">✨ Notre Approche</h3>
+                        <ul style="font-size: 1.05rem; line-height: 2.2; list-style: none;">
+                            <li>✓ Code écrit à la main</li>
+                            <li>✓ Design moderne</li>
+                            <li>✓ 100% modifiable</li>
+                            <li>✓ Support inclus</li>
+                        </ul>
+                    </div>
+                    <div style="position: absolute; top: -10px; right: -10px; width: 100%; height: 100%; background: var(--gradient-2); border-radius: 24px; z-index: -1;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section style="padding: 100px 0; background: white;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <div style="display: inline-block; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%); padding: 0.5rem 1.2rem; border-radius: 50px; color: var(--primary); font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem;">
+                    NOS SERVICES
+                </div>
+                <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 1rem; color: var(--dark);">Ce que nous faisons</h2>
+                <p style="font-size: 1.2rem; color: var(--gray); max-width: 600px; margin: 0 auto;">
+                    Des solutions web complètes et performantes pour donner vie à vos projets
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="service-card animate-fadeInUp delay-100" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%); padding: 2.5rem; border-radius: 20px; border: 2px solid transparent;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🎨</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Design Moderne</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        Interfaces élégantes et intuitives qui reflètent votre identité de marque.
+                    </p>
+                </div>
+
+                <div class="service-card animate-fadeInUp delay-200" style="background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%); padding: 2.5rem; border-radius: 20px; border: 2px solid transparent;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💻</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Code Artisanal</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        HTML, CSS, JavaScript écrits à la main. Zéro template, 100% personnalisé.
+                    </p>
+                </div>
+
+                <div class="service-card animate-fadeInUp delay-300" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%); padding: 2.5rem; border-radius: 20px; border: 2px solid transparent;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📱</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Adapté</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        Parfaitement adapté à tous les écrans : mobile, tablette, desktop.
+                    </p>
+                </div>
+
+                <div class="service-card animate-fadeInUp delay-400" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(20, 184, 166, 0.05) 100%); padding: 2.5rem; border-radius: 20px; border: 2px solid transparent;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Performance</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        Sites ultra-rapides optimisés pour une expérience fluide.
+                    </p>
+                </div>
+
+         
+                <div class="service-card animate-fadeInUp delay-600" style="background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%); padding: 2.5rem; border-radius: 20px; border: 2px solid transparent;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💸</div>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">0% de Commission</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        <strong style="color: var(--primary);">Économisez 15-20% par réservation !</strong> Booking, Airbnb,abritel prennent des commissions importantes.
+                        Avec votre propre site, <strong>100% des revenus vous reviennent</strong>. Votre site se rembourse en quelques locations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section style="padding: 100px 0; background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(236, 72, 153, 0.03) 100%);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <div style="display: inline-block; background: var(--gradient); padding: 0.5rem 1.2rem; border-radius: 50px; color: white; font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem;">
+                    QUI SOMMES-NOUS
+                </div>
+                <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 1rem; color: var(--dark);">Notre Histoire</h2>
+                <p style="font-size: 1.2rem; color: var(--gray); max-width: 700px; margin: 0 auto;">
+                    Deux étudiants ingénieurs en informatique animés par une passion commune :
+                    créer des sites web de qualité professionnelle à des prix accessibles.
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div class="hover-lift animate-fadeInUp delay-100" style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow-md); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.5rem;">🎓</div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Formation d'Excellence</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        École d'ingénieur informatique. Technologies modernes et bonnes pratiques.
+                    </p>
+                </div>
+
+                <div class="hover-lift animate-fadeInUp delay-300" style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow-md); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient-2); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.5rem;">❤️</div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Passion du Code</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        Le développement web est notre passion. Chaque projet est unique.
+                    </p>
+                </div>
+
+                <div class="hover-lift animate-fadeInUp delay-500" style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow-md); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient-3); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.5rem;">💰</div>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; color: var(--dark);">Prix Accessibles</h3>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        250-600€ selon vos besoins. Qualité pro, tarifs étudiants.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="padding: 100px 0; background: white;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <div style="background: var(--gradient); padding: 5rem 3rem; border-radius: 32px; text-align: center; color: white; box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; filter: blur(40px);"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 150px; height: 150px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; filter: blur(40px);"></div>
+
+                <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 1.5rem; position: relative; z-index: 1;">Un projet en tête ?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto; position: relative; z-index: 1;">
+                    Parlons-en ensemble ! En tant qu'étudiants passionnés, nous sommes motivés à donner vie
+                    à votre projet web avec qualité et professionnalisme.
+                </p>
+                <div style="background: rgba(255,255,255,0.2); padding: 1.5rem; border-radius: 16px; max-width: 600px; margin: 0 auto 2rem; position: relative; z-index: 1; border: 2px solid rgba(255,255,255,0.3);">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤝</div>
+                    <strong style="font-size: 1.3rem; display: block; margin-bottom: 0.5rem;">Paiement après livraison si vous êtes satisfait</strong>
+                    <p style="opacity: 0.95; font-size: 1.05rem; margin: 0;">Votre satisfaction est notre priorité. Nous nous engageons à créer un site qui vous correspond.</p>
+                </div>
+
+                <div style="display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; position: relative; z-index: 1;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚡</div>
+                        <strong style="display: block; font-size: 1.2rem; margin-bottom: 0.3rem;">Livraison rapide</strong>
+                        <span style="opacity: 0.9; font-size: 1.05rem;">1 à 2 semaines max</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">💸</div>
+                        <strong style="display: block; font-size: 1.2rem; margin-bottom: 0.3rem;">Sans commissions</strong>
+                        <span style="opacity: 0.9; font-size: 1.05rem;">Rentabilisé rapidement</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1;">
+                    <a href="contact.html" class="btn-hover" style="padding: 1.2rem 2.5rem; background: white; color: var(--primary); font-weight: 700; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); transition: all 0.3s; font-size: 1.1rem;">
+                        Demander un devis gratuit →
+                    </a>
+                    <a href="portfolio.html" class="btn-hover" style="padding: 1.2rem 2.5rem; background: rgba(255, 255, 255, 0.2); color: white; font-weight: 700; border-radius: 12px; text-decoration: none; border: 2px solid white; transition: all 0.3s; font-size: 1.1rem;">
+                        Voir nos réalisations
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--dark); color: white; padding: 4rem 2rem 2rem; text-align: center;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem; font-size: 1.05rem;">
+                Étudiants Ingénieurs Informatique • Passionnés de Code • Sites Sur Mesure • À partir de 250€
+            </p>
+            <div style="display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
+                <a href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Accueil</a>
+                <a href="portfolio.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Portfolio</a>
+                <a href="tarifs.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Tarifs</a>
+                <a href="contact.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-weight: 600;">Contact</a>
+            </div>
+            <p style="margin-top: 2rem; opacity: 0.5; font-size: 0.9rem;">
+                © 2025 Web Locations. Tous droits réservés.
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
