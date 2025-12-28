@@ -776,6 +776,107 @@
                 font-size: 1rem;
             }
         }
+
+        /* Menu utilisateur */
+        .user-menu {
+            position: relative;
+        }
+
+        .user-avatar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .user-avatar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .user-avatar-icon {
+            width: 32px;
+            height: 32px;
+            background: white;
+            color: #6366f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #1f2937;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background: #f3f4f6;
+        }
+
+        .dropdown-item.danger {
+            color: #ef4444;
+        }
+
+        .dropdown-item.danger:hover {
+            background: #fef2f2;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 0.5rem 0;
+        }
+
+        #loginLink {
+            display: none;
+        }
+
+        #userMenuContainer {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -789,7 +890,24 @@
                 <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="tarifs.html">Tarifs</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="login.html" style="background: var(--gradient); color: white; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600;">Connexion</a></li>
+                <li id="loginLink"><a href="login.html" style="background: linear-gradient(135deg, #6366f1, #ec4899); color: white; padding: 0.6rem 1.2rem; border-radius: 8px;">Connexion</a></li>
+                <li class="user-menu" id="userMenuContainer">
+                    <div class="user-avatar" id="userAvatar">
+                        <div class="user-avatar-icon" id="userInitials">C</div>
+                        <span id="userDisplayName">Client</span>
+                    </div>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="dashboard.html" class="dropdown-item">
+                            <span>👤</span>
+                            <span>Mon compte</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item danger" id="logoutBtn">
+                            <span>🚪</span>
+                            <span>Déconnexion</span>
+                        </button>
+                    </div>
+                </li>
             </ul>
         </nav>
     </header>
@@ -1206,6 +1324,85 @@
 
         // Initialize all animations
         console.log('🎨 Animations initialized successfully!');
+    </script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script src="js/firebase-config.js"></script>
+
+    <script>
+        // Vérifier l'état de connexion de l'utilisateur
+        auth.onAuthStateChanged(async (user) => {
+            const loginLink = document.getElementById('loginLink');
+            const userMenuContainer = document.getElementById('userMenuContainer');
+
+            if (user) {
+                // Utilisateur connecté - afficher le menu utilisateur
+                loginLink.style.display = 'none';
+                userMenuContainer.style.display = 'block';
+
+                // Récupérer les données utilisateur depuis Firestore
+                try {
+                    const userDoc = await db.collection('clients').doc(user.uid).get();
+                    if (userDoc.exists) {
+                        const userData = userDoc.data();
+                        const userName = userData.nom || 'Client';
+
+                        // Mettre à jour le nom
+                        document.getElementById('userDisplayName').textContent = userName;
+
+                        // Générer les initiales
+                        const initials = userName.split(' ')
+                            .map(word => word[0])
+                            .join('')
+                            .toUpperCase()
+                            .substring(0, 2);
+                        document.getElementById('userInitials').textContent = initials;
+                    }
+                } catch (error) {
+                    console.error('Erreur lors du chargement des données:', error);
+                }
+            } else {
+                // Utilisateur non connecté - afficher le bouton de connexion
+                loginLink.style.display = 'block';
+                userMenuContainer.style.display = 'none';
+            }
+        });
+
+        // Toggle menu déroulant
+        document.addEventListener('DOMContentLoaded', () => {
+            const userAvatar = document.getElementById('userAvatar');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (userAvatar) {
+                userAvatar.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('active');
+                });
+            }
+
+            // Fermer le menu si on clique ailleurs
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.user-menu')) {
+                    dropdownMenu.classList.remove('active');
+                }
+            });
+
+            // Déconnexion
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', async () => {
+                    if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
+                        await auth.signOut();
+                        window.location.reload();
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
