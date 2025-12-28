@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Web Locations</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo" style="display: flex; align-items: center;">
+                <img src="images/logowebduo.png" alt="WebDuo" style="height: 100px;">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="tarifs.html">Tarifs</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div style="padding-top: 120px; min-height: 100vh; background: var(--light);">
+        <section class="section">
+            <div class="container">
+                <div class="section-header reveal" style="text-align: center; margin-bottom: 5rem;">
+                    <div style="display: inline-block; background: var(--gradient); padding: 0.5rem 1.5rem; border-radius: 50px; color: white; font-weight: 700; font-size: 0.9rem; margin-bottom: 1.5rem; letter-spacing: 1px;">
+                        PORTFOLIO
+                    </div>
+                    <h1 style="font-size: 4rem; font-weight: 900; margin-bottom: 1.5rem; line-height: 1.1;">
+                        Nos <span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Réalisations</span>
+                    </h1>
+                    <p style="font-size: 1.3rem; color: var(--gray); max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                        Découvrez nos projets récents. Chaque site est unique, développé entièrement à la main,<br>
+                        sans templates ni outils payants.
+                    </p>
+                </div>
+
+                <div class="cards-grid">
+                    <!-- Projet 1 -->
+                    <div class="project-card reveal">
+                        <div class="project-image" style="background-image: url('images/portfolio.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="project-content">
+                            <span class="project-tag">Portfolio Professionnel</span>
+                            <h3 class="project-title">Web Locations - Portfolio</h3>
+                            <p class="project-description">
+                                Le site sur lequel vous naviguez actuellement ! Portfolio avec calculateur de prix interactif,
+                                animations modernes et design gradient. Un exemple concret de ce que nous créons pour nos clients.
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Animations</span>
+                            </div>
+                            <a href="index.html" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                                Retour à l'accueil →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Projet 2 -->
+                    <div class="project-card reveal">
+                        <div class="project-image" style="background-image: url('images/maison.jpg'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="project-content">
+                            <span class="project-tag">Location de vacances</span>
+                            <h3 class="project-title">Les Cistes</h3>
+                            <p class="project-description">
+                                Notre premier site réalisé lors de notre première année. Site vitrine pour une maison
+                                de vacances en Provence avec système de réservation et calendrier de disponibilités.
+                                <strong style="color: var(--primary);">Projet payé 400€</strong> - Aujourd'hui, nous sommes bien plus expérimentés !
+                            </p>
+                            <div class="project-tech">
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Adapté</span>
+                            </div>
+                            <a href="https://les-cistes.netlify.app/" target="_blank" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                                Voir le site →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Projet 3 - Votre projet -->
+                    <div class="project-card reveal" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%); border: 2px dashed rgba(99, 102, 241, 0.3); display: flex; align-items: center; justify-content: center; min-height: 400px;">
+                        <div style="text-align: center; padding: 3rem;">
+                            <div style="font-size: 4rem; margin-bottom: 1.5rem; animation: pulse 2s ease-in-out infinite;">
+                                ✨
+                            </div>
+                            <h3 style="font-size: 2rem; font-weight: 900; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;">
+                                Votre projet ici ?
+                            </h3>
+                            <p style="font-size: 1.2rem; color: var(--gray); margin-bottom: 2rem; max-width: 500px;">
+                                Nous espérons que ce sera vous les prochains !<br>
+                                Ensemble, créons quelque chose d'unique.
+                            </p>
+                            <a href="contact.html" class="btn btn-primary" style="display: inline-block; padding: 1rem 2rem; background: var(--gradient); color: white; font-weight: 700; border-radius: 12px; text-decoration: none; box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3); transition: all 0.3s;">
+                                Parlons de votre projet →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal" style="text-align: center; margin-top: 4rem;">
+                    <h3 class="section-title">Votre projet en tête ?</h3>
+                    <p class="section-description" style="margin-bottom: 2rem;">
+                        Chaque projet est unique. Parlons du vôtre !
+                    </p>
+                    <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="contact.html" class="btn btn-primary">
+                            Demander un devis
+                            <span>→</span>
+                        </a>
+                        <a href="tarifs.html" class="btn btn-dark">
+                            Voir les tarifs
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">
+                Étudiants Ingénieurs Informatique • Passionnés de Code • Sites Sur Mesure • 250€ - 700€
+            </p>
+            <div class="footer-links">
+                <a href="index.html">Accueil</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="tarifs.html">Tarifs</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p style="margin-top: 2rem; opacity: 0.6; font-size: 0.9rem;">
+                © 2025 Web Locations. Tous droits réservés.
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

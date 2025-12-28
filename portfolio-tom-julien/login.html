@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Client - Connexion</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(99, 102, 241, 0.6), 0 0 60px rgba(236, 72, 153, 0.3);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-scaleIn {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        .delay-100 { animation-delay: 0.1s; opacity: 0; }
+        .delay-200 { animation-delay: 0.2s; opacity: 0; }
+        .delay-300 { animation-delay: 0.3s; opacity: 0; }
+        .delay-400 { animation-delay: 0.4s; opacity: 0; }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+            padding: 2rem;
+        }
+
+        .login-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
+            max-width: 450px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #ec4899);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header img {
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+
+        .login-header h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .form-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: rgba(99, 102, 241, 0.05);
+            padding: 0.5rem;
+            border-radius: 12px;
+        }
+
+        .form-tab {
+            flex: 1;
+            padding: 0.8rem;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--gray);
+        }
+
+        .form-tab.active {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group input.valid {
+            border-color: #22c55e;
+        }
+
+        .form-group input.invalid {
+            border-color: #ef4444;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(0, 0, 0, 0.3);
+        }
+
+        .field-error {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-submit:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .forgot-password a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .forgot-password a:hover {
+            color: #ec4899;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--gray);
+            margin: 1.5rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+            font-size: 0.9rem;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .success-message {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-home a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .back-home a:hover {
+            color: #6366f1;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #registerForm {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .login-box {
+                padding: 2rem;
+            }
+
+            .login-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box animate-scaleIn">
+            <div class="login-header animate-fadeInUp">
+                <img src="images/logowebduo.png" alt="WebDuo Logo">
+                <h1>Espace Client</h1>
+                <p>Accédez à votre tableau de bord</p>
+            </div>
+
+            <!-- Onglets -->
+            <div class="form-tabs animate-fadeInUp delay-100">
+                <div class="form-tab active" id="loginTab" onclick="switchTab('login')">
+                    Connexion
+                </div>
+                <div class="form-tab" id="registerTab" onclick="switchTab('register')">
+                    Inscription
+                </div>
+            </div>
+
+            <!-- Messages d'erreur et succès -->
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <!-- Formulaire de connexion -->
+            <form id="loginForm" class="animate-fadeInUp delay-200">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="votre@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-submit" id="loginBtn">
+                    Se connecter
+                </button>
+                <div class="forgot-password">
+                    <a href="#" id="forgotPasswordLink">Mot de passe oublié ?</a>
+                </div>
+            </form>
+
+            <!-- Formulaire d'inscription -->
+            <form id="registerForm" class="animate-fadeInUp delay-200">
+                <div class="form-group">
+                    <label for="registerName">Nom complet</label>
+                    <input type="text" id="registerName" placeholder="Jean Dupont" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" placeholder="votre@email.com" required>
+                    <div class="field-error" id="emailError">Format d'email invalide</div>
+                </div>
+                <div class="form-group">
+                    <label for="registerPhone">Téléphone</label>
+                    <input type="tel" id="registerPhone" placeholder="06 12 34 56 78" required>
+                    <div class="field-error" id="phoneError">Format de téléphone invalide (ex: 06 12 34 56 78)</div>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Mot de passe</label>
+                    <input type="password" id="registerPassword" placeholder="••••••••" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="registerPasswordConfirm">Confirmer le mot de passe</label>
+                    <input type="password" id="registerPasswordConfirm" placeholder="••••••••" required minlength="6">
+                </div>
+                <button type="submit" class="btn-submit" id="registerBtn">
+                    Créer mon compte
+                </button>
+            </form>
+
+            <div class="divider animate-fadeInUp delay-300">
+                <span>ou</span>
+            </div>
+
+            <div class="back-home animate-fadeInUp delay-400">
+                <a href="index.html">← Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script src="js/firebase-config.js"></script>
+
+    <script>
+        // Gestion des onglets
+        function switchTab(tab) {
+            const loginTab = document.getElementById('loginTab');
+            const registerTab = document.getElementById('registerTab');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+
+            hideMessages();
+
+            if (tab === 'login') {
+                loginTab.classList.add('active');
+                registerTab.classList.remove('active');
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            } else {
+                loginTab.classList.remove('active');
+                registerTab.classList.add('active');
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            }
+        }
+
+        // Afficher un message d'erreur
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Afficher un message de succès
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Masquer les messages
+        function hideMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // Ajouter un spinner de chargement
+        function addSpinner(button) {
+            const spinner = document.createElement('span');
+            spinner.className = 'loading-spinner';
+            button.appendChild(spinner);
+            button.disabled = true;
+        }
+
+        // Retirer le spinner de chargement
+        function removeSpinner(button, originalText) {
+            const spinner = button.querySelector('.loading-spinner');
+            if (spinner) spinner.remove();
+            button.disabled = false;
+            button.innerHTML = originalText;
+        }
+
+        // Formulaire de connexion
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideMessages();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const originalText = loginBtn.innerHTML;
+
+            try {
+                addSpinner(loginBtn);
+
+                // Connexion avec Firebase
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                showSuccess('Connexion réussie ! Redirection...');
+
+                // Redirection vers le tableau de bord client
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+
+            } catch (error) {
+                removeSpinner(loginBtn, originalText);
+
+                let errorMessage = 'Une erreur est survenue lors de la connexion.';
+
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        errorMessage = 'Aucun compte trouvé avec cet email.';
+                        break;
+                    case 'auth/wrong-password':
+                        errorMessage = 'Mot de passe incorrect.';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Format d\'email invalide.';
+                        break;
+                    case 'auth/too-many-requests':
+                        errorMessage = 'Trop de tentatives. Veuillez réessayer plus tard.';
+                        break;
+                }
+
+                showError(errorMessage);
+            }
+        });
+
+        // Validation de l'email
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Validation du numéro de téléphone français
+        function isValidPhone(phone) {
+            // Accepte les formats: 0612345678, 06 12 34 56 78, 06.12.34.56.78, 06-12-34-56-78, +33612345678
+            const phoneRegex = /^(?:(?:\+|00)33|0)[1-9](?:[\s.-]?\d{2}){4}$/;
+            return phoneRegex.test(phone);
+        }
+
+        // Formulaire d'inscription
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideMessages();
+
+            const name = document.getElementById('registerName').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const phone = document.getElementById('registerPhone').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+            const registerBtn = document.getElementById('registerBtn');
+            const originalText = registerBtn.innerHTML;
+
+            // Vérifier que tous les champs sont remplis
+            if (!name || !email || !phone || !password || !passwordConfirm) {
+                showError('Tous les champs sont obligatoires.');
+                return;
+            }
+
+            // Vérifier le format de l'email
+            if (!isValidEmail(email)) {
+                showError('Format d\'email invalide. Exemple: exemple@email.com');
+                return;
+            }
+
+            // Vérifier le format du téléphone
+            if (!isValidPhone(phone)) {
+                showError('Format de téléphone invalide. Exemple: 06 12 34 56 78');
+                return;
+            }
+
+            // Vérifier que les mots de passe correspondent
+            if (password !== passwordConfirm) {
+                showError('Les mots de passe ne correspondent pas.');
+                return;
+            }
+
+            // Vérifier la longueur du mot de passe
+            if (password.length < 6) {
+                showError('Le mot de passe doit contenir au moins 6 caractères.');
+                return;
+            }
+
+            try {
+                addSpinner(registerBtn);
+
+                // Créer le compte avec Firebase Authentication
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                // Créer le document utilisateur dans Firestore
+                await db.collection('clients').doc(user.uid).set({
+                    nom: name,
+                    email: email,
+                    telephone: phone,
+                    dateInscription: firebase.firestore.FieldValue.serverTimestamp(),
+                    projet: {
+                        pack: null,
+                        prix: null,
+                        dateCommande: null,
+                        dateLivraison: null,
+                        statut: 'nouveau_client',
+                        previewUrl: null,
+                        stripePaymentLink: null
+                    },
+                    messages: [],
+                    fichiers: []
+                });
+
+                showSuccess('Compte créé avec succès ! Redirection...');
+
+                // Redirection vers le tableau de bord
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+
+            } catch (error) {
+                removeSpinner(registerBtn, originalText);
+
+                let errorMessage = 'Une erreur est survenue lors de l\'inscription.';
+
+                switch (error.code) {
+                    case 'auth/email-already-in-use':
+                        errorMessage = 'Cet email est déjà utilisé.';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Format d\'email invalide.';
+                        break;
+                    case 'auth/weak-password':
+                        errorMessage = 'Le mot de passe est trop faible.';
+                        break;
+                }
+
+                showError(errorMessage);
+            }
+        });
+
+        // Mot de passe oublié
+        document.getElementById('forgotPasswordLink').addEventListener('click', async (e) => {
+            e.preventDefault();
+            hideMessages();
+
+            const email = document.getElementById('loginEmail').value.trim();
+
+            if (!email) {
+                showError('Veuillez entrer votre email dans le champ de connexion.');
+                return;
+            }
+
+            // Vérifier le format de l'email
+            if (!isValidEmail(email)) {
+                showError('Format d\'email invalide. Exemple: exemple@email.com');
+                return;
+            }
+
+            try {
+                await auth.sendPasswordResetEmail(email);
+                showSuccess('Un email de réinitialisation a été envoyé à ' + email);
+            } catch (error) {
+                let errorMessage = 'Une erreur est survenue.';
+
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        errorMessage = 'Aucun compte trouvé avec cet email.';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Format d\'email invalide.';
+                        break;
+                }
+
+                showError(errorMessage);
+            }
+        });
+
+        // Validation en temps réel pour l'email
+        document.getElementById('registerEmail').addEventListener('blur', function() {
+            const email = this.value.trim();
+            const errorDiv = document.getElementById('emailError');
+
+            if (email && !isValidEmail(email)) {
+                this.classList.add('invalid');
+                this.classList.remove('valid');
+                errorDiv.style.display = 'block';
+            } else if (email) {
+                this.classList.add('valid');
+                this.classList.remove('invalid');
+                errorDiv.style.display = 'none';
+            } else {
+                this.classList.remove('valid', 'invalid');
+                errorDiv.style.display = 'none';
+            }
+        });
+
+        // Validation en temps réel pour le téléphone
+        document.getElementById('registerPhone').addEventListener('blur', function() {
+            const phone = this.value.trim();
+            const errorDiv = document.getElementById('phoneError');
+
+            if (phone && !isValidPhone(phone)) {
+                this.classList.add('invalid');
+                this.classList.remove('valid');
+                errorDiv.style.display = 'block';
+            } else if (phone) {
+                this.classList.add('valid');
+                this.classList.remove('invalid');
+                errorDiv.style.display = 'none';
+            } else {
+                this.classList.remove('valid', 'invalid');
+                errorDiv.style.display = 'none';
+            }
+        });
+
+        // Vérifier si l'utilisateur est déjà connecté
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // Si déjà connecté, rediriger vers le dashboard
+                window.location.href = 'dashboard.html';
+            }
+        });
+
+        console.log('🔐 Login page initialized successfully!');
+    </script>
+</body>
+</html>
