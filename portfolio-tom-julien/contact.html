@@ -6,6 +6,139 @@
     <title>Contact - Web Locations</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Menu utilisateur */
+        .user-menu {
+            position: relative;
+        }
+
+        .user-avatar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .user-avatar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .user-avatar-icon {
+            width: 32px;
+            height: 32px;
+            background: white;
+            color: #6366f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-arrow {
+            transition: transform 0.3s;
+        }
+
+        .user-menu.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .user-menu.active .user-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #1f2937;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background: #f3f4f6;
+        }
+
+        .dropdown-item.danger {
+            color: #ef4444;
+        }
+
+        .dropdown-item.danger:hover {
+            background: #fef2f2;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 968px) {
+            .user-menu {
+                position: static;
+            }
+
+            .user-dropdown {
+                position: fixed;
+                right: 1rem;
+                left: 1rem;
+                width: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .user-avatar {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .user-avatar-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 0.85rem;
+            }
+
+            .dropdown-item {
+                padding: 0.9rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,6 +151,27 @@
                 <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="tarifs.html">Tarifs</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li id="loginLink"><a href="login.html" style="background: linear-gradient(135deg, #6366f1, #ec4899); color: white; padding: 0.6rem 1.2rem; border-radius: 8px;">Connexion</a></li>
+                <li class="user-menu" id="userMenuContainer" style="display: none;">
+                    <div class="user-avatar" id="userAvatar">
+                        <div class="user-avatar-icon" id="userInitials">C</div>
+                        <span class="user-name" id="userName">Client</span>
+                        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M6 8L2 4h8L6 8z"/>
+                        </svg>
+                    </div>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="dashboard.html" class="dropdown-item">
+                            <span>📊</span>
+                            <span>Mon tableau de bord</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item danger" id="logoutBtn">
+                            <span>🚪</span>
+                            <span>Déconnexion</span>
+                        </button>
+                    </div>
+                </li>
             </ul>
         </nav>
     </header>
@@ -76,8 +230,7 @@
                             <span class="card-icon">5️⃣</span>
                             <h4 class="card-title">Support</h4>
                             <p class="card-text">
-                                Nous restons disponibles pour le support gratuit
-                                selon la formule choisie (de 1 mois à 1 an).
+                                Nous restons disponibles pour la maintenance du site.
                             </p>
                         </div>
                     </div>
@@ -92,8 +245,8 @@
                             <div class="contact-icon">📧</div>
                             <div>
                                 <h4 style="margin-bottom: 0.3rem;">Email</h4>
-                                <a href="mailto:contact.website@gmail.com" style="color: white; text-decoration: none; opacity: 0.9;">
-                                    contact.website@gmail.com
+                                <a href="mailto:ideas-solutions@webduo.fr" style="color: white; text-decoration: none; opacity: 0.9;">
+                                    ideas-solutions@webduo.fr
                                 </a>
                             </div>
                         </div>
@@ -150,10 +303,12 @@
                             </div>
                         </div>
 
-                        <form id="contact-form" action="https://zebramail.co/send" method="POST">
+                        <form id="contact-form">
+                            <input type="hidden" name="access_key" value="c18ebd62-c0a8-4e58-a123-6e0afb4f03d3">
+                            <input type="hidden" name="redirect" value="false">
+                            <input type="hidden" name="subject" value="Nouvelle demande de devis - WebDuo">
+                            <input type="hidden" name="from_name" value="WebDuo - Formulaire Contact">
                             <input type="hidden" name="to" value="ideas-solutions@webduo.fr">
-                            <input type="hidden" name="subject" value="Nouvelle demande de devis - WebDuo Portfolio">
-                            <input type="hidden" name="redirect" value="https://webduo.fr/merci.html">
 
                             <h3 style="color: var(--dark); margin-bottom: 1.5rem; font-size: 1.8rem;">
                                 Demander un devis 
@@ -174,26 +329,6 @@
                             <div class="form-group">
                                 <label for="phone">Téléphone</label>
                                 <input type="tel" id="phone" name="phone" placeholder="+33 6 12 34 56 78">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="deadline">Délai de livraison</label>
-                                <select id="deadline" name="deadline">
-                                    <option value="">Sélectionnez...</option>
-                                    <option value="2semaines">2 semaines (Inclus)</option>
-                                    <option value="1semaine">1 semaine (+30€)</option>
-                                    <option value="3-5jours">3 à 5 jours (+50€)</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="support">Durée de support</label>
-                                <select id="support" name="support">
-                                    <option value="">Sélectionnez...</option>
-                                    <option value="1mois">1 mois (Inclus)</option>
-                                    <option value="3mois">3 mois (+30€)</option>
-                                    <option value="1an">1 an (+200€)</option>
-                                </select>
                             </div>
 
                             <div class="form-group">
@@ -221,7 +356,7 @@
                             N'hésitez pas à nous contacter, nous sommes là pour vous aider !
                         </p>
                         <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                            <a href="mailto:contact.website@gmail.com" class="btn" style="background: white; color: var(--primary);">
+                            <a href="mailto:ideas-solutions@webduo.fr" class="btn" style="background: white; color: var(--primary);">
                                 📧 Nous écrire
                             </a>
                         </div>
@@ -234,7 +369,7 @@
     <footer>
         <div class="footer-content">
             <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem;">
-                Étudiants Ingénieurs Informatique • Passionnés de Code • Sites Sur Mesure • 100-200€
+                Étudiants Ingénieurs Informatique • Passionnés de Code • Sites Sur Mesure • 200€-690€
             </p>
             <div class="footer-links">
                 <a href="index.html">Accueil</a>
@@ -249,5 +384,83 @@
     </footer>
 
     <script src="js/main.js"></script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+
+    <script>
+        // Vérifier l'état de connexion de l'utilisateur
+        auth.onAuthStateChanged(async (user) => {
+            const loginLink = document.getElementById('loginLink');
+            const userMenuContainer = document.getElementById('userMenuContainer');
+
+            if (user) {
+                // Utilisateur connecté
+                loginLink.style.display = 'none';
+                userMenuContainer.style.display = 'block';
+
+                // Charger les données utilisateur depuis Firestore
+                try {
+                    const userDoc = await db.collection('clients').doc(user.uid).get();
+                    if (userDoc.exists) {
+                        const userData = userDoc.data();
+                        const userName = document.getElementById('userName');
+                        const userInitials = document.getElementById('userInitials');
+
+                        userName.textContent = userData.nom || 'Client';
+
+                        // Initiales
+                        const initials = userData.nom
+                            ? userData.nom.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2)
+                            : 'C';
+                        userInitials.textContent = initials;
+                    }
+                } catch (error) {
+                    console.error('Erreur lors du chargement des données:', error);
+                }
+            } else {
+                // Utilisateur non connecté
+                loginLink.style.display = 'block';
+                userMenuContainer.style.display = 'none';
+            }
+        });
+
+        // Toggle dropdown
+        const userAvatar = document.getElementById('userAvatar');
+        const userMenuContainer = document.getElementById('userMenuContainer');
+
+        if (userAvatar && userMenuContainer) {
+            userAvatar.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userMenuContainer.classList.toggle('active');
+            });
+
+            // Fermer le dropdown si on clique ailleurs
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.user-menu')) {
+                    userMenuContainer.classList.remove('active');
+                }
+            });
+        }
+
+        // Déconnexion
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', async () => {
+                if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
+                    try {
+                        await auth.signOut();
+                        window.location.href = 'index.html';
+                    } catch (error) {
+                        console.error('Erreur lors de la déconnexion:', error);
+                        alert('Erreur lors de la déconnexion');
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>
