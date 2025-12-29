@@ -710,7 +710,21 @@ footer {
 }
 
 /* ========== RESPONSIVE ========== */
+
+/* Tablettes et petits ordinateurs (jusqu'à 968px) */
 @media (max-width: 968px) {
+    nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .logo img {
+        height: 80px !important;
+    }
+
+    .hero {
+        padding: 6rem 1.5rem 3rem;
+    }
+
     .hero-content {
         grid-template-columns: 1fr;
         gap: 3rem;
@@ -718,6 +732,14 @@ footer {
 
     .hero-text {
         text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .hero-text p {
+        font-size: 1.1rem;
     }
 
     .hero-stats {
@@ -730,10 +752,54 @@ footer {
 
     .contact-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
     .nav-links {
         gap: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .section {
+        padding: 4rem 1.5rem;
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+
+    .section-description {
+        font-size: 1.1rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .pricing-card.featured {
+        transform: scale(1);
+    }
+
+    .card {
+        padding: 2rem;
+    }
+
+    .hero-card {
+        padding: 2rem;
+    }
+
+    .contact-form {
+        padding: 2rem;
+    }
+
+    .contact-info {
+        padding: 2rem;
     }
 }
 
@@ -807,15 +873,41 @@ footer {
     }
 }
 
+/* Smartphones (jusqu'à 600px) */
 @media (max-width: 600px) {
     nav {
-        flex-direction: column;
-        gap: 1rem;
+        padding: 0.8rem 1rem;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .logo img {
+        height: 60px !important;
+        max-height: 60px !important;
     }
 
     .nav-links {
+        gap: 1rem;
+        font-size: 0.85rem;
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    .hero {
+        padding: 5rem 1rem 2rem;
+        min-height: auto;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
     }
 
     .hero-stats {
@@ -823,11 +915,177 @@ footer {
         gap: 1.5rem;
     }
 
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .hero-card {
+        padding: 1.5rem;
+    }
+
+    .hero-card h3 {
+        font-size: 1.4rem;
+    }
+
+    .hero-card li {
+        font-size: 0.95rem;
+        padding: 0.6rem 0;
+    }
+
     .section {
-        padding: 4rem 1rem;
+        padding: 3rem 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-description {
+        font-size: 1rem;
+    }
+
+    .section-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    .card-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .pricing-card {
+        padding: 2rem;
     }
 
     .pricing-card.featured {
         transform: scale(1);
+    }
+
+    .pricing-price {
+        font-size: 2.5rem;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .contact-form {
+        padding: 1.5rem;
+    }
+
+    .contact-info {
+        padding: 1.5rem;
+    }
+
+    .contact-info h3 {
+        font-size: 1.5rem;
+    }
+
+    .contact-item {
+        margin: 1.5rem 0;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    .project-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .project-image {
+        height: 200px;
+        font-size: 3rem;
+    }
+
+    .project-content {
+        padding: 1.5rem;
+    }
+
+    .project-title {
+        font-size: 1.3rem;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .contact-header-animation {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Très petits smartphones (jusqu'à 375px) */
+@media (max-width: 375px) {
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-text p {
+        font-size: 0.95rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .card {
+        padding: 1.2rem;
+    }
+
+    .pricing-card {
+        padding: 1.5rem;
+    }
+
+    .contact-form,
+    .contact-info {
+        padding: 1.2rem;
     }
 }

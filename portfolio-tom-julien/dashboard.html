@@ -41,6 +41,15 @@
             }
         }
 
+        @keyframes progressAnimation {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+
         .animate-fadeInUp {
             animation: fadeInUp 0.8s ease-out forwards;
         }
@@ -212,79 +221,6 @@
             background: linear-gradient(135deg, #f59e0b, #d97706);
         }
 
-        .chat-container {
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .messages-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-            background: rgba(99, 102, 241, 0.02);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-        }
-
-        .message {
-            margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 12px;
-            max-width: 80%;
-        }
-
-        .message-client {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: white;
-            margin-left: auto;
-        }
-
-        .message-admin {
-            background: white;
-            border: 2px solid rgba(99, 102, 241, 0.2);
-        }
-
-        .message-time {
-            font-size: 0.75rem;
-            opacity: 0.7;
-            margin-top: 0.5rem;
-        }
-
-        .message-input-container {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .message-input {
-            flex: 1;
-            padding: 1rem;
-            border: 2px solid rgba(99, 102, 241, 0.2);
-            border-radius: 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-        }
-
-        .message-input:focus {
-            outline: none;
-            border-color: #6366f1;
-        }
-
-        .btn-send {
-            padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, #6366f1, #ec4899);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-send:hover {
-            transform: scale(1.05);
-        }
-
         .file-upload-area {
             border: 2px dashed rgba(99, 102, 241, 0.3);
             border-radius: 12px;
@@ -322,53 +258,6 @@
             color: #ef4444;
             cursor: pointer;
             font-weight: 600;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #6366f1, #ec4899);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.35rem;
-            top: 0.25rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #6366f1;
-        }
-
-        .timeline-item.active::before {
-            background: #22c55e;
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
-        }
-
-        .timeline-date {
-            font-size: 0.85rem;
-            color: var(--gray);
-            margin-bottom: 0.25rem;
-        }
-
-        .timeline-title {
-            font-weight: 700;
-            color: var(--dark);
         }
 
         .empty-state {
@@ -476,8 +365,25 @@
         }
 
         @media (max-width: 968px) {
+            .dashboard-container {
+                padding: 120px 1.5rem 3rem;
+            }
+
             .dashboard-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .dashboard-card {
+                padding: 1.5rem;
+            }
+
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+
+            .dashboard-header p {
+                font-size: 1rem;
             }
 
             .user-menu {
@@ -489,6 +395,120 @@
                 right: 1rem;
                 left: 1rem;
                 width: auto;
+            }
+
+            .file-upload-area {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .dashboard-container {
+                padding: 100px 1rem 2rem;
+            }
+
+            .dashboard-header {
+                margin-bottom: 2rem;
+            }
+
+            .dashboard-header h1 {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .dashboard-header p {
+                font-size: 0.95rem;
+            }
+
+            .dashboard-card {
+                padding: 1.2rem;
+                border-radius: 16px;
+            }
+
+            .dashboard-card h2 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+
+            .dashboard-grid {
+                gap: 1.2rem;
+            }
+
+            .project-info-row {
+                padding: 0.8rem 0;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+
+            .project-info-label,
+            .project-info-value {
+                font-size: 0.95rem;
+            }
+
+            .status-badge {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .file-upload-area {
+                padding: 1.2rem;
+            }
+
+            .file-upload-area p {
+                font-size: 0.9rem;
+            }
+
+            .file-item {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .user-avatar {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .user-avatar-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 0.85rem;
+            }
+
+            .dropdown-item {
+                padding: 0.9rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .empty-state {
+                padding: 2rem 1rem;
+            }
+
+            .empty-state-icon {
+                font-size: 2.5rem;
+            }
+
+            .empty-state p {
+                font-size: 0.95rem;
+            }
+
+            #progressSection {
+                margin-bottom: 1rem !important;
+            }
+
+            #progressPercentage {
+                font-size: 1rem !important;
+            }
+
+            #progressInfo {
+                padding: 0.8rem !important;
+                font-size: 0.85rem !important;
             }
         }
     </style>
@@ -567,20 +587,71 @@
                 </div>
             </div>
 
-            <!-- Timeline Card -->
-            <div class="dashboard-card animate-fadeInUp delay-200">
-                <h2>📅 Timeline du Projet</h2>
-
-                <div id="timeline" class="timeline">
-                    <!-- Rempli dynamiquement -->
-                </div>
-            </div>
-
             <!-- Preview & Validation Card -->
             <div class="dashboard-card animate-fadeInUp delay-300">
                 <h2>🎨 Prévisualisation</h2>
 
                 <div id="previewSection">
+                    <!-- Barre de progression -->
+                    <div id="progressSection" style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                            <span style="font-weight: 600; color: var(--dark);">Avancement du projet</span>
+                            <span id="progressPercentage" style="font-weight: 700; color: #6366f1; font-size: 1.1rem;">0%</span>
+                        </div>
+
+                        <!-- Barre de progression -->
+                        <div style="background: rgba(99, 102, 241, 0.1); border-radius: 50px; height: 12px; overflow: hidden; position: relative;">
+                            <div id="progressBar" style="
+                                background: linear-gradient(90deg, #6366f1, #ec4899);
+                                height: 100%;
+                                width: 0%;
+                                border-radius: 50px;
+                                transition: width 0.5s ease;
+                                position: relative;
+                                overflow: hidden;
+                            ">
+                                <div style="
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    bottom: 0;
+                                    right: 0;
+                                    background-image: linear-gradient(
+                                        -45deg,
+                                        rgba(255, 255, 255, .2) 25%,
+                                        transparent 25%,
+                                        transparent 50%,
+                                        rgba(255, 255, 255, .2) 50%,
+                                        rgba(255, 255, 255, .2) 75%,
+                                        transparent 75%,
+                                        transparent
+                                    );
+                                    background-size: 50px 50px;
+                                    animation: progressAnimation 2s linear infinite;
+                                "></div>
+                            </div>
+                        </div>
+
+                        <!-- Indicateurs de temps -->
+                        <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.85rem; color: var(--gray);">
+                            <span>Jour 1</span>
+                            <span>Jour 7</span>
+                            <span>Jour 14</span>
+                        </div>
+
+                        <!-- Informations supplémentaires -->
+                        <div id="progressInfo" style="
+                            margin-top: 1rem;
+                            padding: 1rem;
+                            background: rgba(99, 102, 241, 0.05);
+                            border-radius: 12px;
+                            font-size: 0.9rem;
+                            color: var(--gray);
+                        ">
+                            <span id="progressMessage">Le développement n'a pas encore commencé</span>
+                        </div>
+                    </div>
+
                     <div class="empty-state">
                         <div class="empty-state-icon">🚧</div>
                         <p>Votre site est en cours de développement</p>
@@ -619,33 +690,6 @@
                 </div>
             </div>
 
-            <!-- Messagerie Card -->
-            <div class="dashboard-card animate-fadeInUp delay-400">
-                <h2>💬 Messagerie</h2>
-
-                <div class="chat-container">
-                    <div class="messages-list" id="messagesList">
-                        <div class="empty-state">
-                            <div class="empty-state-icon">💭</div>
-                            <p>Aucun message pour le moment</p>
-                            <p style="font-size: 0.9rem;">Envoyez-nous un message si vous avez des questions !</p>
-                        </div>
-                    </div>
-
-                    <div class="message-input-container">
-                        <input
-                            type="text"
-                            class="message-input"
-                            id="messageInput"
-                            placeholder="Écrivez votre message..."
-                        >
-                        <button class="btn-send" id="sendMessageBtn">
-                            Envoyer
-                        </button>
-                    </div>
-                </div>
-            </div>
-
             <!-- Fichiers Card -->
             <div class="dashboard-card animate-fadeInUp delay-100" style="grid-column: 1 / -1;">
                 <h2>📁 Mes Fichiers</h2>
@@ -676,7 +720,6 @@
     <script>
         let currentUser = null;
         let unsubscribeProject = null;
-        let unsubscribeMessages = null;
 
         // Vérifier l'authentification
         auth.onAuthStateChanged(async (user) => {
@@ -714,7 +757,6 @@
                     document.getElementById('userInitials').textContent = initials;
 
                     displayProjectInfo(userData.projet);
-                    displayTimeline(userData.projet);
                     displayFiles(userData.fichiers || []);
                 }
             } catch (error) {
@@ -730,13 +772,72 @@
                     if (doc.exists) {
                         const data = doc.data();
                         displayProjectInfo(data.projet);
-                        displayTimeline(data.projet);
                         displayFiles(data.fichiers || []);
                     }
                 });
 
-            // Écouter les nouveaux messages
-            loadMessages();
+        }
+
+        // Mettre à jour la barre de progression
+        function updateProgressBar(projet) {
+            if (!projet || !projet.dateCommande) {
+                document.getElementById('progressBar').style.width = '0%';
+                document.getElementById('progressPercentage').textContent = '0%';
+                document.getElementById('progressMessage').textContent = 'Le développement n\'a pas encore commencé';
+                return;
+            }
+
+            const orderDate = new Date(projet.dateCommande);
+            const now = new Date();
+            const twoWeeksInMs = 14 * 24 * 60 * 60 * 1000; // 14 jours en millisecondes
+            const elapsedTime = now - orderDate;
+
+            // Calculer le pourcentage basé sur le temps écoulé (max 100%)
+            let timeBasedProgress = Math.min(Math.floor((elapsedTime / twoWeeksInMs) * 100), 100);
+
+            // Ajuster le pourcentage en fonction du statut
+            let finalProgress = 0;
+            let message = '';
+
+            switch(projet.statut) {
+                case 'nouveau_client':
+                    finalProgress = Math.min(timeBasedProgress, 10);
+                    message = `Projet en attente de démarrage (Jour ${Math.ceil(elapsedTime / (24 * 60 * 60 * 1000))})`;
+                    break;
+                case 'en_developpement':
+                    finalProgress = Math.max(timeBasedProgress, 20);
+                    finalProgress = Math.min(finalProgress, 75);
+                    message = `Développement en cours (Jour ${Math.ceil(elapsedTime / (24 * 60 * 60 * 1000))} sur 14)`;
+                    break;
+                case 'livre':
+                    finalProgress = Math.max(timeBasedProgress, 85);
+                    finalProgress = Math.min(finalProgress, 95);
+                    message = 'Site livré, en attente de votre validation';
+                    break;
+                case 'satisfait':
+                    finalProgress = 95;
+                    message = 'Site validé, en attente du paiement';
+                    break;
+                case 'paye':
+                    finalProgress = 100;
+                    message = 'Projet terminé ! 🎉';
+                    break;
+                default:
+                    finalProgress = timeBasedProgress;
+                    message = `Progression : Jour ${Math.ceil(elapsedTime / (24 * 60 * 60 * 1000))} sur 14`;
+            }
+
+            // Mettre à jour l'affichage
+            document.getElementById('progressBar').style.width = finalProgress + '%';
+            document.getElementById('progressPercentage').textContent = finalProgress + '%';
+            document.getElementById('progressMessage').textContent = message;
+
+            // Ajouter une classe pour animation si le projet est terminé
+            if (finalProgress === 100) {
+                document.getElementById('progressInfo').style.background = 'rgba(34, 197, 94, 0.1)';
+                document.getElementById('progressMessage').style.color = '#22c55e';
+                document.getElementById('progressMessage').style.fontWeight = '700';
+            }
         }
 
         // Afficher les informations du projet
@@ -744,11 +845,16 @@
             if (!projet || !projet.pack) {
                 document.getElementById('projectInfo').style.display = 'none';
                 document.getElementById('noProjectMessage').style.display = 'block';
+                document.getElementById('progressSection').style.display = 'none';
                 return;
             }
 
             document.getElementById('projectInfo').style.display = 'block';
             document.getElementById('noProjectMessage').style.display = 'none';
+            document.getElementById('progressSection').style.display = 'block';
+
+            // Mettre à jour la barre de progression
+            updateProgressBar(projet);
 
             // Statut
             const statusElement = document.getElementById('projectStatus');
@@ -789,90 +895,6 @@
             }
         }
 
-        // Afficher la timeline
-        function displayTimeline(projet) {
-            const timeline = document.getElementById('timeline');
-
-            const steps = [
-                { label: 'Inscription', date: projet?.dateCommande, active: true },
-                { label: 'Développement', date: null, active: projet?.statut === 'en_developpement' },
-                { label: 'Livraison', date: projet?.dateLivraison, active: projet?.statut === 'livre' || projet?.statut === 'satisfait' || projet?.statut === 'paye' },
-                { label: 'Validation', date: null, active: projet?.statut === 'satisfait' || projet?.statut === 'paye' },
-                { label: 'Publication', date: null, active: projet?.statut === 'paye' }
-            ];
-
-            timeline.innerHTML = steps.map(step => `
-                <div class="timeline-item ${step.active ? 'active' : ''}">
-                    ${step.date ? `<div class="timeline-date">${new Date(step.date).toLocaleDateString('fr-FR')}</div>` : ''}
-                    <div class="timeline-title">${step.label}</div>
-                </div>
-            `).join('');
-        }
-
-        // Charger les messages
-        function loadMessages() {
-            db.collection('messages')
-                .where('clientId', '==', currentUser.uid)
-                .orderBy('timestamp', 'asc')
-                .onSnapshot((snapshot) => {
-                    const messagesList = document.getElementById('messagesList');
-
-                    if (snapshot.empty) {
-                        messagesList.innerHTML = `
-                            <div class="empty-state">
-                                <div class="empty-state-icon">💭</div>
-                                <p>Aucun message pour le moment</p>
-                                <p style="font-size: 0.9rem;">Envoyez-nous un message si vous avez des questions !</p>
-                            </div>
-                        `;
-                        return;
-                    }
-
-                    messagesList.innerHTML = '';
-                    snapshot.forEach((doc) => {
-                        const msg = doc.data();
-                        const messageDiv = document.createElement('div');
-                        messageDiv.className = `message ${msg.from === 'client' ? 'message-client' : 'message-admin'}`;
-                        messageDiv.innerHTML = `
-                            <div>${msg.text}</div>
-                            <div class="message-time">${new Date(msg.timestamp?.toDate()).toLocaleString('fr-FR')}</div>
-                        `;
-                        messagesList.appendChild(messageDiv);
-                    });
-
-                    // Scroll vers le bas
-                    messagesList.scrollTop = messagesList.scrollHeight;
-                });
-        }
-
-        // Envoyer un message
-        async function sendMessage() {
-            const input = document.getElementById('messageInput');
-            const text = input.value.trim();
-
-            if (!text) return;
-
-            try {
-                await db.collection('messages').add({
-                    clientId: currentUser.uid,
-                    from: 'client',
-                    text: text,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    read: false
-                });
-
-                input.value = '';
-            } catch (error) {
-                console.error('Erreur lors de l\'envoi du message:', error);
-                alert('Erreur lors de l\'envoi du message');
-            }
-        }
-
-        document.getElementById('sendMessageBtn').addEventListener('click', sendMessage);
-        document.getElementById('messageInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-
         // Gérer l'upload de fichiers
         const fileInput = document.getElementById('fileInput');
         const fileUploadArea = document.getElementById('fileUploadArea');
@@ -881,53 +903,191 @@
 
         fileUploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             fileUploadArea.style.borderColor = '#6366f1';
             fileUploadArea.style.background = 'rgba(99, 102, 241, 0.05)';
         });
 
-        fileUploadArea.addEventListener('dragleave', () => {
-            fileUploadArea.style.borderColor = 'rgba(99, 102, 241, 0.3)';
-            fileUploadArea.style.background = '';
+        fileUploadArea.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            fileUploadArea.style.borderColor = '#6366f1';
+            fileUploadArea.style.background = 'rgba(99, 102, 241, 0.05)';
+        });
+
+        fileUploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            // Vérifier que nous quittons vraiment la zone et pas juste un enfant
+            if (e.target === fileUploadArea) {
+                fileUploadArea.style.borderColor = 'rgba(99, 102, 241, 0.3)';
+                fileUploadArea.style.background = '';
+            }
         });
 
         fileUploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             fileUploadArea.style.borderColor = 'rgba(99, 102, 241, 0.3)';
             fileUploadArea.style.background = '';
-            handleFiles(e.dataTransfer.files);
+
+            const files = e.dataTransfer.files;
+            if (files && files.length > 0) {
+                handleFiles(files);
+            }
         });
 
         fileInput.addEventListener('change', (e) => {
             handleFiles(e.target.files);
         });
 
-        async function handleFiles(files) {
-            for (let file of files) {
-                if (file.size > 10 * 1024 * 1024) {
-                    alert(`Le fichier ${file.name} est trop volumineux (max 10MB)`);
-                    continue;
-                }
+        // Gérer le copier-coller d'images
+        document.addEventListener('paste', async (e) => {
+            const items = e.clipboardData?.items;
+            if (!items) return;
 
-                try {
-                    // Upload vers Firebase Storage
-                    const storageRef = storage.ref(`clients/${currentUser.uid}/${file.name}`);
-                    await storageRef.put(file);
-                    const downloadURL = await storageRef.getDownloadURL();
-
-                    // Ajouter à Firestore
-                    await db.collection('clients').doc(currentUser.uid).update({
-                        fichiers: firebase.firestore.FieldValue.arrayUnion({
-                            name: file.name,
-                            url: downloadURL,
-                            uploadedAt: new Date().toISOString()
-                        })
-                    });
-
-                } catch (error) {
-                    console.error('Erreur lors de l\'upload:', error);
-                    alert(`Erreur lors de l'upload de ${file.name}`);
+            const files = [];
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    const file = items[i].getAsFile();
+                    if (file) {
+                        // Renommer le fichier avec un timestamp
+                        const timestamp = new Date().getTime();
+                        const newFile = new File([file], `image_${timestamp}.png`, { type: file.type });
+                        files.push(newFile);
+                    }
                 }
             }
+
+            if (files.length > 0) {
+                e.preventDefault();
+                handleFiles(files);
+
+                // Notification visuelle
+                fileUploadArea.style.borderColor = '#22c55e';
+                fileUploadArea.style.background = 'rgba(34, 197, 94, 0.1)';
+                setTimeout(() => {
+                    fileUploadArea.style.borderColor = 'rgba(99, 102, 241, 0.3)';
+                    fileUploadArea.style.background = '';
+                }, 1000);
+            }
+        });
+
+        async function handleFiles(files) {
+            if (!files || files.length === 0) return;
+
+            // Vérifier que l'utilisateur est connecté
+            if (!currentUser) {
+                alert('Vous devez être connecté pour uploader des fichiers');
+                return;
+            }
+
+            // Afficher un indicateur de chargement
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'upload-loading';
+            loadingDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 2rem;
+                border-radius: 16px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+                z-index: 9999;
+                text-align: center;
+            `;
+            loadingDiv.innerHTML = `
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📤</div>
+                <div style="font-weight: 700; color: var(--dark); margin-bottom: 0.5rem;">Upload en cours...</div>
+                <div id="upload-progress" style="color: var(--gray);">0 / ${files.length} fichier(s)</div>
+                <button onclick="this.parentElement.remove()" style="
+                    margin-top: 1rem;
+                    padding: 0.5rem 1rem;
+                    background: #ef4444;
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-weight: 600;
+                ">Fermer</button>
+            `;
+            document.body.appendChild(loadingDiv);
+
+            let uploadedCount = 0;
+            let successCount = 0;
+
+            try {
+                for (let file of files) {
+                    try {
+                        if (file.size > 10 * 1024 * 1024) {
+                            console.log(`Fichier ${file.name} trop volumineux`);
+                            uploadedCount++;
+                            document.getElementById('upload-progress').textContent = `${uploadedCount} / ${files.length} fichier(s)`;
+                            continue;
+                        }
+
+                        console.log(`Début upload de ${file.name}...`);
+
+                        // Upload vers Firebase Storage
+                        const storageRef = storage.ref(`clients/${currentUser.uid}/${file.name}`);
+                        const uploadTask = await storageRef.put(file);
+                        console.log('Fichier uploadé dans Storage');
+
+                        const downloadURL = await storageRef.getDownloadURL();
+                        console.log('URL obtenue:', downloadURL);
+
+                        // Ajouter à Firestore
+                        await db.collection('clients').doc(currentUser.uid).update({
+                            fichiers: firebase.firestore.FieldValue.arrayUnion({
+                                name: file.name,
+                                url: downloadURL,
+                                uploadedAt: new Date().toISOString()
+                            })
+                        });
+                        console.log('Fichier ajouté à Firestore');
+
+                        uploadedCount++;
+                        successCount++;
+                        document.getElementById('upload-progress').textContent = `${uploadedCount} / ${files.length} fichier(s)`;
+
+                    } catch (error) {
+                        console.error(`Erreur lors de l'upload de ${file.name}:`, error);
+                        uploadedCount++;
+                        document.getElementById('upload-progress').textContent = `${uploadedCount} / ${files.length} fichier(s)`;
+                    }
+                }
+
+                // Message de succès ou d'erreur
+                if (successCount > 0) {
+                    loadingDiv.innerHTML = `
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                        <div style="font-weight: 700; color: #22c55e; margin-bottom: 0.5rem;">Upload terminé !</div>
+                        <div style="color: var(--gray);">${successCount} fichier(s) uploadé(s)</div>
+                    `;
+                } else {
+                    loadingDiv.innerHTML = `
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">❌</div>
+                        <div style="font-weight: 700; color: #ef4444; margin-bottom: 0.5rem;">Échec de l'upload</div>
+                        <div style="color: var(--gray);">Aucun fichier n'a pu être uploadé</div>
+                    `;
+                }
+
+            } catch (error) {
+                console.error('Erreur globale:', error);
+                loadingDiv.innerHTML = `
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">❌</div>
+                    <div style="font-weight: 700; color: #ef4444; margin-bottom: 0.5rem;">Erreur</div>
+                    <div style="color: var(--gray);">${error.message}</div>
+                `;
+            }
+
+            // Retirer l'indicateur de chargement après 2 secondes
+            setTimeout(() => {
+                if (loadingDiv && loadingDiv.parentNode) {
+                    loadingDiv.remove();
+                }
+            }, 2000);
         }
 
         // Afficher les fichiers
@@ -1004,7 +1164,6 @@
         // Nettoyage à la fermeture
         window.addEventListener('beforeunload', () => {
             if (unsubscribeProject) unsubscribeProject();
-            if (unsubscribeMessages) unsubscribeMessages();
         });
 
         console.log('📊 Dashboard initialized successfully!');

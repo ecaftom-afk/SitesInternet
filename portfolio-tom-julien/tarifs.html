@@ -247,6 +247,193 @@
                 transform: translateY(0);
             }
         }
+
+        /* Modal pour les langues supplémentaires */
+        .language-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .language-modal.active {
+            display: flex;
+        }
+
+        .language-modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .language-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .language-counter button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: var(--gradient);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .language-counter button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .language-counter button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .language-counter .count {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--dark);
+            min-width: 80px;
+            text-align: center;
+        }
+
+        /* RESPONSIVE - TARIFS PAGE */
+        @media (max-width: 968px) {
+            .tarifs-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+
+            .price-display {
+                position: static !important;
+                margin-top: 2rem;
+            }
+
+            .tarifs-header {
+                margin-bottom: 2.5rem !important;
+            }
+
+            .tarifs-title {
+                font-size: 2.5rem !important;
+            }
+
+            .tarifs-subtitle {
+                font-size: 1.1rem !important;
+            }
+
+            #pages-options,
+            #translation-options {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+
+            #payment-options,
+            #booking-options,
+            #mobile-options {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 1rem !important;
+            }
+
+            .tarifs-header {
+                margin-bottom: 2rem !important;
+            }
+
+            .tarifs-title {
+                font-size: 2rem !important;
+            }
+
+            .tarifs-subtitle {
+                font-size: 1rem !important;
+            }
+
+            section {
+                padding: 40px 0 !important;
+            }
+
+            .language-modal-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            .language-counter {
+                gap: 1rem;
+            }
+
+            .language-counter button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .language-counter .count {
+                font-size: 2.5rem;
+                min-width: 60px;
+            }
+
+            .option-card {
+                padding: 1.2rem !important;
+            }
+
+            .option-card strong {
+                font-size: 1rem !important;
+            }
+
+            .option-card p {
+                font-size: 0.8rem !important;
+            }
+
+            .option-card span {
+                font-size: 1.1rem !important;
+            }
+
+            .option-card.selected::after {
+                width: 24px;
+                height: 24px;
+                font-size: 0.8rem;
+                top: 8px;
+                right: 8px;
+            }
+
+            .extra-option-card.selected::after {
+                width: 24px;
+                height: 24px;
+                font-size: 0.8rem;
+                top: 8px;
+                right: 8px;
+            }
+
+            .price-display {
+                padding: 2rem !important;
+            }
+
+            #total-price {
+                font-size: 2.5rem !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -267,19 +454,19 @@
     <div style="padding-top: 120px; min-height: 100vh; background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(236, 72, 153, 0.03) 100%);">
         <section style="padding: 60px 0;">
             <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
-                <div style="text-align: center; margin-bottom: 4rem;">
+                <div class="tarifs-header" style="text-align: center; margin-bottom: 4rem;">
                     <div style="display: inline-block; background: var(--gradient); padding: 0.5rem 1.2rem; border-radius: 50px; color: white; font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem;">
                         NOS PACKS
                     </div>
-                    <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; color: var(--dark);">
+                    <h1 class="tarifs-title" style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; color: var(--dark);">
                         Choisissez votre <span style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">formule</span>
                     </h1>
-                    <p style="font-size: 1.3rem; color: var(--gray); max-width: 700px; margin: 0 auto;">
+                    <p class="tarifs-subtitle" style="font-size: 1.3rem; color: var(--gray); max-width: 700px; margin: 0 auto;">
                         Sélectionnez un pack et personnalisez-le selon vos besoins
                     </p>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start;">
+                <div class="tarifs-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start;">
                     <!-- Options à gauche -->
                     <div>
                         <!-- Choix du nombre de pages -->
@@ -289,40 +476,26 @@
                                 <h2 style="font-size: 2rem; font-weight: 900; color: var(--dark); margin-bottom: 0.5rem;">📄 Combien de pages ?</h2>
                                 <p style="color: var(--gray); margin: 0;">Définissez la taille de votre site</p>
                             </div>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem;" id="pages-options">
-                                <!-- 3-4 pages sans calendrier -->
-                                <div class="option-card selected" data-value="200" data-label="3-4 pages" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" id="pages-options">
+                                <!-- 2-3 pages -->
+                                <div class="option-card selected" data-value="200" data-label="2-3 pages" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
                                     <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📄</div>
-                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.5rem; font-size: 1.1rem;">3-4 pages</strong>
-                                    <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 0.5rem;">Accueil, À propos, Services, Contact</p>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.5rem; font-size: 1.1rem;">2-3 pages</strong>
+                                    <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 0.5rem;">Accueil, Galerie, Contact</p>
                                     <span style="color: var(--primary); font-weight: 900; font-size: 1.3rem;">200€</span>
                                 </div>
-                                <!-- 3-4 pages avec calendrier -->
-                                <div class="option-card" data-value="240" data-label="3-4 pages + calendrier" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
-                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📄📅</div>
-                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.5rem; font-size: 1.1rem;">3-4 pages + calendrier</strong>
-                                    <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 0.5rem;">Avec simulation de prix</p>
-                                    <span style="color: var(--primary); font-weight: 900; font-size: 1.3rem;">240€</span>
-                                </div>
-                                <!-- 5-6 pages sans calendrier -->
-                                <div class="option-card" data-value="350" data-label="5-6 pages" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                <!-- 4-5 pages -->
+                                <div class="option-card" data-value="350" data-label="4-5 pages" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
                                     <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📄📄</div>
-                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.5rem; font-size: 1.1rem;">5-6 pages</strong>
-                                    <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 0.5rem;">Site complet avec galerie et blog</p>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.5rem; font-size: 1.1rem;">4-5 pages</strong>
+                                    <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 0.5rem;">+ Tarifs et Activités</p>
                                     <span style="color: var(--accent); font-weight: 900; font-size: 1.3rem;">350€</span>
                                 </div>
-                                <!-- 5-6 pages avec calendrier -->
-                                <div class="option-card" data-value="390" data-label="5-6 pages + calendrier" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
-                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📄📄📅</div>
-                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.5rem; font-size: 1.1rem;">5-6 pages + calendrier</strong>
-                                    <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 0.5rem;">Avec simulation de prix</p>
-                                    <span style="color: var(--accent); font-weight: 900; font-size: 1.3rem;">390€</span>
-                                </div>
-                                <!-- 7+ pages -->
-                                <div class="option-card" data-value="500" data-label="7+ pages (sur devis)" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                <!-- 5+ pages -->
+                                <div class="option-card" data-value="500" data-label="5+ pages (sur demande)" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
                                     <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📚</div>
-                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.5rem; font-size: 1.1rem;">7+ pages</strong>
-                                    <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 0.5rem;">Prix variable selon demande</p>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.5rem; font-size: 1.1rem;">5+ pages</strong>
+                                    <p style="color: var(--gray); font-size: 0.85rem; margin-bottom: 0.5rem;">Selon demande du client</p>
                                     <span style="color: var(--secondary); font-weight: 900; font-size: 1.3rem;">500€+</span>
                                 </div>
                             </div>
@@ -343,22 +516,22 @@
                                     <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">Français</strong>
                                     <span style="color: var(--primary); font-weight: 700;">Inclus</span>
                                 </div>
-                                <div class="option-card" data-value="15" data-label="FR + EN" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                <div class="option-card" data-value="15" data-label="FR + Anglais" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
                                     <div style="margin-bottom: 0.5rem; display: flex; justify-content: center; align-items: center; gap: 0.3rem;">
                                         <img src="https://flagcdn.com/w80/fr.png" alt="FR" style="width: 40px; height: 27px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                                         <img src="https://flagcdn.com/w80/gb.png" alt="EN" style="width: 40px; height: 27px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                                     </div>
-                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">Français + Anglais</strong>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">Anglais</strong>
                                     <span style="color: var(--accent); font-weight: 700;">+15€</span>
                                 </div>
-                                <div class="option-card" data-value="30" data-label="FR + EN + DE" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                <div class="option-card" data-value="15" data-label="Autre langue" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
                                     <div style="margin-bottom: 0.5rem; display: flex; justify-content: center; align-items: center; gap: 0.3rem;">
                                         <img src="https://flagcdn.com/w80/fr.png" alt="FR" style="width: 35px; height: 23px; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                                         <img src="https://flagcdn.com/w80/gb.png" alt="EN" style="width: 35px; height: 23px; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                        <img src="https://flagcdn.com/w80/de.png" alt="DE" style="width: 35px; height: 23px; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                        <span style="font-size: 1.5rem; color: var(--gray);">...</span>
                                     </div>
-                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">FR + EN + DE</strong>
-                                    <span style="color: var(--secondary); font-weight: 700;">+30€</span>
+                                    <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">Autre langue</strong>
+                                    <span style="color: var(--secondary); font-weight: 700; font-size: 0.8rem;">+15€ par langue supp.</span>
                                 </div>
                             </div>
                         </div>
@@ -376,10 +549,10 @@
                                     <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">Non merci</strong>
                                     <span style="color: var(--gray); font-weight: 700;">0€</span>
                                 </div>
-                                <div class="option-card" data-value="80" data-label="Oui" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
+                                <div class="option-card" data-value="50" data-label="Oui" style="padding: 1.5rem; background: white; border-radius: 16px; text-align: center; box-shadow: var(--shadow-sm);">
                                     <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">✅</div>
                                     <strong style="display: block; color: var(--dark); margin-bottom: 0.3rem; font-size: 1.1rem;">Oui, avec Stripe</strong>
-                                    <span style="color: var(--primary); font-weight: 900; font-size: 1.3rem;">+80€</span>
+                                    <span style="color: var(--primary); font-weight: 900; font-size: 1.3rem;">+50€</span>
                                 </div>
                             </div>
                         </div>
@@ -435,7 +608,7 @@
                             <div id="selected-options" style="margin-bottom: 1.5rem; min-height: 120px;">
                                 <div style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 1rem;">Votre configuration :</div>
                                 <div id="options-list" style="font-size: 0.9rem; line-height: 2;">
-                                    <div>✓ 3-4 pages (200€)</div>
+                                    <div>✓ 2-3 pages (200€)</div>
                                 </div>
                             </div>
 
@@ -465,6 +638,38 @@
         </section>
     </div>
 
+    <!-- Modal pour sélection des langues supplémentaires -->
+    <div class="language-modal" id="language-modal">
+        <div class="language-modal-content">
+            <h3 style="text-align: center; color: var(--dark); font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem;">
+                🌐 Langues supplémentaires
+            </h3>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 2rem;">
+                Combien de langues en plus du français souhaitez-vous ?
+            </p>
+
+            <div class="language-counter">
+                <button type="button" id="decrease-lang" style="font-size: 2rem; line-height: 1;">−</button>
+                <div class="count" id="language-count">1</div>
+                <button type="button" id="increase-lang" style="font-size: 2rem; line-height: 1;">+</button>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <p style="color: var(--gray); font-size: 0.95rem; margin-bottom: 0.5rem;">Prix par langue supplémentaire : 15€</p>
+                <p style="color: var(--primary); font-size: 1.8rem; font-weight: 900;" id="language-price">15€</p>
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <button type="button" id="cancel-lang" style="flex: 1; padding: 1rem; background: rgba(0,0,0,0.05); border: 2px solid #e5e7eb; border-radius: 12px; color: var(--gray); font-weight: 700; cursor: pointer; transition: all 0.3s;">
+                    Annuler
+                </button>
+                <button type="button" id="confirm-lang" style="flex: 1; padding: 1rem; background: var(--gradient); border: none; border-radius: 12px; color: white; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);">
+                    Confirmer
+                </button>
+            </div>
+        </div>
+    </div>
+
     <footer style="background: var(--dark); color: white; padding: 4rem 2rem 2rem; text-align: center;">
         <div style="max-width: 1200px; margin: 0 auto;">
             <p style="color: rgba(255,255,255,0.7); margin-bottom: 2rem; font-size: 1.05rem;">
@@ -484,11 +689,12 @@
 
     <script>
         // Configuration
-        let selectedPages = { value: 200, label: "3-4 pages" };
+        let selectedPages = { value: 200, label: "2-3 pages" };
         let selectedTranslation = { value: 0, label: "Français uniquement" };
         let selectedPayment = { value: 0, label: "Non" };
         let selectedBooking = { value: 0, label: "Non" };
         let selectedMobile = { value: 0, label: "Non" };
+        let languageCount = 1;
 
         // Fonction pour calculer et afficher le prix
         function updatePrice() {
@@ -563,9 +769,98 @@
             selectedPages = selection;
         });
 
-        // Gestion de la traduction
-        setupOptions('translation-options', (selection) => {
-            selectedTranslation = selection;
+        // Gestion de la traduction avec modal pour "Autre langue"
+        const translationContainer = document.getElementById('translation-options');
+        if (translationContainer) {
+            const translationOptions = translationContainer.querySelectorAll('.option-card');
+
+            translationOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const label = this.getAttribute('data-label') || '';
+
+                    // Si c'est "Autre langue", ouvrir le modal
+                    if (label === 'Autre langue') {
+                        document.getElementById('language-modal').classList.add('active');
+                        return;
+                    }
+
+                    // Sinon, comportement normal
+                    translationOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+
+                    const value = parseInt(this.getAttribute('data-value')) || 0;
+                    selectedTranslation = { value, label };
+                    updatePrice();
+                });
+            });
+        }
+
+        // Gestion du modal de langues
+        const modal = document.getElementById('language-modal');
+        const decreaseBtn = document.getElementById('decrease-lang');
+        const increaseBtn = document.getElementById('increase-lang');
+        const countEl = document.getElementById('language-count');
+        const priceEl = document.getElementById('language-price');
+        const confirmBtn = document.getElementById('confirm-lang');
+        const cancelBtn = document.getElementById('cancel-lang');
+
+        // Fonction pour mettre à jour le compteur de langues
+        function updateLanguageCounter() {
+            countEl.textContent = languageCount;
+            const price = languageCount * 15;
+            priceEl.textContent = price + '€';
+            decreaseBtn.disabled = languageCount <= 1;
+        }
+
+        // Augmenter le nombre de langues
+        increaseBtn.addEventListener('click', () => {
+            languageCount++;
+            updateLanguageCounter();
+        });
+
+        // Diminuer le nombre de langues
+        decreaseBtn.addEventListener('click', () => {
+            if (languageCount > 1) {
+                languageCount--;
+                updateLanguageCounter();
+            }
+        });
+
+        // Confirmer la sélection
+        confirmBtn.addEventListener('click', () => {
+            const price = languageCount * 15;
+            const label = languageCount === 1 ? '1 langue supplémentaire' : `${languageCount} langues supplémentaires`;
+
+            // Mettre à jour la sélection
+            selectedTranslation = { value: price, label };
+
+            // Sélectionner visuellement la carte "Autre langue"
+            const translationOptions = translationContainer.querySelectorAll('.option-card');
+            translationOptions.forEach(opt => opt.classList.remove('selected'));
+            translationOptions[2].classList.add('selected'); // La 3ème carte est "Autre langue"
+
+            // Fermer le modal
+            modal.classList.remove('active');
+
+            // Mettre à jour le prix
+            updatePrice();
+        });
+
+        // Annuler
+        cancelBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            // Réinitialiser le compteur
+            languageCount = 1;
+            updateLanguageCounter();
+        });
+
+        // Fermer le modal en cliquant en dehors
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                languageCount = 1;
+                updateLanguageCounter();
+            }
         });
 
         // Gestion du paiement
