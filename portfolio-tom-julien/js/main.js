@@ -101,6 +101,8 @@ if (priceReminder && supportSelect) {
 }
 
 // Form submission with Web3Forms
+// DÉSACTIVÉ - Géré directement dans contact.html pour intégration Firebase
+/*
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     const submitBtn = document.getElementById('submit-btn');
@@ -233,6 +235,7 @@ if (contactForm) {
         }
     });
 }
+*/
 
 // Confetti animation
 function createConfetti() {
